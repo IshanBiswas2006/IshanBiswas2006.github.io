@@ -1,3 +1,4 @@
+/* ===== SKILLS DATA ===== */
 const SKILLS = {
   "Programming Languages": [
     { name: "C",          logo: "https://raw.githubusercontent.com/bablubambal/All_logo_and_pictures/7c0ac2ceb9f9d24992ec393d11fa7337d2f92466/programming%20languages/c.svg" },
@@ -10,10 +11,10 @@ const SKILLS = {
     { name: "MySQL",      logo: "https://cdn.simpleicons.org/mysql/00618A" },
   ],
   "Core Areas": [
-    { name: "DSA",             logo: "https://cdn.simpleicons.org/thealgorithms/2563eb" },
-    { name: "Data Science",    logo: "https://cdn.simpleicons.org/anaconda/44A833" },
-    { name: "Problem Solving", logo: "https://cdn.simpleicons.org/leetcode/FFA116" },
-    { name: "Logical Thinking",logo: "https://cdn.simpleicons.org/brain/7c3aed" },
+    { name: "DSA",              logo: "https://cdn.simpleicons.org/thealgorithms/2563eb" },
+    { name: "Data Science",     logo: "https://cdn.simpleicons.org/anaconda/44A833" },
+    { name: "Problem Solving",  logo: "https://cdn.simpleicons.org/leetcode/FFA116" },
+    { name: "Logical Thinking", logo: "https://cdn.simpleicons.org/brain/7c3aed" },
   ],
   "Tools & Environment": [
     { name: "VS Code", logo: "https://upload.wikimedia.org/wikipedia/commons/9/9a/Visual_Studio_Code_1.35_icon.svg" },
@@ -24,7 +25,6 @@ const SKILLS = {
 
 (function buildSkills() {
   const grid = document.getElementById('skills-grid');
-
   Object.entries(SKILLS).forEach(([groupName, items]) => {
     const group = document.createElement('div');
     group.className = 'skill-group fade-in';
@@ -77,7 +77,7 @@ const SKILLS = {
   });
 })();
 
-// Intersection Observer for fade-in
+/* ===== FADE-IN OBSERVER ===== */
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((e, i) => {
     if (e.isIntersecting) {
@@ -88,7 +88,7 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.1 });
 document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-// Smooth scroll
+/* ===== SMOOTH SCROLL ===== */
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
     const target = document.querySelector(a.getAttribute('href'));
@@ -96,7 +96,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 
-// Hamburger
+/* ===== PILL NAV ===== */
 const PillNav = (() => {
   let isMobileMenuOpen = false, circles = [], timelines = [], activeTweens = [];
   let logoImgEl = null, logoTween = null, hamburgerEl = null;
@@ -217,7 +217,9 @@ const PillNav = (() => {
     items.forEach(item => {
       const li = document.createElement('li'); const a = document.createElement('a');
       a.href = item.href; a.className = 'mobile-menu-link'; a.textContent = item.label;
-      a.addEventListener('click', () => { isMobileMenuOpen = true; toggleMobileMenu(); });
+      // FIX: Was `isMobileMenuOpen = true; toggleMobileMenu()` — always closed menu.
+      // Should just call toggleMobileMenu() which flips the state correctly.
+      a.addEventListener('click', () => { toggleMobileMenu(); });
       li.appendChild(a); mUl.appendChild(li);
     });
     pop.appendChild(mUl); wrapper.appendChild(pop); container.appendChild(wrapper);
@@ -259,13 +261,10 @@ PillNav.init({
     { label: 'Skills',    href: '#skills'         },
     { label: 'Contact',   href: '#contact'        },
   ],
-  ease:                  'power3.out',
-  baseColor:             '#0d0d14',
-  pillColor:             '#f5f4f0',
-  pillTextColor:         '#0d0d14',
-  hoveredPillTextColor:  '#f5f4f0',
-  initialLoadAnimation:  true
+  ease:                 'power3.out',
+  baseColor:            '#0d0d14',
+  pillColor:            '#f5f4f0',
+  pillTextColor:        '#0d0d14',
+  hoveredPillTextColor: '#f5f4f0',
+  initialLoadAnimation: true
 });
-// const hamburger = document.querySelector('.hamburger');
-// const navLinks = document.querySelector('.nav-links');
-// hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
