@@ -257,7 +257,7 @@ PillNav.init({
   items: [
     { label: 'About',     href: '#about'          },
     { label: 'Education', href: '#education'      },
-    { label: 'Certs',     href: '#certifications' },
+    { label: 'certifications',     href: '#certifications' },
     { label: 'Skills',    href: '#skills'         },
     { label: 'Contact',   href: '#contact'        },
   ],
