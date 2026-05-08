@@ -1,0 +1,232 @@
+/* =========================================================
+   NIGHT MODE — night-mode.css
+   ========================================================= */
+
+/* ── NIGHT THEME VARIABLES ──────────────────────────────── */
+body.night-mode {
+    --ink: #e8e6f0;
+    --bg: #0d0d14;
+    --accent: #4f8ef7;
+    --accent2: #9d6ef5;
+    --muted: #8892a4;
+    --card-bg: #161622;
+    --border: rgba(255, 255, 255, 0.08);
+    --tag-bg: #1a1f3a;
+    --tag-text: #7ba5f9;
+}
+
+/* ── HERO (night) ───────────────────────────────────────── */
+body.night-mode .hero {
+    background: linear-gradient(135deg, #0d0d14 0%, #0f1229 50%, #130d20 100%);
+}
+body.night-mode .hero p { color: #9ca3af; }
+body.night-mode .float-stat {
+    background: #161622;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    color: var(--ink);
+}
+body.night-mode .float-stat > div > div:last-child { color: #8892a4 !important; }
+
+/* ── EDUCATION (night) ──────────────────────────────────── */
+body.night-mode .education { background: #0f0f1a; }
+body.night-mode .edu-card {
+    background: #161622;
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+/* ── CERTIFICATIONS (night) ─────────────────────────────── */
+body.night-mode .certifications { background: #0d0d14; }
+body.night-mode .cert-card {
+    background: #161622;
+    border-color: rgba(255, 255, 255, 0.08);
+}
+body.night-mode .cert-card:hover { box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3); }
+body.night-mode .cert-icon { background: #1a1f3a; }
+
+/* ── SKILLS (night) ─────────────────────────────────────── */
+body.night-mode .skills { background: #0f0f1a; }
+body.night-mode .skill-group {
+    background: #161622;
+    border-color: rgba(255, 255, 255, 0.08);
+}
+body.night-mode .skill-tag {
+    background: #1e1e2e;
+    border-color: rgba(255, 255, 255, 0.1);
+}
+body.night-mode .skill-tag-text {
+    background: #1e1e2e;
+    border-color: rgba(79, 142, 247, 0.35);
+}
+
+/* ── CONTACT / FOOTER (night) ───────────────────────────── */
+body.night-mode .contact { background: #070710; }
+body.night-mode footer { background: #050508; }
+
+/* ── NAVBAR NIGHT OVERRIDES ─────────────────────────────── */
+body.night-mode .pill-nav-items {
+    background: #161622 !important;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.45);
+}
+body.night-mode .pill {
+    background: #1e2035 !important;
+    color: #c8c4e0 !important;
+}
+body.night-mode .pill .hover-circle { background: #4f8ef7 !important; }
+body.night-mode .pill .pill-label-hover { color: #fff !important; }
+body.night-mode .pill-logo {
+    background: #161622 !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
+}
+body.night-mode .mobile-menu-button { background: #161622 !important; }
+body.night-mode .hamburger-line { background: #c8c4e0 !important; }
+body.night-mode .mobile-menu-popover {
+    background: #161622 !important;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+}
+body.night-mode .mobile-menu-popover .mobile-menu-link {
+    background: #1e2035 !important;
+    color: #c8c4e0 !important;
+}
+body.night-mode .mobile-menu-popover .mobile-menu-link:hover {
+    background: #4f8ef7 !important;
+    color: #fff !important;
+}
+
+/* ── MISC ───────────────────────────────────────────────── */
+body.night-mode .glass-btn--secondary span { color: #e8e6f0; }
+body.night-mode .section-title { color: var(--ink); }
+body.night-mode .status-badge { background: #0d2e1a; color: #4ade80; }
+
+/* =========================================================
+   THEME TOGGLE BUTTON
+   ========================================================= */
+
+/* Desktop: fixed circle top-right */
+#theme-toggle-wrap {
+    position: fixed;
+    top: 1rem;
+    right: 1.5rem;
+    z-index: 200;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #0d0d14;
+    box-shadow: 0 4px 16px rgba(13, 13, 20, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.4s ease, box-shadow 0.4s ease;
+    flex-shrink: 0;
+}
+body.night-mode #theme-toggle-wrap {
+    background: #161622;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.55);
+}
+#theme-toggle-wrap:hover {
+    box-shadow: 0 4px 20px rgba(79, 142, 247, 0.4);
+}
+
+/* Mobile: static, inside nav row next to hamburger */
+@media (max-width: 768px) {
+    #theme-toggle-wrap {
+        position: static;
+        top: auto;
+        right: auto;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        box-shadow: 0 4px 16px rgba(13, 13, 20, 0.22);
+    }
+    body.night-mode #theme-toggle-wrap {
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
+    }
+
+    /* Group: toggle + hamburger on the right */
+    .pill-nav-right-group {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-left: auto;
+    }
+}
+
+/* Pill track */
+#theme-toggle {
+    width: 36px;
+    height: 20px;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    padding: 0;
+    background: #1a1a2e;
+    box-shadow:
+        inset 0 2px 5px rgba(0,0,0,0.6),
+        inset 0 -1px 2px rgba(255,255,255,0.05),
+        0 0 0 1.5px rgba(255,255,255,0.06);
+    transition: background 0.35s ease;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Metallic knob */
+#theme-toggle .knob {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%,
+        #eae8f8 0%, #b0aed0 45%, #7070a0 100%);
+    box-shadow:
+        0 1px 5px rgba(0,0,0,0.6),
+        inset 0 1px 3px rgba(255,255,255,0.45),
+        inset 0 -1px 2px rgba(0,0,0,0.25);
+    transition: transform 0.38s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 3;
+    pointer-events: none;
+}
+
+/* Sun icon — right of track, shown in DAY */
+#theme-toggle .icon-sun {
+    position: absolute;
+    right: 3px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.9;
+    transition: opacity 0.25s ease;
+}
+
+/* Moon icon — left of track, shown in NIGHT */
+#theme-toggle .icon-moon {
+    position: absolute;
+    left: 3px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 11px;
+    height: 11px;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+
+/* Night state */
+body.night-mode #theme-toggle { background: #0e1035; }
+body.night-mode #theme-toggle .knob {
+    transform: translateX(16px);
+    background: radial-gradient(circle at 35% 30%,
+        #d5d3f0 0%, #9090c8 45%, #4852b0 100%);
+    box-shadow:
+        0 1px 5px rgba(0,0,0,0.7),
+        inset 0 1px 3px rgba(255,255,255,0.3),
+        inset 0 -1px 2px rgba(0,0,0,0.3);
+}
+body.night-mode #theme-toggle .icon-sun  { opacity: 0; }
+body.night-mode #theme-toggle .icon-moon { opacity: 0.95; }
