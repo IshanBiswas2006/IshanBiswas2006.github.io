@@ -73,9 +73,11 @@ I'm **Ishan Biswas**, currently pursuing a **Bachelor of Computer Applications (
 ├── README.md                   # Project documentation
 └── Assets/
     ├── CSS/
-    │   └── Style.css           # Stylesheet
+    │   ├── Style.css           # Stylesheet  
+    │   └── night-mode.css      # Stylesheet For Dark Mode  
     ├── JS/
-    │   └── script.js           # JavaScript logic
+    │   ├── script.js           # JavaScript logic
+    │   └── night mode.js       # JavaScript Dark mode logic    
     └── Media/
         └── Image/
             ├── icon.png        # Site icon/favicon
