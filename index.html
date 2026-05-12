@@ -5,218 +5,765 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ishan Biswas — Data Science Aspirant</title>
-    <link rel="icon" type="image/png" href="./Assets/Media/Image/icon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="./Assets/CSS/Style.css">
-    <link rel="stylesheet" href="./Assets/CSS/night-mode.css">
+    <!-- <style src="./Assets/CSS/night-mode.css"></style> -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'syne': ['Syne', 'sans-serif'],
+                        'dm':   ['DM Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        ink:     '#0d0d14',
+                        cream:   '#f5f4f0',
+                        accent:  '#2563eb',
+                        accent2: '#7c3aed',
+                        muted:   '#6b7280',
+                        cardBg:  '#ffffff',
+                    }
+                }
+            }
+        }
+    </script>
 </head>
 
 <body>
+    <div class="min-h-screen bg-cream font-dm text-ink overflow-x-hidden">
 
-    <!-- NAV -->
-    <div id="pill-nav-root"></div>
+        <!-- ═══════════════ NAVIGATION ═══════════════ -->
+        <div id="pill-nav-root"></div>
 
-    <!-- HERO -->
-    <section class="hero" id="about">
-        <div class="hero-inner">
-            <div class="hero-text fade-in">
-                <div class="badge">
-                    <span class="badge-dot"></span>
-                    Data Science Aspirant
-                </div>
-                <h1>I am <span class="highlight">Ishan Biswas</span>,<br>a BCA Student</h1>
-                <p>
-                    I am currently pursuing Bachelor of Computer Applications (BCA) at MAKAUT University (2025–2029).
-                    Alongside my academic studies, I am actively learning Data Structures & Algorithms and Data Science.
-                    I am building strong foundations in programming and problem-solving, with the goal of becoming a
-                    professional Data Scientist. I focus on logical thinking, structured coding practices, and
-                    continuous learning.
-                </p>
-                <div class="btn-row">
-                    <div class="button-wrap">
-                        <a href="#" class="glass-btn glass-btn--secondary">
-                            <span>
-                                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                                    stroke-width="2">
-                                    <path
-                                        d="M12 10v6m0 0l-3-3m3 3l3-3M3 17V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
-                                </svg>
-                                View Resume
-                            </span>
-                        </a>
-                        <div class="button-shadow"></div>
-                    </div>
-                    <div class="button-wrap">
-                        <a href="#contact" class="glass-btn glass-btn--secondary">
-                            <span>Contact Me →</span>
-                        </a>
-                        <div class="button-shadow"></div>
-                    </div>
+        <!-- ═══════════════ HERO ═══════════════ -->
+        <section id="about" class="relative min-h-screen flex items-center pt-32 pb-20 overflow-hidden grain">
+            <!-- Background gradients -->
+            <div class="absolute inset-0 pointer-events-none">
+                <div class="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-accent/5 rounded-full blur-3xl"></div>
+                <div class="absolute bottom-1/4 left-1/4 w-[400px] h-[400px] bg-accent2/4 rounded-full blur-3xl"></div>
+                <div
+                    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-gradient-radial from-accent/3 to-transparent rounded-full blur-3xl">
                 </div>
             </div>
 
-            <div class="hero-image-wrap fade-in">
-                <div class="profile-blob">
-                    <!-- FIX: removed redundant profile-placeholder wrapper and conflicting inline styles -->
-                    <img src="./Assets/Media/Image/my-photo.jpg" alt="Ishan Biswas">
-                </div>
-                <div class="float-stat top-right">
-                    <span class="stat-icon">🎓</span>
+            <div class="relative z-10 max-w-6xl mx-auto w-full px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                    <!-- Text Column -->
                     <div>
-                        <div class="stat-num">BCA</div>
-                        <div style="font-size:.72rem;color:#6b7280">MAKAUT Univ.</div>
-                    </div>
-                </div>
-                <div class="float-stat bottom-left">
-                    <span class="stat-icon">💡</span>
-                    <div>
-                        <div class="stat-num">DSA</div>
-                        <div style="font-size:.72rem;color:#6b7280">& Data Science</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+                        <div
+                            class="animate-slide-up inline-flex items-center gap-2 bg-accent/8 border border-accent/12 rounded-full px-4 py-1.5 mb-6">
+                            <span class="badge-dot w-1.5 h-1.5 rounded-full bg-accent"></span>
+                            <span class="text-xs font-semibold uppercase tracking-widest text-accent">Data Science
+                                Aspirant</span>
+                        </div>
 
-    <!-- EDUCATION -->
-    <!-- FIX: added section-inner wrapper so content respects max-width and stays centred -->
-    <section class="education" id="education">
-        <div class="section-inner">
-            <span class="section-label">Academic Background</span>
-            <h2 class="section-title">Education</h2>
-            <div class="edu-card fade-in">
-                <div class="edu-icon">🎓</div>
-                <div class="edu-content">
-                    <h3>Bachelor of Computer Applications (BCA)</h3>
-                    <div class="uni">MAKAUT University</div>
-                    <div class="year">📅 2025 – 2029</div>
-                    <span class="status-badge">● Currently Pursuing</span>
-                </div>
-            </div>
-        </div>
-    </section>
+                        <h1
+                            class="animate-slide-up-delay-1 font-syne font-extrabold text-5xl lg:text-6xl xl:text-[3.5rem] leading-[1.08] tracking-tight mb-6">
+                            I am <span class="gradient-text">Ishan Biswas</span>,<br>a BCA Student
+                        </h1>
 
-    <!-- CERTIFICATIONS -->
-    <!-- FIX: added section-inner wrapper -->
-    <section class="certifications" id="certifications">
-        <div class="section-inner">
-            <span class="section-label">Achievements</span>
-            <h2 class="section-title">Certifications</h2>
-            <div class="cards-grid">
-                <div class="cert-card fade-in">
-                    <div class="cert-icon">📊</div>
-                    <h3>Data Science Fundamentals</h3>
-                    <p>Foundation-level certification covering core data science concepts, workflows, and tools.</p>
-                    <a href="#" class="cert-link">View Certificate →</a>
-                </div>
-                <div class="cert-card fade-in">
-                    <div class="cert-icon">⚡</div>
-                    <h3>C++ Programming</h3>
-                    <p>Certification validating proficiency in object-oriented programming using C++.</p>
-                    <a href="#" class="cert-link">View Certificate →</a>
-                </div>
-                <div class="cert-card fade-in">
-                    <div class="cert-icon">🗄️</div>
-                    <h3>SQL & Database Management</h3>
-                    <p>Covers relational database design, SQL queries, and database management fundamentals.</p>
-                    <a href="#" class="cert-link">View Certificate →</a>
-                </div>
-                <div class="cert-card fade-in">
-                    <div class="cert-icon">🧠</div>
-                    <h3>Data Structures & Algorithms</h3>
-                    <p>Demonstrates understanding of core DSA concepts including arrays, trees, graphs, and sorting.</p>
-                    <a href="#" class="cert-link">View Certificate →</a>
-                </div>
-            </div>
-        </div>
-    </section>
+                        <p class="animate-slide-up-delay-2 text-base text-muted leading-relaxed max-w-lg mb-8">
+                            Currently pursuing Bachelor of Computer Applications (BCA) at MAKAUT University (2025–2029).
+                            Actively learning Data Structures &amp; Algorithms and Data Science, building strong foundations
+                            in programming and problem-solving with the goal of becoming a professional Data Scientist.
+                        </p>
 
-    <!-- SKILLS -->
-    <!-- FIX: added section-inner wrapper -->
-    <section class="skills" id="skills">
-        <div class="section-inner">
-            <span class="section-label">Technical Expertise</span>
-            <h2 class="section-title">Technical Skills</h2>
-            <div class="skills-grid" id="skills-grid"></div>
-        </div>
-    </section>
+                        <div class="animate-slide-up-delay-3 flex items-center gap-4 flex-wrap">
+                            <div class="relative">
+                                <a id="hero-resume-btn" href="#"
+                                    class="glass-btn inline-flex items-center gap-2.5 bg-white/10 backdrop-blur-sm rounded-full px-7 py-3.5 font-semibold text-sm shadow-lg shadow-black/5 border border-black/5">
+                                    <iconify-icon icon="lucide:download" class="text-base"></iconify-icon>
+                                    View Resume
+                                </a>
+                            </div>
+                            <div class="relative">
+                                <a id="hero-contact-btn" href="#contact"
+                                    class="glass-btn inline-flex items-center gap-2.5 bg-white/10 backdrop-blur-sm rounded-full px-7 py-3.5 font-semibold text-sm shadow-lg shadow-black/5 border border-black/5">
+                                    Contact Me
+                                    <iconify-icon icon="lucide:arrow-right" class="text-base"></iconify-icon>
+                                </a>
+                            </div>
+                        </div>
 
-    <!-- CONTACT -->
-    <section class="contact" id="contact">
-        <div class="contact-inner">
-            <span class="section-label">Let's Connect</span>
-            <h2 class="section-title">Get In Touch</h2>
-            <p class="contact-subtitle">Open to internship opportunities, collaborations, and learning discussions.</p>
+                        <!-- Social links row -->
+                        <div class="animate-slide-up-delay-3 flex items-center gap-3 mt-8 pt-6 border-t border-black/5">
+                            <span class="text-xs text-muted font-medium uppercase tracking-wider mr-1">Find me on</span>
+                            <a id="hero-github-link" href="https://github.com/IshanBiswas2006" target="_blank"
+                                class="w-9 h-9 rounded-full bg-ink/5 flex items-center justify-center text-muted hover:bg-ink hover:text-cream transition-all duration-300">
+                                <iconify-icon icon="mdi:github" class="text-base"></iconify-icon>
+                            </a>
+                            <a id="hero-linkedin-link" href="https://linkedin.com/in/ishan-biswas-521b97384"
+                                target="_blank"
+                                class="w-9 h-9 rounded-full bg-ink/5 flex items-center justify-center text-muted hover:bg-accent hover:text-white transition-all duration-300">
+                                <iconify-icon icon="mdi:linkedin" class="text-base"></iconify-icon>
+                            </a>
+                            <a id="hero-email-link" href="mailto:biswas.ishan2006@gmail.com"
+                                class="w-9 h-9 rounded-full bg-ink/5 flex items-center justify-center text-muted hover:bg-accent2 hover:text-white transition-all duration-300">
+                                <iconify-icon icon="lucide:mail" class="text-base"></iconify-icon>
+                            </a>
+                        </div>
+                    </div>
 
-            <div class="contact-grid">
-                <div class="contact-item">
-                    <div class="contact-icon">📞</div>
-                    <div class="contact-info">
-                        <label>Phone</label>
-                        <a href="tel:7003090104">7003090104</a>
-                    </div>
-                </div>
-                <div class="contact-item">
-                    <div class="contact-icon">✉️</div>
-                    <div class="contact-info">
-                        <label>Email</label>
-                        <a href="mailto:biswas.ishan2006@gmail.com">Email me</a>
-                    </div>
-                </div>
-                <div class="contact-item">
-                    <div class="contact-icon">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
-                            <path
-                                d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
-                        </svg>
-                    </div>
-                    <div class="contact-info">
-                        <label>GitHub</label>
-                        <a href="https://github.com/IshanBiswas2006" target="_blank">IshanBiswas2006</a>
-                    </div>
-                </div>
-                <div class="contact-item">
-                    <div class="contact-icon">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
-                            <path
-                                d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                        </svg>
-                    </div>
-                    <div class="contact-info">
-                        <label>LinkedIn</label>
-                        <a href="https://linkedin.com/in/ishan-biswas-521b97384" target="_blank">Ishan Biswas</a>
+                    <!-- Profile Image Column -->
+                    <div class="relative flex justify-center items-center">
+                        <div class="animate-scale-in profile-blob relative w-80 h-[360px] lg:w-[380px] lg:h-[420px] overflow-hidden shadow-2xl shadow-accent/10"
+                            style="background: linear-gradient(145deg, #dbeafe, #ede9fe);">
+                            <div class="absolute inset-0 flex flex-col items-center justify-center text-accent">
+                                <iconify-icon icon="lucide:user" class="text-7xl opacity-20"></iconify-icon>
+                                <span class="text-sm font-medium opacity-30 mt-2 font-syne">Ishan Biswas</span>
+                            </div>
+                        </div>
+
+                        <!-- Floating stat: BCA -->
+                        <div
+                            class="animate-float-in-1 float-anim absolute -top-2 -right-4 lg:right-[-16px] xl:right-0 bg-white rounded-2xl px-4 py-3 shadow-xl shadow-black/8 flex items-center gap-3 border border-black/5">
+                            <span class="text-xl">🎓</span>
+                            <div>
+                                <div class="font-syne font-bold text-accent text-sm">BCA</div>
+                                <div class="text-xs text-muted">MAKAUT Univ.</div>
+                            </div>
+                        </div>
+
+                        <!-- Floating stat: DSA -->
+                        <div
+                            class="animate-float-in-2 float-anim-delay absolute -bottom-2 -left-4 lg:left-[-16px] xl:left-0 bg-white rounded-2xl px-4 py-3 shadow-xl shadow-black/8 flex items-center gap-3 border border-black/5">
+                            <span class="text-xl">💡</span>
+                            <div>
+                                <div class="font-syne font-bold text-accent text-sm">DSA</div>
+                                <div class="text-xs text-muted">&amp; Data Science</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="button-wrap button-wrap--contact">
-                <a href="tel:7003090104" class="glass-btn glass-btn--contact">
-                    <span>
-                        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                            stroke-width="2">
-                            <path
-                                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                        </svg>
+            <!-- Scroll indicator -->
+            <div
+                class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-slide-up-delay-3">
+                <span class="text-[10px] text-muted/60 uppercase tracking-widest font-medium">Scroll</span>
+                <div class="w-5 h-8 rounded-full border-2 border-muted/20 flex items-start justify-center pt-1.5">
+                    <div class="w-1 h-2 bg-muted/40 rounded-full" style="animation: float 2s ease-in-out infinite;">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════ QUICK STATS BAR ═══════════════ -->
+        <div class="bg-white border-y border-black/5">
+            <div class="max-w-6xl mx-auto px-6 lg:px-8 py-6">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div class="fade-in flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-accent/8 flex items-center justify-center">
+                            <iconify-icon icon="lucide:code-2" class="text-lg text-accent"></iconify-icon>
+                        </div>
+                        <div>
+                            <div class="font-syne font-bold text-lg tracking-tight">4+</div>
+                            <div class="text-xs text-muted">Languages</div>
+                        </div>
+                    </div>
+                    <div class="fade-in stagger-1 flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-accent2/8 flex items-center justify-center">
+                            <iconify-icon icon="lucide:folder-open" class="text-lg text-accent2"></iconify-icon>
+                        </div>
+                        <div>
+                            <div class="font-syne font-bold text-lg tracking-tight">4</div>
+                            <div class="text-xs text-muted">Projects</div>
+                        </div>
+                    </div>
+                    <div class="fade-in stagger-2 flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-500/8 flex items-center justify-center">
+                            <iconify-icon icon="lucide:award" class="text-lg text-emerald-600"></iconify-icon>
+                        </div>
+                        <div>
+                            <div class="font-syne font-bold text-lg tracking-tight">4</div>
+                            <div class="text-xs text-muted">Certifications</div>
+                        </div>
+                    </div>
+                    <div class="fade-in stagger-3 flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-amber-500/8 flex items-center justify-center">
+                            <iconify-icon icon="lucide:graduation-cap" class="text-lg text-amber-600"></iconify-icon>
+                        </div>
+                        <div>
+                            <div class="font-syne font-bold text-lg tracking-tight">BCA</div>
+                            <div class="text-xs text-muted">1st Semester</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════ EDUCATION ═══════════════ -->
+        <section id="education" class="py-24 bg-white relative">
+            <div class="max-w-6xl mx-auto w-full px-6 lg:px-8">
+                <span class="block text-xs font-semibold uppercase tracking-widest text-accent mb-2">Academic
+                    Background</span>
+                <h2 class="font-syne font-extrabold text-4xl tracking-tight mb-12">Education</h2>
+
+                <div class="relative max-w-3xl">
+                    <div
+                        class="absolute left-6 top-6 bottom-6 w-0.5 bg-gradient-to-b from-accent to-accent2 rounded-full">
+                    </div>
+
+                    <div class="fade-in relative pl-16">
+                        <div
+                            class="absolute left-3.5 top-8 w-5 h-5 rounded-full bg-white border-[3px] border-accent shadow-lg shadow-accent/20 z-10">
+                        </div>
+                        <div class="bg-cream rounded-2xl p-7 border border-black/5 relative overflow-hidden card-hover">
+                            <div
+                                class="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-accent to-accent2 rounded-l-2xl">
+                            </div>
+                            <div class="flex items-start gap-5">
+                                <div
+                                    class="w-14 h-14 rounded-xl bg-gradient-to-br from-accent to-accent2 flex items-center justify-center flex-shrink-0 shadow-lg shadow-accent/20">
+                                    <span class="text-2xl">🎓</span>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex items-start justify-between flex-wrap gap-3">
+                                        <div>
+                                            <h3 class="font-syne font-bold text-xl mb-1">Bachelor of Computer
+                                                Applications (BCA)</h3>
+                                            <p class="text-accent font-medium text-sm mb-1">MAKAUT University, West
+                                                Bengal</p>
+                                        </div>
+                                        <span
+                                            class="inline-flex items-center gap-1.5 bg-emerald-50 text-emerald-700 px-3 py-1 rounded-full text-xs font-semibold border border-emerald-100">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 badge-dot"></span>
+                                            Currently Pursuing
+                                        </span>
+                                    </div>
+                                    <div class="flex items-center gap-4 mt-3 text-sm text-muted">
+                                        <span class="flex items-center gap-1.5">
+                                            <iconify-icon icon="lucide:calendar" class="text-accent/60"></iconify-icon>
+                                            2025 – 2029
+                                        </span>
+                                        <span class="flex items-center gap-1.5">
+                                            <iconify-icon icon="lucide:book-open" class="text-accent/60"></iconify-icon>
+                                            1st Semester
+                                        </span>
+                                    </div>
+                                    <div class="mt-4 flex flex-wrap gap-2">
+                                        <span
+                                            class="text-xs px-2.5 py-1 rounded-full bg-accent/8 text-accent font-medium">Computer
+                                            Science</span>
+                                        <span
+                                            class="text-xs px-2.5 py-1 rounded-full bg-accent2/8 text-accent2 font-medium">Data
+                                            Science</span>
+                                        <span
+                                            class="text-xs px-2.5 py-1 rounded-full bg-amber-500/8 text-amber-700 font-medium">Mathematics</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <div class="fade-in stagger-1 relative pl-16 mt-6">
+                        <div
+                            class="absolute left-3.5 top-8 w-5 h-5 rounded-full bg-white border-[3px] border-accent2 shadow-lg shadow-accent2/20 z-10">
+                        </div>
+                        <div class="bg-cream rounded-2xl p-7 border border-black/5 relative overflow-hidden card-hover">
+                            <div
+                                class="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-accent2 to-accent rounded-l-2xl">
+                            </div>
+                            <div class="flex items-start gap-5">
+                                <div
+                                    class="w-14 h-14 rounded-xl bg-gradient-to-br from-accent2 to-accent flex items-center justify-center flex-shrink-0 shadow-lg shadow-accent2/20">
+                                    <span class="text-2xl">📚</span>
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="font-syne font-bold text-xl mb-1">Higher Secondary Education</h3>
+                                    <p class="text-accent2 font-medium text-sm mb-1">West Bengal Council of Higher
+                                        Secondary Education</p>
+                                    <div class="flex items-center gap-4 mt-3 text-sm text-muted">
+                                        <span class="flex items-center gap-1.5">
+                                            <iconify-icon icon="lucide:calendar" class="text-accent2/60"></iconify-icon>
+                                            Completed 2025
+                                        </span>
+                                        <span class="flex items-center gap-1.5">
+                                            <iconify-icon icon="lucide:award" class="text-accent2/60"></iconify-icon>
+                                            Science Stream
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+        </section>
+
+        <!-- ═══════════════ PROJECTS ═══════════════ -->
+        <section id="projects" class="py-24 bg-cream relative">
+            <div class="max-w-6xl mx-auto w-full px-6 lg:px-8">
+                <span class="block text-xs font-semibold uppercase tracking-widest text-accent mb-2">Featured
+                    Work</span>
+                <h2 class="font-syne font-extrabold text-4xl tracking-tight mb-4">Projects</h2>
+                <p class="text-muted text-base mb-12 max-w-lg">Building practical projects to strengthen my skills in
+                    programming, data analysis, and problem-solving.</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div
+                        class="fade-in project-card group bg-white rounded-2xl border border-black/5 overflow-hidden card-hover">
+                        <div class="relative h-48 bg-gradient-to-br from-accent/10 to-accent2/10 overflow-hidden">
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div
+                                    class="w-20 h-20 rounded-2xl bg-white/80 backdrop-blur-sm flex items-center justify-center shadow-lg">
+                                    <iconify-icon icon="lucide:bar-chart-3" class="text-4xl text-accent"></iconify-icon>
+                                </div>
+                            </div>
+                            <div
+                                class="project-overlay absolute inset-0 bg-ink/60 flex items-center justify-center gap-3 opacity-0">
+                                <a id="project1-live-link" href="#"
+                                    class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-ink hover:bg-accent hover:text-white transition-colors">
+                                    <iconify-icon icon="lucide:external-link" class="text-lg"></iconify-icon>
+                                </a>
+                                <a id="project1-github-link" href="#"
+                                    class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-ink hover:bg-ink hover:text-white transition-colors">
+                                    <iconify-icon icon="mdi:github" class="text-lg"></iconify-icon>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center gap-2 mb-3">
+                                <span
+                                    class="text-xs px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 font-medium border border-emerald-100">Completed</span>
+                            </div>
+                            <h3 class="font-syne font-bold text-lg mb-2">Data Analysis Dashboard</h3>
+                            <p class="text-sm text-muted leading-relaxed mb-4">An interactive data analysis dashboard
+                                built with Python for visualizing datasets, identifying trends, and generating
+                                statistical insights from CSV files.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span
+                                    class="tech-badge text-xs px-2.5 py-1 rounded-full border border-black/10 text-muted font-medium cursor-default">Python</span>
+                                <span
+                                    class="tech-badge text-xs px-2.5 py-1 rounded-full border border-black/10 text-muted font-medium cursor-default">Pandas</span>
+                                <span
+                                    class="tech-badge text-xs px-2.5 py-1 rounded-full border border-black/10 text-muted font-medium cursor-default">Matplotlib</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        class="fade-in stagger-1 project-card group bg-white rounded-2xl border border-black/5 overflow-hidden card-hover">
+                        <div class="relative h-48 bg-gradient-to-br from-accent2/10 to-pink-500/10 overflow-hidden">
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div
+                                    class="w-20 h-20 rounded-2xl bg-white/80 backdrop-blur-sm flex items-center justify-center shadow-lg">
+                                    <iconify-icon icon="lucide:code-2" class="text-4xl text-accent2"></iconify-icon>
+                                </div>
+                            </div>
+                            <div
+                                class="project-overlay absolute inset-0 bg-ink/60 flex items-center justify-center gap-3 opacity-0">
+                                <a id="project2-github-link" href="#"
+                                    class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-ink hover:bg-ink hover:text-white transition-colors">
+                                    <iconify-icon icon="mdi:github" class="text-lg"></iconify-icon>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center gap-2 mb-3">
+                                <span
+                                    class="text-xs px-2 py-0.5 rounded-full bg-amber-50 text-amber-700 font-medium border border-amber-100">In
+                                    Progress</span>
+                            </div>
+                            <h3 class="font-syne font-bold text-lg mb-2">DSA Practice Tracker</h3>
+                            <p class="text-sm text-muted leading-relaxed mb-4">A structured problem tracker for Data
+                                Structures &amp; Algorithms practice. Categorized by topic with difficulty levels and
+                                solution links.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span
+                                    class="tech-badge text-xs px-2.5 py-1 rounded-full border border-black/10 text-muted font-medium cursor-default">C++</span>
+                                <span
+                                    class="tech-badge text-xs px-2.5 py-1 rounded-full border border-black/10 text-muted font-medium cursor-default">Algorithms</span>
+                                <span
+                                    class="tech-badge text-xs px-2.5 py-1 rounded-full border border-black/10 text-muted font-medium cursor-default">Data
+                                    Structures</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        class="fade-in stagger-2 project-card group bg-white rounded-2xl border border-black/5 overflow-hidden card-hover">
+                        <div class="relative h-48 bg-gradient-to-br from-emerald-500/10 to-cyan-500/10 overflow-hidden">
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div
+                                    class="w-20 h-20 rounded-2xl bg-white/80 backdrop-blur-sm flex items-center justify-center shadow-lg">
+                                    <iconify-icon icon="lucide:globe" class="text-4xl text-emerald-600"></iconify-icon>
+                                </div>
+                            </div>
+                            <div
+                                class="project-overlay absolute inset-0 bg-ink/60 flex items-center justify-center gap-3 opacity-0">
+                                <a id="project3-live-link" href="#"
+                                    class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-ink hover:bg-accent hover:text-white transition-colors">
+                                    <iconify-icon icon="lucide:external-link" class="text-lg"></iconify-icon>
+                                </a>
+                                <a id="project3-github-link" href="#"
+                                    class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-ink hover:bg-ink hover:text-white transition-colors">
+                                    <iconify-icon icon="mdi:github" class="text-lg"></iconify-icon>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center gap-2 mb-3">
+                                <span
+                                    class="text-xs px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 font-medium border border-emerald-100">Completed</span>
+                            </div>
+                            <h3 class="font-syne font-bold text-lg mb-2">Personal Portfolio Website</h3>
+                            <p class="text-sm text-muted leading-relaxed mb-4">A modern, responsive portfolio website
+                                built from scratch showcasing skills, education, and projects. Features dark/light mode
+                                and smooth animations.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span
+                                    class="tech-badge text-xs px-2.5 py-1 rounded-full border border-black/10 text-muted font-medium cursor-default">HTML5</span>
+                                <span
+                                    class="tech-badge text-xs px-2.5 py-1 rounded-full border border-black/10 text-muted font-medium cursor-default">CSS3</span>
+                                <span
+                                    class="tech-badge text-xs px-2.5 py-1 rounded-full border border-black/10 text-muted font-medium cursor-default">JavaScript</span>
+                                <span
+                                    class="tech-badge text-xs px-2.5 py-1 rounded-full border border-black/10 text-muted font-medium cursor-default">GSAP</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        class="fade-in stagger-3 project-card group bg-white rounded-2xl border border-black/5 overflow-hidden card-hover">
+                        <div class="relative h-48 bg-gradient-to-br from-amber-500/10 to-red-500/10 overflow-hidden">
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div
+                                    class="w-20 h-20 rounded-2xl bg-white/80 backdrop-blur-sm flex items-center justify-center shadow-lg">
+                                    <iconify-icon icon="lucide:brain-circuit"
+                                        class="text-4xl text-amber-600"></iconify-icon>
+                                </div>
+                            </div>
+                            <div
+                                class="project-overlay absolute inset-0 bg-ink/60 flex items-center justify-center gap-3 opacity-0">
+                                <a id="project4-github-link" href="#"
+                                    class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-ink hover:bg-ink hover:text-white transition-colors">
+                                    <iconify-icon icon="mdi:github" class="text-lg"></iconify-icon>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center gap-2 mb-3">
+                                <span
+                                    class="text-xs px-2 py-0.5 rounded-full bg-accent/8 text-accent font-medium border border-accent/15">Planned</span>
+                            </div>
+                            <h3 class="font-syne font-bold text-lg mb-2">ML Prediction Model</h3>
+                            <p class="text-sm text-muted leading-relaxed mb-4">A machine learning model to predict
+                                student performance based on study habits and academic data. Uses regression analysis
+                                and data preprocessing.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span
+                                    class="tech-badge text-xs px-2.5 py-1 rounded-full border border-black/10 text-muted font-medium cursor-default">Python</span>
+                                <span
+                                    class="tech-badge text-xs px-2.5 py-1 rounded-full border border-black/10 text-muted font-medium cursor-default">Scikit-learn</span>
+                                <span
+                                    class="tech-badge text-xs px-2.5 py-1 rounded-full border border-black/10 text-muted font-medium cursor-default">NumPy</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════ CERTIFICATIONS ═══════════════ -->
+        <section id="certifications" class="py-24 bg-white relative">
+            <div class="max-w-6xl mx-auto w-full px-6 lg:px-8">
+                <span class="block text-xs font-semibold uppercase tracking-widest text-accent mb-2">Achievements</span>
+                <h2 class="font-syne font-extrabold text-4xl tracking-tight mb-12">Certifications</h2>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                    <div
+                        class="fade-in bg-cream rounded-2xl p-6 border border-black/5 relative overflow-hidden card-hover group">
+                        <div class="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-accent to-accent2"></div>
+                        <div class="w-11 h-11 rounded-xl bg-accent/10 flex items-center justify-center mb-5">
+                            <span class="text-xl">📊</span>
+                        </div>
+                        <h3 class="font-syne font-bold text-base mb-1.5">Data Science Fundamentals</h3>
+                        <p class="text-xs text-muted leading-relaxed mb-4">Foundation-level certification covering core
+                            data science concepts, workflows, and tools.</p>
+                        <div class="flex items-center justify-between">
+                            <a id="cert1-link" href="#"
+                                class="text-accent text-xs font-semibold flex items-center gap-1 group-hover:gap-2 transition-all">
+                                View Certificate
+                                <iconify-icon icon="lucide:arrow-right" class="text-xs"></iconify-icon>
+                            </a>
+                            <iconify-icon icon="lucide:badge-check" class="text-accent/30 text-lg"></iconify-icon>
+                        </div>
+                    </div>
+
+                    <div
+                        class="fade-in stagger-1 bg-cream rounded-2xl p-6 border border-black/5 relative overflow-hidden card-hover group">
+                        <div class="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-amber-400 to-orange-500">
+                        </div>
+                        <div class="w-11 h-11 rounded-xl bg-amber-500/10 flex items-center justify-center mb-5">
+                            <span class="text-xl">⚡</span>
+                        </div>
+                        <h3 class="font-syne font-bold text-base mb-1.5">C++ Programming</h3>
+                        <p class="text-xs text-muted leading-relaxed mb-4">Certification validating proficiency in
+                            object-oriented programming using C++.</p>
+                        <div class="flex items-center justify-between">
+                            <a id="cert2-link" href="#"
+                                class="text-accent text-xs font-semibold flex items-center gap-1 group-hover:gap-2 transition-all">
+                                View Certificate
+                                <iconify-icon icon="lucide:arrow-right" class="text-xs"></iconify-icon>
+                            </a>
+                            <iconify-icon icon="lucide:badge-check" class="text-amber-400/30 text-lg"></iconify-icon>
+                        </div>
+                    </div>
+
+                    <div
+                        class="fade-in stagger-2 bg-cream rounded-2xl p-6 border border-black/5 relative overflow-hidden card-hover group">
+                        <div class="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-emerald-400 to-cyan-500">
+                        </div>
+                        <div class="w-11 h-11 rounded-xl bg-emerald-500/10 flex items-center justify-center mb-5">
+                            <span class="text-xl">🗄️</span>
+                        </div>
+                        <h3 class="font-syne font-bold text-base mb-1.5">SQL &amp; Database Management</h3>
+                        <p class="text-xs text-muted leading-relaxed mb-4">Covers relational database design, SQL
+                            queries, and database management fundamentals.</p>
+                        <div class="flex items-center justify-between">
+                            <a id="cert3-link" href="#"
+                                class="text-accent text-xs font-semibold flex items-center gap-1 group-hover:gap-2 transition-all">
+                                View Certificate
+                                <iconify-icon icon="lucide:arrow-right" class="text-xs"></iconify-icon>
+                            </a>
+                            <iconify-icon icon="lucide:badge-check" class="text-emerald-400/30 text-lg"></iconify-icon>
+                        </div>
+                    </div>
+
+                    <div
+                        class="fade-in stagger-3 bg-cream rounded-2xl p-6 border border-black/5 relative overflow-hidden card-hover group">
+                        <div class="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-accent2 to-pink-500">
+                        </div>
+                        <div class="w-11 h-11 rounded-xl bg-accent2/10 flex items-center justify-center mb-5">
+                            <span class="text-xl">🧠</span>
+                        </div>
+                        <h3 class="font-syne font-bold text-base mb-1.5">Data Structures &amp; Algorithms</h3>
+                        <p class="text-xs text-muted leading-relaxed mb-4">Demonstrates understanding of core DSA
+                            concepts including arrays, trees, graphs, and sorting.</p>
+                        <div class="flex items-center justify-between">
+                            <a id="cert4-link" href="#"
+                                class="text-accent text-xs font-semibold flex items-center gap-1 group-hover:gap-2 transition-all">
+                                View Certificate
+                                <iconify-icon icon="lucide:arrow-right" class="text-xs"></iconify-icon>
+                            </a>
+                            <iconify-icon icon="lucide:badge-check" class="text-accent2/30 text-lg"></iconify-icon>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════ SKILLS ═══════════════ -->
+        <section id="skills" class="py-24 bg-cream relative">
+            <div class="max-w-6xl mx-auto w-full px-6 lg:px-8">
+                <span class="block text-xs font-semibold uppercase tracking-widest text-accent mb-2">Technical
+                    Expertise</span>
+                <h2 class="font-syne font-extrabold text-4xl tracking-tight mb-12">Technical Skills</h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="fade-in bg-white rounded-2xl p-6 border border-black/5 card-hover">
+                        <div class="flex items-center gap-3 mb-5">
+                            <span
+                                class="text-xs font-bold uppercase tracking-wider text-muted font-syne">Languages</span>
+                            <div class="flex-1 h-px bg-black/5"></div>
+                        </div>
+                        <div class="flex flex-wrap gap-3">
+                            <div
+                                class="skill-tag-hover flex flex-col items-center gap-2 bg-cream border border-black/5 rounded-xl p-3 min-w-[72px] cursor-default">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
+                                    alt="Python" class="w-8 h-8">
+                                <span class="text-xs font-semibold text-muted">Python</span>
+                            </div>
+                            <div
+                                class="skill-tag-hover flex flex-col items-center gap-2 bg-cream border border-black/5 rounded-xl p-3 min-w-[72px] cursor-default">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg"
+                                    alt="C++" class="w-8 h-8">
+                                <span class="text-xs font-semibold text-muted">C++</span>
+                            </div>
+                            <div
+                                class="skill-tag-hover flex flex-col items-center gap-2 bg-cream border border-black/5 rounded-xl p-3 min-w-[72px] cursor-default">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" alt="C"
+                                    class="w-8 h-8">
+                                <span class="text-xs font-semibold text-muted">C</span>
+                            </div>
+                            <div
+                                class="skill-tag-hover flex flex-col items-center gap-2 bg-cream border border-black/5 rounded-xl p-3 min-w-[72px] cursor-default">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg"
+                                    alt="Java" class="w-8 h-8">
+                                <span class="text-xs font-semibold text-muted">Java</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="fade-in stagger-1 bg-white rounded-2xl p-6 border border-black/5 card-hover">
+                        <div class="flex items-center gap-3 mb-5">
+                            <span class="text-xs font-bold uppercase tracking-wider text-muted font-syne">Web &amp;
+                                Database</span>
+                            <div class="flex-1 h-px bg-black/5"></div>
+                        </div>
+                        <div class="flex flex-wrap gap-3">
+                            <div
+                                class="skill-tag-hover flex flex-col items-center gap-2 bg-cream border border-black/5 rounded-xl p-3 min-w-[72px] cursor-default">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg"
+                                    alt="HTML5" class="w-8 h-8">
+                                <span class="text-xs font-semibold text-muted">HTML5</span>
+                            </div>
+                            <div
+                                class="skill-tag-hover flex flex-col items-center gap-2 bg-cream border border-black/5 rounded-xl p-3 min-w-[72px] cursor-default">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg"
+                                    alt="CSS3" class="w-8 h-8">
+                                <span class="text-xs font-semibold text-muted">CSS3</span>
+                            </div>
+                            <div
+                                class="skill-tag-hover flex flex-col items-center gap-2 bg-cream border border-black/5 rounded-xl p-3 min-w-[72px] cursor-default">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
+                                    alt="JavaScript" class="w-8 h-8">
+                                <span class="text-xs font-semibold text-muted">JavaScript</span>
+                            </div>
+                            <div
+                                class="skill-tag-hover flex flex-col items-center gap-2 bg-cream border border-black/5 rounded-xl p-3 min-w-[72px] cursor-default">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
+                                    alt="MySQL" class="w-8 h-8">
+                                <span class="text-xs font-semibold text-muted">MySQL</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="fade-in stagger-2 bg-white rounded-2xl p-6 border border-black/5 card-hover">
+                        <div class="flex items-center gap-3 mb-5">
+                            <span class="text-xs font-bold uppercase tracking-wider text-muted font-syne">Data Science &amp;
+                                Tools</span>
+                            <div class="flex-1 h-px bg-black/5"></div>
+                        </div>
+                        <div class="flex flex-wrap gap-3">
+                            <div
+                                class="skill-tag-hover flex flex-col items-center gap-2 bg-cream border border-black/5 rounded-xl p-3 min-w-[72px] cursor-default">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg"
+                                    alt="NumPy" class="w-8 h-8">
+                                <span class="text-xs font-semibold text-muted">NumPy</span>
+                            </div>
+                            <div
+                                class="skill-tag-hover flex flex-col items-center gap-2 bg-cream border border-black/5 rounded-xl p-3 min-w-[72px] cursor-default">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg"
+                                    alt="Pandas" class="w-8 h-8">
+                                <span class="text-xs font-semibold text-muted">Pandas</span>
+                            </div>
+                            <div
+                                class="skill-tag-hover flex flex-col items-center gap-2 bg-cream border border-black/5 rounded-xl p-3 min-w-[72px] cursor-default">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg"
+                                    alt="Git" class="w-8 h-8">
+                                <span class="text-xs font-semibold text-muted">Git</span>
+                            </div>
+                            <div
+                                class="skill-tag-hover flex flex-col items-center gap-2 bg-cream border border-black/5 rounded-xl p-3 min-w-[72px] cursor-default">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg"
+                                    alt="VS Code" class="w-8 h-8">
+                                <span class="text-xs font-semibold text-muted">VS Code</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════ CONTACT ═══════════════ -->
+        <section id="contact" class="py-24 bg-ink text-white relative overflow-hidden">
+            <div class="absolute inset-0 pointer-events-none">
+                <div class="absolute top-1/4 right-1/4 w-96 h-96 bg-accent/15 rounded-full blur-3xl"></div>
+                <div class="absolute bottom-1/4 left-1/4 w-80 h-80 bg-accent2/10 rounded-full blur-3xl"></div>
+            </div>
+
+            <div class="relative z-10 max-w-6xl mx-auto w-full px-6 lg:px-8">
+                <span class="block text-xs font-semibold uppercase tracking-widest text-sky-300 mb-2">Let's
+                    Connect</span>
+                <h2 class="font-syne font-extrabold text-4xl tracking-tight text-white mb-3">Get In Touch</h2>
+                <p class="text-gray-400 text-base mb-12">Open to internship opportunities, collaborations, and learning
+                    discussions.</p>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
+                    <div
+                        class="fade-in bg-white/7 border border-white/10 rounded-2xl p-5 flex items-center gap-4 hover:bg-white/12 transition-colors">
+                        <div class="w-11 h-11 rounded-xl bg-accent/25 flex items-center justify-center flex-shrink-0">
+                            <span class="text-lg">📞</span>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] uppercase tracking-wider text-gray-500 mb-0.5">Phone</label>
+                            <a id="contact-phone-link" href="tel:7003090104"
+                                class="text-sm font-medium text-white hover:text-sky-300 transition-colors">7003090104</a>
+                        </div>
+                    </div>
+
+                    <div
+                        class="fade-in stagger-1 bg-white/7 border border-white/10 rounded-2xl p-5 flex items-center gap-4 hover:bg-white/12 transition-colors">
+                        <div class="w-11 h-11 rounded-xl bg-accent/25 flex items-center justify-center flex-shrink-0">
+                            <span class="text-lg">✉️</span>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] uppercase tracking-wider text-gray-500 mb-0.5">Email</label>
+                            <a id="contact-email-link" href="mailto:biswas.ishan2006@gmail.com"
+                                class="text-sm font-medium text-white hover:text-sky-300 transition-colors">Email me</a>
+                        </div>
+                    </div>
+
+                    <div
+                        class="fade-in stagger-2 bg-white/7 border border-white/10 rounded-2xl p-5 flex items-center gap-4 hover:bg-white/12 transition-colors">
+                        <div class="w-11 h-11 rounded-xl bg-accent/25 flex items-center justify-center flex-shrink-0">
+                            <iconify-icon icon="mdi:github" class="text-xl text-white"></iconify-icon>
+                        </div>
+                        <div>
+                            <label
+                                class="block text-[10px] uppercase tracking-wider text-gray-500 mb-0.5">GitHub</label>
+                            <a id="contact-github-link" href="https://github.com/IshanBiswas2006" target="_blank"
+                                class="text-sm font-medium text-white hover:text-sky-300 transition-colors">IshanBiswas2006</a>
+                        </div>
+                    </div>
+
+                    <div
+                        class="fade-in stagger-3 bg-white/7 border border-white/10 rounded-2xl p-5 flex items-center gap-4 hover:bg-white/12 transition-colors">
+                        <div class="w-11 h-11 rounded-xl bg-accent/25 flex items-center justify-center flex-shrink-0">
+                            <iconify-icon icon="mdi:linkedin" class="text-xl text-white"></iconify-icon>
+                        </div>
+                        <div>
+                            <label
+                                class="block text-[10px] uppercase tracking-wider text-gray-500 mb-0.5">LinkedIn</label>
+                            <a id="contact-linkedin-link" href="https://linkedin.com/in/ishan-biswas-521b97384"
+                                target="_blank"
+                                class="text-sm font-medium text-white hover:text-sky-300 transition-colors">Ishan
+                                Biswas</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fade-in">
+                    <a id="contact-cta-btn" href="mailto:biswas.ishan2006@gmail.com"
+                        class="glass-btn inline-flex items-center gap-2 rounded-full px-7 py-3.5 font-semibold text-sm text-white shadow-xl shadow-accent/20"
+                        style="background: linear-gradient(-75deg, rgba(37,99,235,0.6), rgba(124,58,237,0.3), rgba(37,99,235,0.7));">
+                        <iconify-icon icon="lucide:mail" class="text-base"></iconify-icon>
                         Say Hello
-                    </span>
-                </a>
-                <div class="button-shadow"></div>
+                    </a>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- FOOTER -->
-    <footer>
-        <p>© 2025 <span>Ishan Biswas</span>. All rights reserved. Built with passion for data &amp; code.</p>
-    </footer>
+        <!-- ═══════════════ FOOTER ═══════════════ -->
+        <footer class="bg-[#0a0a10] text-gray-500 text-center py-8 px-6 text-sm">
+            <p>© 2025 <span class="text-accent font-medium">Ishan Biswas</span>. All rights reserved. Built with passion
+                for data &amp; code.</p>
+        </footer>
+
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="./Assets/JS/script.js"></script>
-    <script src="./Assets/JS/night mode.js"></script>
+    <script src="Assets/JS/script.js"></script>
+    <!-- <script src="./Assets/JS/night mode.js"></script> -->
 </body>
 
 </html>
