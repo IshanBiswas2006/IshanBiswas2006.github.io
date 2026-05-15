@@ -230,3 +230,80 @@ body.night-mode #theme-toggle .knob {
 }
 body.night-mode #theme-toggle .icon-sun  { opacity: 0; }
 body.night-mode #theme-toggle .icon-moon { opacity: 0.95; }
+
+/* =========================================================
+   PROJECTS (night) — append to night-mode.css
+   ========================================================= */
+
+body.night-mode .projects { background: #0d0d14; }
+
+body.night-mode .project-card {
+    background: #161622;
+    border-color: rgba(255, 255, 255, 0.07);
+}
+
+body.night-mode .project-card:hover,
+body.night-mode .project-card:focus-visible {
+    border-color: rgba(79, 142, 247, 0.3);
+    box-shadow:
+        0 0 0 1px rgba(79, 142, 247, 0.15),
+        0 20px 50px rgba(0, 0, 0, 0.35),
+        0 0 40px rgba(79, 142, 247, 0.08);
+}
+
+body.night-mode .project-thumb--blue   { background: linear-gradient(135deg, rgba(37,99,235,.14) 0%, rgba(124,58,237,.1) 100%); }
+body.night-mode .project-thumb--purple { background: linear-gradient(135deg, rgba(124,58,237,.14) 0%, rgba(236,72,153,.1) 100%); }
+body.night-mode .project-thumb--green  { background: linear-gradient(135deg, rgba(16,185,129,.14) 0%, rgba(6,182,212,.1) 100%); }
+body.night-mode .project-thumb--amber  { background: linear-gradient(135deg, rgba(245,158,11,.14) 0%, rgba(239,68,68,.1) 100%); }
+
+body.night-mode .project-icon-wrap {
+    background: rgba(22, 22, 34, 0.9);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+}
+
+body.night-mode .project-overlay {
+    background: rgba(5, 5, 14, 0.72);
+}
+
+body.night-mode .project-overlay-btn--live,
+body.night-mode .project-overlay-btn--github {
+    background: #1e2035;
+    color: #c8c4e0;
+}
+body.night-mode .project-overlay-btn--live:hover {
+    background: var(--accent);
+    color: white;
+}
+body.night-mode .project-overlay-btn--github:hover {
+    background: #c8c4e0;
+    color: #0d0d14;
+}
+
+body.night-mode .status-pill--done {
+    background: #0d2e1a;
+    color: #4ade80;
+    border-color: rgba(74, 222, 128, 0.2);
+}
+body.night-mode .status-pill--progress {
+    background: #2a1f06;
+    color: #fbbf24;
+    border-color: rgba(251, 191, 36, 0.2);
+}
+body.night-mode .status-pill--planned {
+    background: #0f1535;
+    color: #7ba5f9;
+    border-color: rgba(79, 142, 247, 0.25);
+}
+
+body.night-mode .project-tag {
+    background: #1e1e2e;
+    color: #8892a4;
+    border-color: rgba(255, 255, 255, 0.08);
+}
+body.night-mode .project-tag:hover {
+    background: #1a1f3a;
+    color: #7ba5f9;
+    border-color: rgba(79, 142, 247, 0.35);
+}
+
+body.night-mode .projects-subtitle { color: #8892a4; }

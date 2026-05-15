@@ -39,16 +39,13 @@
     btn.setAttribute('aria-label', 'Toggle day / night mode');
     btn.setAttribute('aria-pressed', 'false');
 
-    /* Knob */
     var knob = document.createElement('span');
     knob.className = 'knob';
 
-    /* Sun (shown on day = right side) */
     var sunEl = document.createElement('span');
     sunEl.className = 'icon-sun';
     sunEl.innerHTML = SUN_SVG;
 
-    /* Moon (shown on night = left side) */
     var moonEl = document.createElement('span');
     moonEl.className = 'icon-moon';
     moonEl.innerHTML = MOON_SVG;
@@ -57,43 +54,6 @@
     btn.appendChild(sunEl);
     btn.appendChild(moonEl);
     wrap.appendChild(btn);
-
-    /* ── Place toggle in the right spot ─────────────────── */
-    function placeToggle() {
-        var isMobile = window.innerWidth <= 768;
-
-        if (isMobile) {
-            /* Move into a right-side group next to hamburger */
-            var nav = document.querySelector('.pill-nav');
-            if (!nav) return;
-
-            /* Create or find the right group */
-            var group = nav.querySelector('.pill-nav-right-group');
-            if (!group) {
-                group = document.createElement('div');
-                group.className = 'pill-nav-right-group';
-
-                /* Find the hamburger button and move it inside the group */
-                var burger = nav.querySelector('.mobile-menu-button');
-                if (burger) {
-                    nav.removeChild(burger);
-                    group.appendChild(wrap);
-                    group.appendChild(burger);
-                } else {
-                    group.appendChild(wrap);
-                }
-                nav.appendChild(group);
-            } else if (!group.contains(wrap)) {
-                /* Insert toggle before the hamburger in existing group */
-                group.insertBefore(wrap, group.firstChild);
-            }
-        } else {
-            /* Desktop: append directly to body as fixed element */
-            if (!document.body.contains(wrap)) {
-                document.body.appendChild(wrap);
-            }
-        }
-    }
 
     /* ── Theme state ────────────────────────────────────── */
     var isNight = false;
@@ -112,7 +72,7 @@
         try { sessionStorage.setItem('ib-theme', night ? 'night' : 'day'); } catch (e) {}
     }
 
-    /* ── Click handler ──────────────────────────────────── */
+    /* ── Click / keyboard handler ───────────────────────── */
     wrap.addEventListener('click', function (e) {
         e.stopPropagation();
         isNight = !isNight;
@@ -126,31 +86,67 @@
         }
     });
 
-    /* ── Init ───────────────────────────────────────────── */
-    /* Wait for PillNav to build the DOM */
+    /* ── Place toggle ───────────────────────────────────── */
+    function placeToggle() {
+        var isMobile = window.innerWidth <= 768;
+
+        if (isMobile) {
+            var nav = document.querySelector('.pill-nav');
+            if (!nav) return;
+
+            /* Always find the burger fresh */
+            var burger = nav.querySelector('.mobile-menu-button');
+
+            /* Remove any old right group */
+            var oldGroup = nav.querySelector('.pill-nav-right-group');
+            if (oldGroup) oldGroup.parentNode.removeChild(oldGroup);
+
+            /* Build new group: [toggle] [burger] */
+            var group = document.createElement('div');
+            group.className = 'pill-nav-right-group';
+            group.appendChild(wrap);
+            if (burger) {
+                nav.removeChild(burger);
+                group.appendChild(burger);
+            }
+            nav.appendChild(group);
+
+        } else {
+            /* Desktop: fixed to body */
+            var oldGroup = document.querySelector('.pill-nav-right-group');
+            if (oldGroup) {
+                /* Restore burger back to nav */
+                var burger = oldGroup.querySelector('.mobile-menu-button');
+                var nav = document.querySelector('.pill-nav');
+                if (burger && nav) nav.appendChild(burger);
+                oldGroup.parentNode.removeChild(oldGroup);
+            }
+            if (!document.body.contains(wrap)) {
+                document.body.appendChild(wrap);
+            }
+        }
+    }
+
+    /* ── Init after PillNav has rendered ───────────────── */
     function init() {
         placeToggle();
         applyTheme(isNight);
     }
 
-    /* PillNav.init() is synchronous so DOM is ready right after */
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', init);
+        document.addEventListener('DOMContentLoaded', function () {
+            setTimeout(init, 50);
+        });
     } else {
-        /* Small defer to let PillNav build first */
-        setTimeout(init, 0);
+        setTimeout(init, 50);
     }
 
-    /* Re-place on resize (desktop <-> mobile switch) */
+    /* ── Re-place on viewport resize ───────────────────── */
     var lastMobile = window.innerWidth <= 768;
     window.addEventListener('resize', function () {
         var nowMobile = window.innerWidth <= 768;
         if (nowMobile !== lastMobile) {
             lastMobile = nowMobile;
-            /* Remove from current parent and re-place */
-            if (wrap.parentNode) wrap.parentNode.removeChild(wrap);
-            var group = document.querySelector('.pill-nav-right-group');
-            if (group) { group.parentNode.removeChild(group); }
             placeToggle();
         }
     });
