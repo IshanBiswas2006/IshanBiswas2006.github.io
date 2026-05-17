@@ -1,25 +1,31 @@
 /* =========================================================
-   NIGHT MODE — night-mode.css
+   night-mode.css — Night theme variables, overrides, and
+   the theme-toggle button/switch widget.
    ========================================================= */
 
+
 /* ── NIGHT THEME VARIABLES ──────────────────────────────── */
+
 body.night-mode {
-    --ink: #e8e6f0;
-    --bg: #0d0d14;
-    --accent: #4f8ef7;
-    --accent2: #9d6ef5;
-    --muted: #8892a4;
-    --card-bg: #161622;
-    --border: rgba(255, 255, 255, 0.08);
-    --tag-bg: #1a1f3a;
+    --ink:      #e8e6f0;
+    --bg:       #0d0d14;
+    --accent:   #4f8ef7;
+    --accent2:  #9d6ef5;
+    --muted:    #8892a4;
+    --card-bg:  #161622;
+    --border:   rgba(255, 255, 255, 0.08);
+    --tag-bg:   #1a1f3a;
     --tag-text: #7ba5f9;
 }
 
-/* ── HERO (night) ───────────────────────────────────────── */
+
+/* ── HERO ───────────────────────────────────────────────── */
+
 body.night-mode .hero {
     background: linear-gradient(135deg, #0d0d14 0%, #0f1229 50%, #130d20 100%);
 }
 body.night-mode .hero p { color: #9ca3af; }
+
 body.night-mode .float-stat {
     background: #161622;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
@@ -27,58 +33,142 @@ body.night-mode .float-stat {
 }
 body.night-mode .float-stat > div > div:last-child { color: #8892a4 !important; }
 
-/* ── EDUCATION (night) ──────────────────────────────────── */
+
+/* ── EDUCATION ──────────────────────────────────────────── */
+
 body.night-mode .education { background: #0f0f1a; }
+
 body.night-mode .edu-card {
     background: #161622;
     border-color: rgba(255, 255, 255, 0.08);
 }
 
-/* ── CERTIFICATIONS (night) ─────────────────────────────── */
+
+/* ── CERTIFICATIONS ─────────────────────────────────────── */
+
 body.night-mode .certifications { background: #0d0d14; }
+
 body.night-mode .cert-card {
     background: #161622;
     border-color: rgba(255, 255, 255, 0.08);
 }
 body.night-mode .cert-card:hover { box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3); }
+
 body.night-mode .cert-icon { background: #1a1f3a; }
 
-/* ── SKILLS (night) ─────────────────────────────────────── */
+
+/* ── SKILLS ─────────────────────────────────────────────── */
+
 body.night-mode .skills { background: #0f0f1a; }
+
 body.night-mode .skill-group {
     background: #161622;
     border-color: rgba(255, 255, 255, 0.08);
 }
+
 body.night-mode .skill-tag {
     background: #1e1e2e;
     border-color: rgba(255, 255, 255, 0.1);
 }
+
 body.night-mode .skill-tag-text {
     background: #1e1e2e;
     border-color: rgba(79, 142, 247, 0.35);
 }
 
-/* ── CONTACT / FOOTER (night) ───────────────────────────── */
-body.night-mode .contact { background: #070710; }
-body.night-mode footer { background: #050508; }
 
-/* ── NAVBAR NIGHT OVERRIDES ─────────────────────────────── */
+/* ── PROJECTS ───────────────────────────────────────────── */
+
+body.night-mode .projects { background: #0d0d14; }
+
+body.night-mode .project-card {
+    background: #161622;
+    border-color: rgba(255, 255, 255, 0.07);
+}
+body.night-mode .project-card:hover,
+body.night-mode .project-card:focus-visible {
+    border-color: rgba(79, 142, 247, 0.3);
+    box-shadow:
+        0 0 0 1px rgba(79, 142, 247, 0.15),
+        0 20px 50px rgba(0, 0, 0, 0.35),
+        0 0 40px rgba(79, 142, 247, 0.08);
+}
+
+body.night-mode .project-thumb--blue   { background: linear-gradient(135deg, rgba(37,99,235,.14)  0%, rgba(124,58,237,.1) 100%); }
+body.night-mode .project-thumb--purple { background: linear-gradient(135deg, rgba(124,58,237,.14) 0%, rgba(236,72,153,.1) 100%); }
+body.night-mode .project-thumb--green  { background: linear-gradient(135deg, rgba(16,185,129,.14) 0%, rgba(6,182,212,.1)  100%); }
+body.night-mode .project-thumb--amber  { background: linear-gradient(135deg, rgba(245,158,11,.14) 0%, rgba(239,68,68,.1)  100%); }
+
+body.night-mode .project-icon-wrap {
+    background: rgba(22, 22, 34, 0.9);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+}
+
+body.night-mode .project-overlay { background: rgba(5, 5, 14, 0.72); }
+
+body.night-mode .project-overlay-btn--live,
+body.night-mode .project-overlay-btn--github {
+    background: #1e2035;
+    color: #c8c4e0;
+}
+body.night-mode .project-overlay-btn--live:hover   { background: var(--accent); color: white; }
+body.night-mode .project-overlay-btn--github:hover { background: #c8c4e0;       color: #0d0d14; }
+
+body.night-mode .status-pill--done {
+    background: #0d2e1a; color: #4ade80;
+    border-color: rgba(74, 222, 128, 0.2);
+}
+body.night-mode .status-pill--progress {
+    background: #2a1f06; color: #fbbf24;
+    border-color: rgba(251, 191, 36, 0.2);
+}
+body.night-mode .status-pill--planned {
+    background: #0f1535; color: #7ba5f9;
+    border-color: rgba(79, 142, 247, 0.25);
+}
+
+body.night-mode .project-tag {
+    background: #1e1e2e;
+    color: #8892a4;
+    border-color: rgba(255, 255, 255, 0.08);
+}
+body.night-mode .project-tag:hover {
+    background: #1a1f3a;
+    color: #7ba5f9;
+    border-color: rgba(79, 142, 247, 0.35);
+}
+
+body.night-mode .projects-subtitle { color: #8892a4; }
+
+
+/* ── CONTACT / FOOTER ───────────────────────────────────────
+   Contact and footer are always dark regardless of theme.
+   Styles are fully handled in Style.css — no overrides needed here.
+   ─────────────────────────────────────────────────────────── */
+
+
+/* ── NAVBAR ─────────────────────────────────────────────── */
+
 body.night-mode .pill-nav-items {
     background: #161622 !important;
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.45);
 }
+
 body.night-mode .pill {
     background: #1e2035 !important;
     color: #c8c4e0 !important;
 }
-body.night-mode .pill .hover-circle { background: #4f8ef7 !important; }
+body.night-mode .pill .hover-circle   { background: #4f8ef7 !important; }
 body.night-mode .pill .pill-label-hover { color: #fff !important; }
+
 body.night-mode .pill-logo {
     background: #161622 !important;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
 }
-body.night-mode .mobile-menu-button { background: #161622 !important; }
-body.night-mode .hamburger-line { background: #c8c4e0 !important; }
+
+body.night-mode .mobile-menu-button   { background: #161622 !important; }
+body.night-mode .hamburger-line       { background: #c8c4e0 !important; }
+
 body.night-mode .mobile-menu-popover {
     background: #161622 !important;
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
@@ -92,16 +182,19 @@ body.night-mode .mobile-menu-popover .mobile-menu-link:hover {
     color: #fff !important;
 }
 
+
 /* ── MISC ───────────────────────────────────────────────── */
+
 body.night-mode .glass-btn--secondary span { color: #e8e6f0; }
-body.night-mode .section-title { color: var(--ink); }
-body.night-mode .status-badge { background: #0d2e1a; color: #4ade80; }
+body.night-mode .section-title            { color: var(--ink); }
+body.night-mode .status-badge             { background: #0d2e1a; color: #4ade80; }
+
 
 /* =========================================================
-   THEME TOGGLE BUTTON
+   THEME TOGGLE WIDGET
    ========================================================= */
 
-/* Desktop: fixed circle top-right */
+/* Desktop: fixed circle in the top-right corner */
 #theme-toggle-wrap {
     position: fixed;
     top: 1rem;
@@ -127,7 +220,8 @@ body.night-mode #theme-toggle-wrap {
     box-shadow: 0 4px 20px rgba(79, 142, 247, 0.4);
 }
 
-/* Mobile: static, inside nav row next to hamburger */
+/* Mobile: static, sits inside the nav row next to the hamburger.
+   Position/size overrides are applied by Style.css media query. */
 @media (max-width: 768px) {
     #theme-toggle-wrap {
         position: static;
@@ -142,7 +236,7 @@ body.night-mode #theme-toggle-wrap {
         box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
     }
 
-    /* Group: toggle + hamburger on the right */
+    /* Group container: toggle + hamburger flush to the right */
     .pill-nav-right-group {
         display: flex;
         align-items: center;
@@ -151,7 +245,8 @@ body.night-mode #theme-toggle-wrap {
     }
 }
 
-/* Pill track */
+/* ── Toggle pill track ──────────────────────────────────── */
+
 #theme-toggle {
     width: 36px;
     height: 20px;
@@ -162,15 +257,16 @@ body.night-mode #theme-toggle-wrap {
     padding: 0;
     background: #1a1a2e;
     box-shadow:
-        inset 0 2px 5px rgba(0,0,0,0.6),
-        inset 0 -1px 2px rgba(255,255,255,0.05),
-        0 0 0 1.5px rgba(255,255,255,0.06);
+        inset 0 2px 5px rgba(0, 0, 0, 0.6),
+        inset 0 -1px 2px rgba(255, 255, 255, 0.05),
+        0 0 0 1.5px rgba(255, 255, 255, 0.06);
     transition: background 0.35s ease;
     outline: none;
     -webkit-tap-highlight-color: transparent;
 }
 
-/* Metallic knob */
+/* ── Metallic knob ──────────────────────────────────────── */
+
 #theme-toggle .knob {
     position: absolute;
     top: 2px;
@@ -181,15 +277,16 @@ body.night-mode #theme-toggle-wrap {
     background: radial-gradient(circle at 35% 30%,
         #eae8f8 0%, #b0aed0 45%, #7070a0 100%);
     box-shadow:
-        0 1px 5px rgba(0,0,0,0.6),
-        inset 0 1px 3px rgba(255,255,255,0.45),
-        inset 0 -1px 2px rgba(0,0,0,0.25);
+        0 1px 5px rgba(0, 0, 0, 0.6),
+        inset 0  1px 3px rgba(255, 255, 255, 0.45),
+        inset 0 -1px 2px rgba(0, 0, 0, 0.25);
     transition: transform 0.38s cubic-bezier(0.34, 1.56, 0.64, 1);
     z-index: 3;
     pointer-events: none;
 }
 
-/* Sun icon — right of track, shown in DAY */
+/* ── Sun icon (right side of track, visible in day mode) ── */
+
 #theme-toggle .icon-sun {
     position: absolute;
     right: 3px;
@@ -203,7 +300,8 @@ body.night-mode #theme-toggle-wrap {
     transition: opacity 0.25s ease;
 }
 
-/* Moon icon — left of track, shown in NIGHT */
+/* ── Moon icon (left side of track, visible in night mode) ─ */
+
 #theme-toggle .icon-moon {
     position: absolute;
     left: 3px;
@@ -217,93 +315,19 @@ body.night-mode #theme-toggle-wrap {
     transition: opacity 0.25s ease;
 }
 
-/* Night state */
+/* ── Night state ────────────────────────────────────────── */
+
 body.night-mode #theme-toggle { background: #0e1035; }
+
 body.night-mode #theme-toggle .knob {
     transform: translateX(16px);
     background: radial-gradient(circle at 35% 30%,
         #d5d3f0 0%, #9090c8 45%, #4852b0 100%);
     box-shadow:
-        0 1px 5px rgba(0,0,0,0.7),
-        inset 0 1px 3px rgba(255,255,255,0.3),
-        inset 0 -1px 2px rgba(0,0,0,0.3);
+        0 1px 5px rgba(0, 0, 0, 0.7),
+        inset 0  1px 3px rgba(255, 255, 255, 0.3),
+        inset 0 -1px 2px rgba(0, 0, 0, 0.3);
 }
+
 body.night-mode #theme-toggle .icon-sun  { opacity: 0; }
 body.night-mode #theme-toggle .icon-moon { opacity: 0.95; }
-
-/* =========================================================
-   PROJECTS (night) — append to night-mode.css
-   ========================================================= */
-
-body.night-mode .projects { background: #0d0d14; }
-
-body.night-mode .project-card {
-    background: #161622;
-    border-color: rgba(255, 255, 255, 0.07);
-}
-
-body.night-mode .project-card:hover,
-body.night-mode .project-card:focus-visible {
-    border-color: rgba(79, 142, 247, 0.3);
-    box-shadow:
-        0 0 0 1px rgba(79, 142, 247, 0.15),
-        0 20px 50px rgba(0, 0, 0, 0.35),
-        0 0 40px rgba(79, 142, 247, 0.08);
-}
-
-body.night-mode .project-thumb--blue   { background: linear-gradient(135deg, rgba(37,99,235,.14) 0%, rgba(124,58,237,.1) 100%); }
-body.night-mode .project-thumb--purple { background: linear-gradient(135deg, rgba(124,58,237,.14) 0%, rgba(236,72,153,.1) 100%); }
-body.night-mode .project-thumb--green  { background: linear-gradient(135deg, rgba(16,185,129,.14) 0%, rgba(6,182,212,.1) 100%); }
-body.night-mode .project-thumb--amber  { background: linear-gradient(135deg, rgba(245,158,11,.14) 0%, rgba(239,68,68,.1) 100%); }
-
-body.night-mode .project-icon-wrap {
-    background: rgba(22, 22, 34, 0.9);
-    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
-}
-
-body.night-mode .project-overlay {
-    background: rgba(5, 5, 14, 0.72);
-}
-
-body.night-mode .project-overlay-btn--live,
-body.night-mode .project-overlay-btn--github {
-    background: #1e2035;
-    color: #c8c4e0;
-}
-body.night-mode .project-overlay-btn--live:hover {
-    background: var(--accent);
-    color: white;
-}
-body.night-mode .project-overlay-btn--github:hover {
-    background: #c8c4e0;
-    color: #0d0d14;
-}
-
-body.night-mode .status-pill--done {
-    background: #0d2e1a;
-    color: #4ade80;
-    border-color: rgba(74, 222, 128, 0.2);
-}
-body.night-mode .status-pill--progress {
-    background: #2a1f06;
-    color: #fbbf24;
-    border-color: rgba(251, 191, 36, 0.2);
-}
-body.night-mode .status-pill--planned {
-    background: #0f1535;
-    color: #7ba5f9;
-    border-color: rgba(79, 142, 247, 0.25);
-}
-
-body.night-mode .project-tag {
-    background: #1e1e2e;
-    color: #8892a4;
-    border-color: rgba(255, 255, 255, 0.08);
-}
-body.night-mode .project-tag:hover {
-    background: #1a1f3a;
-    color: #7ba5f9;
-    border-color: rgba(79, 142, 247, 0.35);
-}
-
-body.night-mode .projects-subtitle { color: #8892a4; }
