@@ -357,7 +357,7 @@ PillNav.init({
             ]
         },
         {
-            title: 'Database',
+            title: 'Web',
             items: [
                 { src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg',           label: 'HTML5'      },
                 { src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg',             label: 'CSS3'       },
