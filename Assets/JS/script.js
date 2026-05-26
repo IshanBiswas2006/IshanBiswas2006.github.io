@@ -353,24 +353,25 @@ PillNav.init({
                 { src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg',       label: 'Python' },
                 { src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg', label: 'C++'    },
                 { src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg',                 label: 'C'      },
-                { src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg',           label: 'Java'   },
+                // { src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg',           label: 'Java'   },
             ]
         },
         {
-            title: 'Web & Database',
+            title: 'Database',
             items: [
                 { src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg',           label: 'HTML5'      },
                 { src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg',             label: 'CSS3'       },
                 { src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg', label: 'JavaScript' },
-                { src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg',           label: 'MySQL'      },
+                // { src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg',           label: 'MySQL'      },
             ]
         },
         {
-            title: 'Data Science & Tools',
+            title: 'Tools',
             items: [
-                { src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg',   label: 'NumPy'   },
-                { src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg', label: 'Pandas'  },
+                // { src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg',   label: 'NumPy'   },
+                // { src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg', label: 'Pandas'  },
                 { src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg',       label: 'Git'     },
+                { src: 'http://raw.githubusercontent.com/bablubambal/All_logo_and_pictures/7c0ac2ceb9f9d24992ec393d11fa7337d2f92466/social%20icons/github.svg',       label: 'GitHub'     },
                 { src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg', label: 'VS Code' },
             ]
         }
