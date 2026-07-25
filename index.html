@@ -1,316 +1,316 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Ishan Biswas — Data Science Aspirant</title>
-
-  <!-- TAB ICON (FAVICON) LINK -->
-  <link rel="icon" type="image/svg+xml" href="./Assets/Media/Icon/icon.svg" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ishan Biswas — Data Science Aspirant & BCA Student</title>
   
-  <!-- Fonts -->
+  <!-- Browser Tab Favicon -->
+  <link rel="icon" type="image/svg+xml" href="./Assets/Media/Icon/icon.svg">
+  
+  <link rel="stylesheet" href="./Assets/CSS/Style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  
-  <!-- Font Awesome Icons & Devicon Integration -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css"/>
-  
-  <link rel="stylesheet" href="./Assets/CSS/Style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;1,400&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <div class="site-wrapper">
-    <div class="site-container">
+  <!-- Custom Cursor / Tooltip -->
+  <div id="cursor-follower" class="cursor-follower">
+    <span class="cursor-text"></span>
+  </div>
 
-      <!-- NAVBAR -->
-      <header class="navbar reveal-on-scroll">
-        <div class="logo">
-          <span class="logo-icon">IB</span>
-          <span class="logo-text">ISHAN BISWAS</span>
-        </div>
-        <a href="#contact" class="btn btn-dark">Contact Me</a>
-      </header>
+  <!-- Sticky Top Bar / Navigation -->
+  <header class="top-nav">
+    <div class="nav-left">
+      <span class="logo">ISHAN BISWAS</span>
+    </div>
+    
+    <nav class="nav-center">
+      <a href="#about" class="nav-link active">ABOUT</a>
+      <a href="#work" class="nav-link">PROJECTS</a>
+      <a href="#certifications" class="nav-link">EDUCATION</a>
+      <a href="#skills" class="nav-link">SKILLS</a>
+      <a href="#contact" class="nav-link" id="nav-contact-btn">CONTACT</a>
+    </nav>
 
-      <!-- HERO SECTION -->
-      <section class="hero-section" id="about">
-        <div class="hero-left reveal-on-scroll">
-          <div class="badge-status">
-            <span class="dot"></span> DATA SCIENCE ASPIRANT
-          </div>
-          <h1 class="hero-title">I am Ishan Biswas,<br/>a BCA Student<span class="copyright-symbol">©</span></h1>
-          <p class="hero-subtext">
-            Pursuing BCA at MAKAUT University (2025–2029). Actively learning Data Structures & Algorithms and Data Science to build strong foundations in programming and problem-solving.
-          </p>
-          <div class="hero-actions">
-            <a href="#projects" class="btn btn-dark btn-hero">View Projects</a>
-            <a href="#contact" class="btn btn-outline">Contact Me</a>
-          </div>
-        </div>
+    <div class="nav-right">
+      <div class="partner-pill" id="partner-pill">
+        <img src="./assets/Media/images/my-image.jpg" alt="Ishan Biswas" class="pill-avatar">
+        <span>LET'S CONNECT &rarr;</span>
+      </div>
+      <div class="location-time">
+        <span class="location">WEST BENGAL, IN</span>
+        <span class="time" id="live-time">IST</span>
+      </div>
+      <!-- Replaced GITHUB with RESUME link -->
+      <a href="resume.pdf" target="_blank" class="resume-link">&Delta; RESUME</a>
+    </div>
+  </header>
 
-        <div class="hero-right">
-          <!-- Profile Card -->
-          <div class="profile-card reveal-on-scroll stagger-1">
-            <div class="card-content">
-              <div class="card-top-info">
-                <h3>Ishan Biswas</h3>
-                <p>West Bengal, India</p>
-              </div>
-              <div class="profile-badges">
-                <span class="framer-tag"><i class="fa-solid fa-graduation-cap"></i> BCA STUDENT</span>
-                <span class="rate-badge">MAKAUT UNIV. (2025–2029)</span>
-              </div>
-            </div>
-            <img src="./Assets/Media/profile/my-image.jpg" alt="Ishan Biswas" class="profile-img" />
-          </div>
+  <main>
+    <!-- Hero Section -->
+    <section class="hero-section" id="about">
+      <div class="avatar-orbit">
+        
+        <!-- Portfolio Link Badge -->
+        <a href="https://ishanbiswas2006.github.io/" target="_blank" class="oval-badge" data-tooltip="PORTFOLIO">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </a>
 
-          <!-- Quick Skills & Focus Widget (Updated Stack) -->
-          <div class="social-widget reveal-on-scroll stagger-2">
-            <p class="widget-header">Core focus areas & active technical stack :</p>
-            <div class="brand-pills">
-              <span class="brand">C++</span>
-              <span class="brand">PYTHON</span>
-              <span class="brand">DSA</span>
-              <span class="brand">DATA SCIENCE</span>
-              <div class="social-icons-row">
-                <a href="https://github.com/IshanBiswas2006" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
-                <a href="https://linkedin.com/in/ishan-biswas-521b97384" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-                <a href="mailto:biswas.ishan2006@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+        <!-- X (Twitter) Badge -->
+        <a href="https://x.com" target="_blank" class="oval-badge" data-tooltip="X (TWITTER)">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
 
-      <!-- MISSION / GOAL BANNER (Updated Paragraph) -->
-      <section class="mission-section reveal-on-scroll">
-        <h2 class="mission-text">
-          I am a passionate BCA student and aspiring Data Scientist who thrives on continuous learning, logical problem-solving, and constructing impactful, real-world data projects.
-        </h2>
-        <div class="client-logos">
-          <span>Python</span>
-          <span>C++</span>
-          <span>SQL</span>
-          <span>DSA</span>
-          <span>DATA SCIENCE</span>
-          <!-- <span>Git</span> -->
-        </div>
-      </section>
-
-      <!-- EDUCATION & CERTIFICATIONS (Service Card Layout Preserved) -->
-      <section class="services-section" id="education">
-        <div class="services-header reveal-on-scroll">
-          <h2>Academic &<br/>Certifications</h2>
-        </div>
-        <div class="services-grid">
-          <!-- Education Card -->
-          <div class="service-card reveal-on-scroll stagger-1">
-            <p class="service-desc">Pursuing Bachelor of Computer Applications focusing on core computer science foundations, algorithm design, software engineering principles, and databases.</p>
-            <div class="service-footer">
-              <span class="service-title">BCA — MAKAUT University</span>
-              <span class="service-num">2025–29</span>
-            </div>
-          </div>
-
-          <!-- Upcoming Cert 1 -->
-          <div class="service-card reveal-on-scroll stagger-2">
-            <p class="service-desc">Currently working towards completing specialized certification credentials in core computer science, software logic, and data science domain concepts.</p>
-            <div class="service-footer">
-              <span class="service-title">Upcoming Certification</span>
-              <span class="service-num">01</span>
-            </div>
-          </div>
-
-          <!-- Upcoming Cert 2 -->
-          <div class="service-card reveal-on-scroll stagger-3">
-            <p class="service-desc">Currently working towards completing specialized certification credentials in core computer science, software logic, and data science domain concepts.</p>
-            <div class="service-footer">
-              <span class="service-title">Upcoming Certification</span>
-              <span class="service-num">02</span>
-            </div>
-          </div>
-
-          <!-- Upcoming Cert 3 -->
-          <div class="service-card reveal-on-scroll stagger-4">
-            <p class="service-desc">Currently working towards completing specialized certification credentials in core computer science, software logic, and data science domain concepts.</p>
-            <div class="service-footer">
-              <span class="service-title">Upcoming Certification</span>
-              <span class="service-num">03</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- FEATURED PROJECTS SECTION -->
-      <section class="work-section" id="projects">
-        <div class="work-header reveal-on-scroll">
-          <h2>Featured<br/>projects</h2>
-          <a href="https://github.com/IshanBiswas2006" target="_blank" class="btn btn-dark">GitHub Profile</a>
+        <!-- Profile Picture Badge -->
+        <div class="oval-badge headshot-badge" data-tooltip="DATA SCIENCE ASPIRANT">
+          <img src="./assets/media/images/my-image.jpg" alt="Ishan Biswas" class="headshot">
+          <span class="status-dot"></span>
         </div>
 
-        <div class="portfolio-grid">
-          <!-- Main Project (Full Width - Unchanged) -->
-          <div class="portfolio-card full-width reveal-on-scroll">
-            <div class="card-media">
-              <div class="project-media-placeholder purple-gradient">
-                <i class="fa-solid fa-diagram-project project-big-icon"></i>
-                <div class="overlay-actions">
-                  <a href="https://ishanbiswas2006.github.io/DSA-Visualizer/" target="_blank" class="overlay-btn"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo</a>
-                  <a href="https://github.com/IshanBiswas2006/DSA-Visualizer" target="_blank" class="overlay-btn"><i class="fa-brands fa-github"></i> Code</a>
-                </div>
-              </div>
-            </div>
-            <div class="card-info">
-              <div class="project-details">
-                <h3>AlgoViz — DSA VISUALIZER</h3>
-                <p class="project-summary">Interactive DSA visualizer featuring real-time animations, code highlighting, and live variable tracking with step-by-step algorithm execution.</p>
-                <div class="tags">
-                  <span class="tag">JAVASCRIPT</span>
-                  <span class="tag">C++</span>
-                  <span class="tag">DSA</span>
-                  <span class="tag">ANIMATIONS</span>
-                </div>
-              </div>
-              <span class="year">IN PROGRESS</span>
-            </div>
-          </div>
+        <!-- GitHub Badge -->
+        <a href="https://github.com/IshanBiswas2006" target="_blank" class="oval-badge" data-tooltip="GITHUB">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        </a>
 
-          <!-- Upcoming Project 1 -->
-          <div class="portfolio-card reveal-on-scroll stagger-1">
-            <div class="card-media">
-              <div class="project-media-placeholder blue-gradient">
-                <i class="fa-solid fa-hourglass-start project-big-icon"></i>
-              </div>
-            </div>
-            <div class="card-info">
-              <div class="project-details">
-                <h3>UPCOMING PROJECT</h3>
-                <p class="project-summary">New data science and analytical project currently under planning and initial architecture development phase.</p>
-                <div class="tags">
-                  <span class="tag">IN DEVELOPMENT</span>
-                </div>
-              </div>
-              <span class="year">COMING SOON</span>
-            </div>
-          </div>
+        <!-- LinkedIn Badge -->
+        <a href="https://linkedin.com/in/ishan-biswas-521b97384" target="_blank" class="oval-badge" data-tooltip="LINKEDIN">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
 
-          <!-- Upcoming Project 2 -->
-          <div class="portfolio-card reveal-on-scroll stagger-2">
-            <div class="card-media">
-              <div class="project-media-placeholder teal-gradient">
-                <i class="fa-solid fa-hourglass-start project-big-icon"></i>
-              </div>
-            </div>
-            <div class="card-info">
-              <div class="project-details">
-                <h3>UPCOMING PROJECT</h3>
-                <p class="project-summary">New algorithms and machine learning solution project currently in technical setup.</p>
-                <div class="tags">
-                  <span class="tag">IN DEVELOPMENT</span>
-                </div>
-              </div>
-              <span class="year">COMING SOON</span>
-            </div>
+      </div>
+
+      <p class="subtitle">DATA SCIENCE ASPIRANT &bull; BCA @ MAKAUT UNIVERSITY (2025&ndash;2029)</p>
+      
+      <h1 class="hero-title">
+        I am Ishan Biswas,<br>
+        <em>a BCA Student.</em>
+      </h1>
+      
+      <p class="about-description">
+        Pursuing BCA at MAKAUT University (2025–2029). Actively learning Data Structures &amp; Algorithms and Data Science to build strong foundations in programming and problem-solving.
+      </p>
+    </section>
+
+    <!-- Horizontal Drag Showcase (Slow Moving Track) -->
+    <section class="slider-section" id="focus">
+      <div class="drag-pill" id="drag-pill">&larr; DRAG ME &rarr;</div>
+      <div class="horizontal-track" id="slider-track">
+        <div class="card card-purple">
+          <div class="card-tag">Problem Solving</div>
+          <h3>C++ &amp; C</h3>
+          <p>Writing optimal code and mastering logic structures.</p>
+        </div>
+        <div class="card card-blue">
+          <div class="card-tag">Programming</div>
+          <h3>Python &amp; Java</h3>
+          <p>Core languages for Data Science, ML, and Object Oriented Systems.</p>
+        </div>
+        <div class="card card-dark">
+          <div class="card-tag">Algorithms</div>
+          <h3>Data Structures &amp; DSA</h3>
+          <p>Building efficient logic frameworks and visualizers.</p>
+        </div>
+        <div class="card card-green">
+          <div class="card-tag">Academics</div>
+          <h3>MAKAUT University</h3>
+          <p>Bachelor of Computer Applications (2025–2029).</p>
+        </div>
+        <div class="card card-pink">
+          <div class="card-tag">Database &amp; Tools</div>
+          <h3>SQL, Git &amp; VS Code</h3>
+          <p>Managing data repositories and developer environments.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills & Tools Section -->
+    <section class="tea-section" id="skills">
+      <div class="tea-header">
+        <h2>Technical skills &amp; tools ☕</h2>
+        <p>Core competencies across programming languages, libraries, databases, and developer tools.</p>
+      </div>
+
+      <div class="tea-grid">
+        <div class="tea-card">
+          <div class="tea-card-inner">
+            <span class="card-num">01</span>
+            <h3>Languages</h3>
+            <p>C, C++, Java, Python, HTML5, CSS3, JavaScript. Building strong software foundations.</p>
           </div>
         </div>
-      </section>
-
-      <!-- SKILLS SECTION (Added Clean, Modern Icons) -->
-      <section class="experience-section" id="skills">
-        <div class="exp-grid">
-          <div class="exp-card exp-cta reveal-on-scroll">
-            <h2>Technical<br/>skills & tools</h2>
-            <a href="#contact" class="btn btn-dark">Get in touch</a>
-          </div>
-
-          <!-- Languages Card with Icons -->
-          <div class="exp-card reveal-on-scroll stagger-1">
-            <div class="company-logo"><i class="fa-solid fa-code"></i> LANGUAGES</div>
-            <div class="skill-icon-list">
-              <span class="skill-item"><i class="devicon-cplusplus-plain colored"></i> C++</span>
-              <span class="skill-item"><i class="devicon-python-plain colored"></i> Python</span>
-              <span class="skill-item"><i class="devicon-c-plain colored"></i> C</span>
-              <span class="skill-item"><i class="devicon-javascript-plain colored"></i> JavaScript</span>
-              <span class="skill-item"><i class="devicon-html5-plain colored"></i> HTML5</span>
-              <span class="skill-item"><i class="devicon-css3-plain colored"></i> CSS3</span>
-            </div>
-            <p class="exp-date">Core Foundations</p>
-          </div>
-
-          <!-- Tools Card with Icons -->
-          <div class="exp-card reveal-on-scroll stagger-2">
-            <div class="company-logo"><i class="fa-solid fa-wrench"></i> DATABASE & TOOLS</div>
-            <div class="skill-icon-list">
-              <span class="skill-item"><i class="devicon-mysql-plain colored"></i> SQL / MySQL</span>
-              <span class="skill-item"><i class="devicon-git-plain colored"></i> Git</span>
-              <span class="skill-item"><i class="devicon-github-original"></i> GitHub</span>
-              <span class="skill-item"><i class="devicon-vscode-plain colored"></i> VS Code</span>
-            </div>
-            <p class="exp-date">Developer Stack</p>
-          </div>
-
-          <!-- Concepts Card with Icons -->
-          <div class="exp-card reveal-on-scroll stagger-3">
-            <div class="company-logo"><i class="fa-solid fa-brain"></i> CONCEPTS</div>
-            <div class="skill-icon-list">
-              <span class="skill-item"><i class="fa-solid fa-network-wired concept-icon"></i> Data Structures & Algorithms</span>
-              <span class="skill-item"><i class="fa-solid fa-chart-pie concept-icon"></i> Data Science Fundamentals</span>
-            </div>
-            <p class="exp-date">Specialization</p>
+        <div class="tea-card">
+          <div class="tea-card-inner">
+            <span class="card-num">02</span>
+            <h3>Libraries</h3>
+            <p>NumPy and Pandas for dataset manipulation, array computation, and data analysis.</p>
           </div>
         </div>
-      </section>
-
-      <!-- CONTACT SECTION -->
-      <section class="contact-section" id="contact">
-        <div class="gradient-banner reveal-on-scroll">
-          <h2>Contact me to collaborate</h2>
-          <p>Open to internship opportunities, collaborations, and technical discussions. Let's build something great together.</p>
-
-          <form class="contact-form" action="mailto:biswas.ishan2006@gmail.com" method="post" enctype="text/plain">
-            <div class="form-row">
-              <input type="text" name="Name" placeholder="Name" required />
-              <input type="email" name="Email" placeholder="Email" required />
-            </div>
-            <div class="form-row">
-              <textarea name="Message" placeholder="Your Message..." rows="4" required></textarea>
-            </div>
-            <button type="submit" class="btn btn-dark btn-submit">Send Message</button>
-          </form>
+        <div class="tea-card">
+          <div class="tea-card-inner">
+            <span class="card-num">03</span>
+            <h3>Tools &amp; Databases</h3>
+            <p>Git, GitHub, VS Code, Jupyter Notebook, and SQL / MySQL for workflows and data storage.</p>
+          </div>
         </div>
-      </section>
+      </div>
 
-      <!-- FOOTER / CONNECT SECTION -->
-      <section class="connect-section">
-        <div class="connect-grid">
-          <div class="connect-left reveal-on-scroll stagger-1">
-            <h2>Let’s<br/>connect<br/>and chat</h2>
-            <div class="email-badge">
-              BISWAS.ISHAN2006@GMAIL.COM <span class="arrow-icon"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+      <!-- Updated Skill Pills with SVG Icons -->
+      <div class="skills-block">
+        <span class="skills-label">ACTIVE TECHNICAL STACK</span>
+        <div class="pills-wrapper">
+          <span class="pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" alt="C" class="pill-icon"> C</span>
+          <span class="pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++" class="pill-icon"> C++</span>
+          <span class="pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" class="pill-icon"> Java</span>
+          <span class="pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" class="pill-icon"> Python</span>
+          <span class="pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5" class="pill-icon"> HTML5</span>
+          <span class="pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3" class="pill-icon"> CSS3</span>
+          <span class="pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" class="pill-icon"> JavaScript</span>
+          <span class="pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg" alt="NumPy" class="pill-icon"> NumPy</span>
+          <span class="pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" alt="Pandas" class="pill-icon"> Pandas</span>
+          <span class="pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" class="pill-icon"> Git</span>
+          <span class="pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" class="pill-icon"> GitHub</span>
+          <span class="pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VS Code" class="pill-icon"> VS Code</span>
+          <span class="pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jupyter/jupyter-original.svg" alt="Jupyter Notebook" class="pill-icon"> Jupyter Notebook</span>
+          <span class="pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="SQL / MySQL" class="pill-icon"> SQL / MySQL</span>
+          <span class="pill"><img src="https://api.iconify.design/lucide:hexagon.svg" alt="DSA" class="pill-icon"> DSA</span>
+          <span class="pill"><img src="https://api.iconify.design/lucide:cpu.svg" alt="Data Science" class="pill-icon"> Data Science</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="case-studies-section" id="work">
+      <span class="section-label">FEATURED PROJECTS</span>
+      <div class="case-grid">
+        <div class="case-card dark-bg">
+          <span class="case-client">ALGORIVIZ &mdash; DSA VISUALIZER</span>
+          <h3>AlgoViz</h3>
+          <p>Interactive DSA visualizer featuring real-time animations, code highlighting, and live variable tracking with step-by-step algorithm execution.</p>
+          <div class="project-tags">Tech: JavaScript, C++, DSA, Animations</div>
+          <div class="project-links">
+            <a href="https://github.com/IshanBiswas2006/DSA-Visualizer" target="_blank" class="case-btn">GitHub Code</a>
+            <a href="https://ishanbiswas2006.github.io/DSA-Visualizer/" target="_blank" class="case-btn secondary-btn">Live Demo</a>
+          </div>
+        </div>
+        <div class="case-card purple-bg">
+          <span class="case-client">UPCOMING PROJECT</span>
+          <h3>Data Science Model</h3>
+          <p>New data science and analytical project currently under planning and initial architecture development phase.</p>
+          <div class="project-tags">Tech: Python, Pandas, NumPy</div>
+          <div class="project-links">
+            <span class="case-btn secondary-btn">Coming Soon</span>
+          </div>
+        </div>
+        <div class="case-card border-bg">
+          <span class="case-client">UPCOMING PROJECT</span>
+          <h3>Algorithm Optimization</h3>
+          <p>New algorithms and machine learning solution project currently in technical setup.</p>
+          <div class="project-tags">Tech: C++, Python</div>
+          <div class="project-links">
+            <span class="case-btn secondary-btn">Coming Soon</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education / Certifications Section -->
+    <section class="built-section" id="certifications">
+      <h2>Academic &amp; Certifications.</h2>
+      <p class="section-sub">Educational background and professional credentials in progress.</p>
+
+      <div class="built-list">
+        <div class="built-row">
+          <div class="built-left">
+            <span class="row-icon icon-black">BCA</span>
+            <div class="exp-info">
+              <span class="row-title">MAKAUT University</span>
+              <span class="exp-sub">Bachelor of Computer Applications (Focusing on core CS foundations &amp; databases)</span>
             </div>
           </div>
-
-          <div class="connect-right reveal-on-scroll stagger-2">
-            <div class="floating-pills-container">
-              <span class="pill float-1">CONNECT! 👀 👋</span>
-              <a href="https://github.com/IshanBiswas2006" target="_blank" class="pill float-2">GITHUB</a>
-              <a href="https://linkedin.com/in/ishan-biswas-521b97384" target="_blank" class="pill float-3">LINKEDIN</a>
-              <a href="tel:7003090104" class="pill float-4">CALL ME</a>
-              <a href="mailto:biswas.ishan2006@gmail.com" class="pill float-5">EMAIL</a>
+          <span class="row-date">2025 &mdash; 2029</span>
+          <span class="row-tag">EDUCATION</span>
+        </div>
+        <div class="built-row">
+          <div class="built-left">
+            <span class="row-icon icon-purple">CER</span>
+            <div class="exp-info">
+              <span class="row-title">Upcoming Certification 01</span>
+              <span class="exp-sub">Specialized credential in software logic and data science.</span>
             </div>
+          </div>
+          <span class="row-date">Upcoming</span>
+          <span class="row-tag">CERTIFICATION</span>
+        </div>
+        <div class="built-row">
+          <div class="built-left">
+            <span class="row-icon icon-blue">CER</span>
+            <div class="exp-info">
+              <span class="row-title">Upcoming Certification 02</span>
+              <span class="exp-sub">Advanced algorithm study and problem-solving certificate.</span>
+            </div>
+          </div>
+          <span class="row-date">Upcoming</span>
+          <span class="row-tag">CERTIFICATION</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer Hero / Contact CTA -->
+    <section class="footer-cta" id="contact">
+      <h2 id="footer-trigger-modal">Let's connect<br><em>and chat.</em></h2>
+      <p class="footer-contact-info">Email: <a href="mailto:biswas.ishan2006@gmail.com" class="text-link">biswas.ishan2006@gmail.com</a> | Phone: 7003090104</p>
+      <div class="social-links">
+        <a href="https://github.com/IshanBiswas2006" target="_blank">GITHUB</a>
+        <a href="https://linkedin.com/in/ishan-biswas-521b97384" target="_blank">LINKEDIN</a>
+        <a href="tel:7003090104">CALL ME (7003090104)</a>
+        <a href="mailto:biswas.ishan2006@gmail.com">EMAIL</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Interactive Contact Modal -->
+  <div class="modal-overlay" id="contact-modal">
+    <div class="modal-container">
+      <button class="modal-close" id="modal-close-btn">&times;</button>
+      <h2>Let's talk.</h2>
+
+      <form id="contact-form" onsubmit="event.preventDefault();">
+        <div class="form-group">
+          <label>YOUR NAME</label>
+          <input type="text" placeholder="Your Name" id="input-name">
+        </div>
+
+        <div class="form-group">
+          <label>WHAT BRINGS YOU HERE?</label>
+          <div class="chip-options">
+            <button type="button" class="chip active">Internship Opportunity</button>
+            <button type="button" class="chip">Project Collaboration</button>
+            <button type="button" class="chip">Technical Discussion</button>
+            <button type="button" class="chip">Friendly Chat</button>
           </div>
         </div>
 
-        <footer class="site-footer reveal-on-scroll">
-          <div class="footer-logo">
-            <span class="logo-icon">IB</span> ISHAN BISWAS
+        <div class="form-group">
+          <div class="slider-labels">
+            <label>HOW URGENT?</label>
+            <span class="urgent-val" id="urgent-text">Sometime soon</span>
           </div>
-          <div class="footer-copy">© 2025–2026 Ishan Biswas</div>
-          <a href="tel:7003090104" class="btn btn-dark">Call 7003090104</a>
-        </footer>
-      </section>
+          <input type="range" min="1" max="3" value="2" class="urgency-slider" id="urgency-slider">
+          <div class="range-ticks">
+            <span>WHENEVER</span>
+            <span>ASAP</span>
+          </div>
+        </div>
 
+        <div class="form-group">
+          <label>YOUR MESSAGE OR INQUIRY</label>
+          <textarea rows="3" placeholder="Tell me what you'd like to collaborate on..."></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn">Send Message &rarr;</button>
+      </form>
     </div>
   </div>
 
