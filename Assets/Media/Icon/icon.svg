@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Circular Dark Background -->
+  <circle cx="32" cy="32" r="32" fill="#191919" />
+  
+  <!-- "IB" Bold Monogram Text -->
+  <text 
+    x="50%" 
+    y="52%" 
+    text-anchor="middle" 
+    dominant-baseline="central" 
+    font-family="'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" 
+    font-weight="800" 
+    font-size="28" 
+    letter-spacing="-0.5" 
+    fill="#FFFFFF">IB</text>
+</svg>
