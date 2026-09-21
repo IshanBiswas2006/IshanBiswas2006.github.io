@@ -453,7 +453,7 @@ function initProfileScrollAnimation() {
 
   function getFrameUrl(index) {
     const pad = String(index).padStart(4, '0');
-    return `./Assets/Media/frames-webp/frame_${pad}.webp`;
+    return `./assets/media/frames/frame_${pad}.webp`;
   }
 
   function resizeCanvas() {
