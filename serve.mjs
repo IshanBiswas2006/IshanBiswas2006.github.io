@@ -34,8 +34,14 @@ const server = http.createServer((req, res) => {
 
     const ext = path.extname(filePath).toLowerCase();
     const contentType = MIME_TYPES[ext] || 'application/octet-stream';
+
+    // Cache static assets for 1 hour in dev; HTML always revalidates
+    const isStatic = ['.js', '.css', '.png', '.jpg', '.jpeg', '.webp', '.svg', '.ico'].includes(ext);
+    const cacheControl = isStatic ? 'public, max-age=3600' : 'no-cache';
+
     res.writeHead(200, {
       'Content-Type': contentType,
+      'Cache-Control': cacheControl,
       'Access-Control-Allow-Origin': '*'
     });
     fs.createReadStream(filePath).pipe(res);

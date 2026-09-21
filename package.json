@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "node serve.mjs",
+    "optimize-images": "node build-scripts/optimize-images.mjs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

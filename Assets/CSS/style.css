@@ -265,6 +265,7 @@ body {
   cursor: pointer;
   color: var(--text-dark);
   text-decoration: none;
+  will-change: transform;
 }
 
 .oval-badge:hover {
@@ -470,6 +471,7 @@ body {
   justify-content: flex-start;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  contain: layout style;
 }
 
 .tea-card:hover {
@@ -560,6 +562,7 @@ body {
   justify-content: flex-end;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  contain: layout style;
 }
 
 .case-card:hover {
@@ -668,6 +671,7 @@ body {
   border-bottom: 1px solid var(--border-color);
   cursor: pointer;
   transition: transform 0.2s ease, background-color 0.2s ease;
+  contain: layout style;
 }
 
 .built-row:hover {
@@ -776,6 +780,7 @@ body {
   padding: 10px 24px;
   border-radius: 30px;
   transition: all 0.2s ease;
+  will-change: transform;
 }
 
 .social-links a:hover {

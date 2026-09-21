@@ -302,10 +302,10 @@ function initSliderTrack() {
 
   slider.addEventListener('mouseenter', () => {
     isHovered = true;
-  });
+  }, { passive: true });
   slider.addEventListener('mouseleave', () => {
     isHovered = false;
-  });
+  }, { passive: true });
 
   if (sliderSection) {
     const rect = sliderSection.getBoundingClientRect();
@@ -368,11 +368,12 @@ function initUrgencyAndModal() {
     if (e.key === 'Escape' && modal && modal.classList.contains('active')) {
       closeModal();
     }
-  });
+  }, { passive: true });
 
-  document.querySelectorAll('.chip').forEach((chip) => {
+  const allChips = document.querySelectorAll('.chip');
+  allChips.forEach((chip) => {
     chip.addEventListener('click', function () {
-      document.querySelectorAll('.chip').forEach((c) => c.classList.remove('active'));
+      allChips.forEach((c) => c.classList.remove('active'));
       this.classList.add('active');
     });
   });
@@ -619,9 +620,6 @@ function initProfileScrollAnimation() {
     frameImages[0] = frame0;
     loadedCount++;
     drawFrame(0);
-    if (typeof ScrollTrigger !== 'undefined') {
-      ScrollTrigger.refresh();
-    }
   };
   frame0.src = getFrameUrl(0);
 
@@ -630,12 +628,16 @@ function initProfileScrollAnimation() {
 
   function preloadAllFrames() {
     const keyframes = [];
+    const keyframeSet = new Set([0]);
     for (let i = 0; i < totalFrames; i += 10) {
-      if (i !== 0) keyframes.push(i);
+      if (i !== 0) {
+        keyframes.push(i);
+        keyframeSet.add(i);
+      }
     }
     const remaining = [];
     for (let i = 0; i < totalFrames; i++) {
-      if (!keyframes.includes(i) && i !== 0) {
+      if (!keyframeSet.has(i) && i !== 0) {
         remaining.push(i);
       }
     }
@@ -645,7 +647,6 @@ function initProfileScrollAnimation() {
 
     triggerQueueUpdate = function () {
       if (remaining.length > 0) {
-        remaining.sort((a, b) => Math.abs(a - targetFrameIndex) - Math.abs(b - targetFrameIndex));
         loadNext();
       }
     };
@@ -714,12 +715,15 @@ function initGSAPScrollAnimations() {
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (prefersReducedMotion) return;
 
+  // Cache DOM references used in scroll callbacks
+  const topNav = document.querySelector('.top-nav');
+  const allNavLinks = document.querySelectorAll('.nav-link');
+
   // --- 8A. Top Navigation Scroll State & Active Section Spy ---
   ScrollTrigger.create({
     start: 'top -40',
     end: 999999,
     onUpdate: (self) => {
-      const topNav = document.querySelector('.top-nav');
       if (topNav) {
         if (self.scroll() > 50) {
           topNav.classList.add('scrolled');
@@ -749,7 +753,7 @@ function initGSAPScrollAnimations() {
       end: 'bottom 45%',
       onToggle: (self) => {
         if (self.isActive) {
-          document.querySelectorAll('.nav-link').forEach((lnk) => lnk.classList.remove('active'));
+          allNavLinks.forEach((lnk) => lnk.classList.remove('active'));
           links.forEach((selector) => {
             const target = document.querySelector(selector);
             if (target) target.classList.add('active');
