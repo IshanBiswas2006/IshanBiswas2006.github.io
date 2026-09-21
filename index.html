@@ -7,7 +7,7 @@
   <meta name="description" content="Ishan Biswas — BCA student at MAKAUT University, aspiring Data Scientist. Skilled in C, C++, Java, Python, DSA, SQL, and Data Science. View projects, skills, and certifications.">
   
   <!-- Browser Tab Favicon -->
-  <link rel="icon" type="image/svg+xml" href="./Assets/Media/Icon/icon.svg">
+  <link rel="icon" type="image/svg+xml" href="./assets/media/icons/icon.svg">
 
   <!-- Preconnect to critical third-party origins -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,9 +20,20 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;1,400&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;1,400&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
 
-  <link rel="stylesheet" href="./Assets/CSS/style.css">
+  <link rel="preload" as="image" href="./assets/media/images/coin.png">
+  <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
+
+  <!-- Premium Minimalist Loading Screen -->
+  <div id="page-loader" class="page-loader" aria-label="Loading experience" aria-live="polite">
+    <div class="page-loader-content">
+      <div class="page-loader-coin-wrap">
+        <img class="page-loader-coin" src="./assets/media/images/coin.png" alt="Coin" draggable="false" width="80" height="80">
+      </div>
+      <p class="page-loader-text">Loading the experience…</p>
+    </div>
+  </div>
 
   <!-- Custom Cursor / Tooltip -->
   <div id="cursor-follower" class="cursor-follower">
@@ -44,7 +55,7 @@
 
     <div class="nav-right">
       <div class="partner-pill" id="partner-pill">
-        <img src="./Assets/Media/images/my-image-thumb.jpg" alt="Ishan Biswas" class="pill-avatar" width="20" height="20" decoding="async" onerror="this.style.display='none'">
+        <img src="./assets/media/images/my-image-thumb.jpg" alt="Ishan Biswas" class="pill-avatar" width="20" height="20" decoding="async" onerror="this.style.display='none'">
         <span>LET'S CONNECT &rarr;</span>
       </div>
       <div class="location-time">
@@ -328,12 +339,12 @@
   </div>
 
   <!-- GSAP & ScrollTrigger Libraries (local) -->
-  <script src="./Assets/JS/gsap/gsap.min.js" defer></script>
-  <script src="./Assets/JS/gsap/ScrollTrigger.min.js" defer></script>
+  <script src="./assets/js/libs/gsap.min.js" defer></script>
+  <script src="./assets/js/libs/ScrollTrigger.min.js" defer></script>
 
   <!-- Lenis Smooth Scroll Library (local) -->
-  <script src="./Assets/JS/lenis/lenis.min.js" defer></script>
+  <script src="./assets/js/libs/lenis.min.js" defer></script>
 
-  <script src="./Assets/JS/script.js" defer></script>
+  <script src="./assets/js/script.js" defer></script>
 </body>
 </html>

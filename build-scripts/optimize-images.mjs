@@ -6,9 +6,9 @@ import sharp from 'sharp';
 import { readdir, stat, mkdir } from 'fs/promises';
 import { join, resolve } from 'path';
 
-const FRAMES_DIR = resolve('Assets/Media/frames');
-const WEBP_DIR = resolve('Assets/Media/frames-webp');
-const IMAGES_DIR = resolve('Assets/Media/images');
+const FRAMES_DIR = resolve('assets/media/raw-frames');
+const WEBP_DIR = resolve('assets/media/frames');
+const IMAGES_DIR = resolve('assets/media/images');
 const WEBP_QUALITY = 80;
 const THUMBNAIL_SIZE = 80;
 

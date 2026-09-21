@@ -17,6 +17,9 @@ const silkyEase = (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t));
 // Global reference to Lenis instance
 let lenis = null;
 
+// Initialize Page Loader immediately
+initPageLoader();
+
 document.addEventListener('DOMContentLoaded', () => {
   // 1. Initialize Lenis Smooth Scrolling & GSAP ScrollTrigger
   initLenisAndScrollTrigger();
@@ -42,6 +45,52 @@ document.addEventListener('DOMContentLoaded', () => {
   // 8. GSAP ScrollTrigger Parallax & Entrance Animations
   initGSAPScrollAnimations();
 });
+
+/* ==========================================================================
+   0. PREMIUM MINIMALIST PAGE LOADER
+   ========================================================================== */
+function initPageLoader() {
+  const loader = document.getElementById('page-loader');
+  if (!loader) return;
+
+  let isDismissed = false;
+
+  function dismissLoader() {
+    if (isDismissed) return;
+    isDismissed = true;
+
+    loader.classList.add('is-hidden');
+
+    const handleCleanup = (e) => {
+      if (e && e.target !== loader) return;
+      loader.removeEventListener('transitionend', handleCleanup);
+      if (loader.parentNode) {
+        loader.remove();
+      }
+      if (typeof ScrollTrigger !== 'undefined') {
+        ScrollTrigger.refresh();
+      }
+    };
+
+    loader.addEventListener('transitionend', handleCleanup);
+    setTimeout(handleCleanup, 800);
+  }
+
+  // Proper window.load & font loading lifecycle
+  function onReady() {
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(dismissLoader).catch(dismissLoader);
+    } else {
+      dismissLoader();
+    }
+  }
+
+  if (document.readyState === 'complete') {
+    onReady();
+  } else {
+    window.addEventListener('load', onReady, { once: true });
+  }
+}
 
 /* ==========================================================================
    1. LENIS SMOOTH SCROLLING & GSAP INTEGRATION
@@ -404,7 +453,7 @@ function initProfileScrollAnimation() {
 
   function getFrameUrl(index) {
     const pad = String(index).padStart(4, '0');
-    return `./Assets/Media/frames-webp/frame_${pad}.webp`;
+    return `./assets/media/frames/frame_${pad}.webp`;
   }
 
   function resizeCanvas() {
