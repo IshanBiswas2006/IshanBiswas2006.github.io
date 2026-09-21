@@ -164,156 +164,122 @@ function initCustomCursor() {
 }
 
 /* ==========================================================================
-   4. HORIZONTAL SLIDER WITH SILKY INERTIA & AUTO MOTION
+   4. HORIZONTAL INFINITE MARQUEE (GSAP Ticker-Driven)
    ========================================================================== */
 function initSliderTrack() {
-  const slider = document.getElementById('slider-track');
-  if (!slider) return;
+  const track = document.getElementById('slider-track');
+  const section = document.getElementById('focus');
+  if (!track) return;
 
-  let isDown = false;
-  let startX = 0;
-  let startScrollLeft = 0;
-  let velocityX = 0;
-  let lastX = 0;
-  let lastTime = 0;
-  let isHovered = false;
-  let sliderVisible = false;
-  let momentumRafId = null;
-  let autoRafId = null;
-  let autoScrollDirection = 1;
-  const autoScrollSpeed = 0.45;
-  let hasDragged = false;
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReducedMotion) {
+    // Fallback: static scrollable row, no animation
+    track.style.overflowX = 'auto';
+    return;
+  }
 
-  const sliderObserver = new IntersectionObserver(
+  // --- Duplicate cards for seamless loop ---
+  const originalCards = Array.from(track.children);
+  const fragment = document.createDocumentFragment();
+  originalCards.forEach((card) => {
+    const clone = card.cloneNode(true);
+    clone.setAttribute('aria-hidden', 'true');
+    fragment.appendChild(clone);
+  });
+  track.appendChild(fragment);
+
+  // --- Measure the width of the original set of cards ---
+  let originalSetWidth = 0;
+  function measureOriginalWidth() {
+    originalSetWidth = 0;
+    const gap = parseFloat(getComputedStyle(track).gap) || 24;
+    originalCards.forEach((card, i) => {
+      originalSetWidth += card.offsetWidth;
+      if (i < originalCards.length - 1) originalSetWidth += gap;
+    });
+    // Add one more gap for the seamless junction between original and clone
+    originalSetWidth += gap;
+  }
+  measureOriginalWidth();
+
+  // --- State ---
+  let translateX = 0;
+  let isPaused = false;
+  let sectionVisible = false;
+  const speed = 0.7; // px per frame at 60fps
+
+  // --- Visibility-based activation ---
+  const observer = new IntersectionObserver(
     (entries) => {
-      sliderVisible = entries[0].isIntersecting;
-      if (sliderVisible && !autoRafId && !isDown) {
-        autoRafId = requestAnimationFrame(autoMoveLoop);
-      }
+      sectionVisible = entries[0].isIntersecting;
     },
     { threshold: 0 }
   );
+  if (section) observer.observe(section);
 
-  const sliderSection = document.getElementById('focus');
-  if (sliderSection) sliderObserver.observe(sliderSection);
+  // Initial visibility check
+  if (section) {
+    const rect = section.getBoundingClientRect();
+    sectionVisible = rect.top < window.innerHeight && rect.bottom > 0;
+  }
 
-  function autoMoveLoop() {
-    if (sliderVisible && !isDown && !isHovered && Math.abs(velocityX) < 0.05) {
-      slider.scrollLeft += autoScrollSpeed * autoScrollDirection;
+  // --- GSAP Ticker for smooth animation ---
+  if (typeof gsap !== 'undefined') {
+    gsap.ticker.add((time, deltaTime) => {
+      if (!sectionVisible || isPaused) return;
 
-      const maxScroll = slider.scrollWidth - slider.clientWidth;
-      if (slider.scrollLeft >= maxScroll - 3) {
-        autoScrollDirection = -1;
-      } else if (slider.scrollLeft <= 3) {
-        autoScrollDirection = 1;
+      // deltaTime is in seconds in GSAP, convert to frame-normalized speed
+      const dt = deltaTime / (1000 / 60); // normalize to ~1 at 60fps
+      translateX -= speed * dt;
+
+      // Seamless reset when we've scrolled past the original set
+      if (originalSetWidth > 0 && Math.abs(translateX) >= originalSetWidth) {
+        translateX += originalSetWidth;
       }
+
+      track.style.transform = `translate3d(${translateX}px, 0, 0)`;
+    });
+  } else {
+    // Fallback RAF loop if GSAP is not available
+    let lastTime = performance.now();
+    function marqueeLoop(now) {
+      if (sectionVisible && !isPaused) {
+        const dt = Math.min((now - lastTime) / 16.67, 3);
+        translateX -= speed * dt;
+        if (originalSetWidth > 0 && Math.abs(translateX) >= originalSetWidth) {
+          translateX += originalSetWidth;
+        }
+        track.style.transform = `translate3d(${translateX}px, 0, 0)`;
+      }
+      lastTime = now;
+      requestAnimationFrame(marqueeLoop);
     }
-    if (sliderVisible) {
-      autoRafId = requestAnimationFrame(autoMoveLoop);
-    } else {
-      autoRafId = null;
-    }
+    requestAnimationFrame(marqueeLoop);
   }
 
-  function applyInertia() {
-    if (Math.abs(velocityX) > 0.3) {
-      slider.scrollLeft += velocityX;
-      velocityX *= 0.94; // Silky smooth deceleration curve
-      momentumRafId = requestAnimationFrame(applyInertia);
-    } else {
-      velocityX = 0;
-      momentumRafId = null;
-    }
-  }
-
-  slider.addEventListener('pointerdown', (e) => {
-    if (e.button !== 0) return;
-    isDown = true;
-    hasDragged = false;
-
-    if (momentumRafId) {
-      cancelAnimationFrame(momentumRafId);
-      momentumRafId = null;
-    }
-
-    slider.classList.add('is-dragging');
-    try {
-      slider.setPointerCapture(e.pointerId);
-    } catch (_) {}
-
-    startX = e.clientX;
-    lastX = e.clientX;
-    startScrollLeft = slider.scrollLeft;
-    lastTime = performance.now();
-    velocityX = 0;
+  // --- Hover pause & lift on individual cards ---
+  const allCards = track.querySelectorAll('.card');
+  allCards.forEach((card) => {
+    card.addEventListener('mouseenter', () => {
+      isPaused = true;
+    }, { passive: true });
+    card.addEventListener('mouseleave', () => {
+      isPaused = false;
+    }, { passive: true });
   });
 
-  slider.addEventListener('pointermove', (e) => {
-    if (!isDown) return;
-    e.preventDefault();
-
-    const currentX = e.clientX;
-    const now = performance.now();
-    const dt = Math.max(now - lastTime, 1);
-    const deltaX = startX - currentX;
-
-    if (Math.abs(deltaX) > 4) {
-      hasDragged = true;
-    }
-
-    const instantV = ((lastX - currentX) / dt) * 16.67;
-    velocityX = velocityX * 0.35 + instantV * 0.65;
-    lastX = currentX;
-    lastTime = now;
-
-    slider.scrollLeft = startScrollLeft + deltaX;
-  });
-
-  function endDrag(e) {
-    if (!isDown) return;
-    isDown = false;
-    slider.classList.remove('is-dragging');
-
-    try {
-      if (slider.hasPointerCapture(e.pointerId)) {
-        slider.releasePointerCapture(e.pointerId);
+  // --- Recalculate on resize ---
+  let resizeTimeout;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      measureOriginalWidth();
+      // Clamp translateX to valid range after resize
+      if (originalSetWidth > 0 && Math.abs(translateX) >= originalSetWidth) {
+        translateX = translateX % originalSetWidth;
       }
-    } catch (_) {}
-
-    if (Math.abs(velocityX) > 0.5) {
-      velocityX = Math.max(-28, Math.min(28, velocityX));
-      momentumRafId = requestAnimationFrame(applyInertia);
-    }
-  }
-
-  slider.addEventListener('pointerup', endDrag);
-  slider.addEventListener('pointercancel', endDrag);
-
-  slider.addEventListener(
-    'click',
-    (e) => {
-      if (hasDragged) {
-        e.preventDefault();
-        e.stopPropagation();
-      }
-    },
-    true
-  );
-
-  slider.addEventListener('mouseenter', () => {
-    isHovered = true;
+    }, 150);
   }, { passive: true });
-  slider.addEventListener('mouseleave', () => {
-    isHovered = false;
-  }, { passive: true });
-
-  if (sliderSection) {
-    const rect = sliderSection.getBoundingClientRect();
-    if (rect.top < window.innerHeight && rect.bottom > 0) {
-      sliderVisible = true;
-      autoRafId = requestAnimationFrame(autoMoveLoop);
-    }
-  }
 }
 
 /* ==========================================================================
@@ -325,15 +291,22 @@ function initUrgencyAndModal() {
   const urgencyLabels = ['Whenever', 'Sometime soon', 'ASAP'];
 
   if (urgencySlider && urgentText) {
-    urgencySlider.addEventListener('input', (e) => {
-      urgentText.textContent = urgencyLabels[e.target.value - 1];
-    });
+    // Set initial slider progress
+    function updateSliderProgress() {
+      const min = parseFloat(urgencySlider.min);
+      const max = parseFloat(urgencySlider.max);
+      const val = parseFloat(urgencySlider.value);
+      const pct = ((val - min) / (max - min)) * 100;
+      urgencySlider.style.setProperty('--slider-progress', pct + '%');
+      urgentText.textContent = urgencyLabels[Math.round(val) - 1];
+    }
+    updateSliderProgress();
+    urgencySlider.addEventListener('input', updateSliderProgress);
   }
 
   const modal = document.getElementById('contact-modal');
   const openBtns = [
     document.getElementById('partner-pill'),
-    document.getElementById('nav-contact-btn'),
     document.getElementById('footer-trigger-modal'),
   ];
   const closeBtn = document.getElementById('modal-close-btn');
@@ -740,7 +713,6 @@ function initGSAPScrollAnimations() {
     { id: '#skills', links: ['a[href="#skills"]'] },
     { id: '#work', links: ['a[href="#work"]'] },
     { id: '#certifications', links: ['a[href="#certifications"]'] },
-    { id: '#contact', links: ['a[href="#contact"]'] },
   ];
 
   navSections.forEach(({ id, links }) => {
@@ -801,23 +773,6 @@ function initGSAPScrollAnimations() {
   }
 
   // --- 8C. Horizontal Slider Track (#focus) Entrance ---
-  const dragPill = document.getElementById('drag-pill');
-  if (dragPill) {
-    gsap.from(dragPill, {
-      opacity: 0,
-      scale: 0.7,
-      xPercent: -50,
-      yPercent: -50,
-      duration: 0.8,
-      ease: 'back.out(1.7)',
-      scrollTrigger: {
-        trigger: '#focus',
-        start: 'top 85%',
-        once: true,
-      },
-    });
-  }
-
   const sliderTrack = document.getElementById('slider-track');
   if (sliderTrack) {
     gsap.from(sliderTrack, {
