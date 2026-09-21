@@ -1,12 +1,18 @@
 /**
  * Ishan Biswas Portfolio — Core Interaction & Animation Engine
+ * Optimized for maximum runtime efficiency, low CPU/memory footprint & silky 60fps execution.
+ * 
  * Integrates:
  * - Lenis Inertia-based Smooth Scrolling
  * - GSAP ScrollTrigger Orchestration (Parallax & Staggered Entrances)
  * - Canvas Frame-by-Frame Scroll Scrubbing
- * - Unified Horizontal Touch / Pointer Dragging
+ * - Infinite Smooth Marquee
  * - Custom Elastic Cursor Follower & Interactive Controls
  */
+
+// Shared constants & configuration
+const prefersReducedMotion = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const silkyEase = (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t));
 
 // Global reference to Lenis instance
 let lenis = null;
@@ -21,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // 3. Custom Cursor Follower with Elastic Spring
   initCustomCursor();
 
-  // 4. Horizontal Scroll Dragging with Silky Momentum & Auto-Motion
+  // 4. Horizontal Scroll Marquee with Smooth GSAP Ticker
   initSliderTrack();
 
   // 5. Interactive Urgency Slider & Contact Modal
@@ -41,16 +47,12 @@ document.addEventListener('DOMContentLoaded', () => {
    1. LENIS SMOOTH SCROLLING & GSAP INTEGRATION
    ========================================================================== */
 function initLenisAndScrollTrigger() {
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (prefersReducedMotion) return;
 
   if (typeof Lenis !== 'undefined') {
     lenis = new Lenis({
       duration: 1.15,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Silky exponential out ease
-      direction: 'vertical',
-      gestureDirection: 'vertical',
-      smooth: true,
+      easing: silkyEase,
       smoothTouch: false, // Maintain native touch momentum on phones
       touchMultiplier: 1.5,
       wheelMultiplier: 1.05,
@@ -69,7 +71,7 @@ function initLenisAndScrollTrigger() {
         lenis.raf(time * 1000);
       });
 
-      // Disable GSAP lag smoothing to maintain 1:1 sync with momentum
+      // Maintain 1:1 sync with momentum without extra lag smoothing overhead
       gsap.ticker.lagSmoothing(0);
     } else {
       function raf(time) {
@@ -101,7 +103,7 @@ function initSmoothAnchorLinks() {
         lenis.scrollTo(targetEl, {
           offset: -60,
           duration: 1.2,
-          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          easing: silkyEase,
         });
       } else {
         targetEl.scrollIntoView({ behavior: 'smooth' });
@@ -111,7 +113,7 @@ function initSmoothAnchorLinks() {
 }
 
 /* ==========================================================================
-   3. CUSTOM CURSOR FOLLOWER
+   3. CUSTOM CURSOR FOLLOWER (Event-Delegated & rAF-Managed)
    ========================================================================== */
 function initCustomCursor() {
   const follower = document.getElementById('cursor-follower');
@@ -134,33 +136,51 @@ function initCustomCursor() {
     }
   }
 
-  document.querySelectorAll('[data-tooltip]').forEach((item) => {
-    item.addEventListener('mouseenter', (e) => {
-      followerText.textContent = item.getAttribute('data-tooltip');
+  const orbit = document.querySelector('.avatar-orbit');
+  if (orbit) {
+    orbit.addEventListener('mouseover', (e) => {
+      const target = e.target.closest('[data-tooltip]');
+      if (!target) return;
+
+      const text = target.getAttribute('data-tooltip');
+      if (followerText.textContent !== text) {
+        followerText.textContent = text;
+      }
       mouseX = e.clientX;
       mouseY = e.clientY;
-      currentX = mouseX;
-      currentY = mouseY;
-      follower.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) translate(-50%, -50%) scale(1)`;
-      follower.classList.add('active');
-      isTracking = true;
-      if (!cursorRafId) cursorRafId = requestAnimationFrame(renderCursor);
-    });
 
-    item.addEventListener('mousemove', (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-    });
-
-    item.addEventListener('mouseleave', () => {
-      follower.classList.remove('active');
-      isTracking = false;
-      if (cursorRafId) {
-        cancelAnimationFrame(cursorRafId);
-        cursorRafId = null;
+      if (!isTracking) {
+        currentX = mouseX;
+        currentY = mouseY;
+        follower.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) translate(-50%, -50%) scale(1)`;
+        follower.classList.add('active');
+        isTracking = true;
+        if (!cursorRafId) cursorRafId = requestAnimationFrame(renderCursor);
       }
     });
-  });
+
+    orbit.addEventListener('mousemove', (e) => {
+      if (isTracking) {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      }
+    }, { passive: true });
+
+    orbit.addEventListener('mouseout', (e) => {
+      const target = e.target.closest('[data-tooltip]');
+      const related = e.relatedTarget ? e.relatedTarget.closest('[data-tooltip]') : null;
+      if (target && target !== related) {
+        if (!related) {
+          follower.classList.remove('active');
+          isTracking = false;
+          if (cursorRafId) {
+            cancelAnimationFrame(cursorRafId);
+            cursorRafId = null;
+          }
+        }
+      }
+    });
+  }
 }
 
 /* ==========================================================================
@@ -171,14 +191,12 @@ function initSliderTrack() {
   const section = document.getElementById('focus');
   if (!track) return;
 
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (prefersReducedMotion) {
-    // Fallback: static scrollable row, no animation
     track.style.overflowX = 'auto';
     return;
   }
 
-  // --- Duplicate cards for seamless loop ---
+  // Duplicate cards once for seamless loop
   const originalCards = Array.from(track.children);
   const fragment = document.createDocumentFragment();
   originalCards.forEach((card) => {
@@ -188,27 +206,25 @@ function initSliderTrack() {
   });
   track.appendChild(fragment);
 
-  // --- Measure the width of the original set of cards ---
   let originalSetWidth = 0;
   function measureOriginalWidth() {
     originalSetWidth = 0;
     const gap = parseFloat(getComputedStyle(track).gap) || 24;
-    originalCards.forEach((card, i) => {
-      originalSetWidth += card.offsetWidth;
-      if (i < originalCards.length - 1) originalSetWidth += gap;
-    });
-    // Add one more gap for the seamless junction between original and clone
+    const len = originalCards.length;
+    for (let i = 0; i < len; i++) {
+      originalSetWidth += originalCards[i].offsetWidth;
+      if (i < len - 1) originalSetWidth += gap;
+    }
     originalSetWidth += gap;
   }
   measureOriginalWidth();
 
-  // --- State ---
   let translateX = 0;
   let isPaused = false;
   let sectionVisible = false;
   const speed = 0.7; // px per frame at 60fps
 
-  // --- Visibility-based activation ---
+  // IntersectionObserver manages ticker activation based on viewport visibility
   const observer = new IntersectionObserver(
     (entries) => {
       sectionVisible = entries[0].isIntersecting;
@@ -217,22 +233,13 @@ function initSliderTrack() {
   );
   if (section) observer.observe(section);
 
-  // Initial visibility check
-  if (section) {
-    const rect = section.getBoundingClientRect();
-    sectionVisible = rect.top < window.innerHeight && rect.bottom > 0;
-  }
-
-  // --- GSAP Ticker for smooth animation ---
   if (typeof gsap !== 'undefined') {
     gsap.ticker.add((time, deltaTime) => {
       if (!sectionVisible || isPaused) return;
 
-      // deltaTime is in seconds in GSAP, convert to frame-normalized speed
-      const dt = deltaTime / (1000 / 60); // normalize to ~1 at 60fps
+      const dt = deltaTime / (1000 / 60);
       translateX -= speed * dt;
 
-      // Seamless reset when we've scrolled past the original set
       if (originalSetWidth > 0 && Math.abs(translateX) >= originalSetWidth) {
         translateX += originalSetWidth;
       }
@@ -240,7 +247,6 @@ function initSliderTrack() {
       track.style.transform = `translate3d(${translateX}px, 0, 0)`;
     });
   } else {
-    // Fallback RAF loop if GSAP is not available
     let lastTime = performance.now();
     function marqueeLoop(now) {
       if (sectionVisible && !isPaused) {
@@ -257,24 +263,16 @@ function initSliderTrack() {
     requestAnimationFrame(marqueeLoop);
   }
 
-  // --- Hover pause & lift on individual cards ---
-  const allCards = track.querySelectorAll('.card');
-  allCards.forEach((card) => {
-    card.addEventListener('mouseenter', () => {
-      isPaused = true;
-    }, { passive: true });
-    card.addEventListener('mouseleave', () => {
-      isPaused = false;
-    }, { passive: true });
-  });
+  // Hover pause on track container
+  track.addEventListener('mouseenter', () => { isPaused = true; }, { passive: true });
+  track.addEventListener('mouseleave', () => { isPaused = false; }, { passive: true });
 
-  // --- Recalculate on resize ---
+  // Recalculate on window resize with debounce
   let resizeTimeout;
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimeout);
     resizeTimeout = setTimeout(() => {
       measureOriginalWidth();
-      // Clamp translateX to valid range after resize
       if (originalSetWidth > 0 && Math.abs(translateX) >= originalSetWidth) {
         translateX = translateX % originalSetWidth;
       }
@@ -291,7 +289,6 @@ function initUrgencyAndModal() {
   const urgencyLabels = ['Whenever', 'Sometime soon', 'ASAP'];
 
   if (urgencySlider && urgentText) {
-    // Set initial slider progress
     function updateSliderProgress() {
       const min = parseFloat(urgencySlider.min);
       const max = parseFloat(urgencySlider.max);
@@ -314,13 +311,13 @@ function initUrgencyAndModal() {
   function openModal() {
     if (!modal) return;
     modal.classList.add('active');
-    if (lenis) lenis.stop(); // Lock smooth scroll while modal is active
+    if (lenis) lenis.stop();
   }
 
   function closeModal() {
     if (!modal) return;
     modal.classList.remove('active');
-    if (lenis) lenis.start(); // Resume smooth scroll
+    if (lenis) lenis.start();
   }
 
   openBtns.forEach((btn) => {
@@ -341,37 +338,45 @@ function initUrgencyAndModal() {
     if (e.key === 'Escape' && modal && modal.classList.contains('active')) {
       closeModal();
     }
-  }, { passive: true });
-
-  const allChips = document.querySelectorAll('.chip');
-  allChips.forEach((chip) => {
-    chip.addEventListener('click', function () {
-      allChips.forEach((c) => c.classList.remove('active'));
-      this.classList.add('active');
-    });
   });
+
+  const chipContainer = document.querySelector('.chip-options');
+  if (chipContainer) {
+    const allChips = chipContainer.querySelectorAll('.chip');
+    chipContainer.addEventListener('click', (e) => {
+      const chip = e.target.closest('.chip');
+      if (!chip) return;
+      allChips.forEach((c) => c.classList.remove('active'));
+      chip.classList.add('active');
+    });
+  }
 }
 
 /* ==========================================================================
-   6. LIVE TIME (IST) DISPLAY
+   6. LIVE TIME (IST) DISPLAY (Cached Formatter)
    ========================================================================== */
 function initLiveClock() {
   const timeEl = document.getElementById('live-time');
   if (!timeEl) return;
 
-  function updateTime() {
-    const options = {
+  let formatter = null;
+  try {
+    formatter = new Intl.DateTimeFormat('en-US', {
       timeZone: 'Asia/Kolkata',
       hour: '2-digit',
       minute: '2-digit',
       hour12: true,
-    };
-    try {
-      const istTime = new Intl.DateTimeFormat('en-US', options).format(new Date());
-      timeEl.textContent = `${istTime} IST`;
-    } catch (_) {
-      timeEl.textContent = 'IST';
+    });
+  } catch (_) {}
+
+  function updateTime() {
+    if (formatter) {
+      try {
+        timeEl.textContent = `${formatter.format(new Date())} IST`;
+        return;
+      } catch (_) {}
     }
+    timeEl.textContent = 'IST';
   }
 
   updateTime();
@@ -397,24 +402,9 @@ function initProfileScrollAnimation() {
   let lastDrawnFrameIndex = -1;
   let lastTime = performance.now();
 
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  let useWebP = false;
-  const webpTestCanvas = document.createElement('canvas');
-  webpTestCanvas.width = 1;
-  webpTestCanvas.height = 1;
-  try {
-    useWebP = webpTestCanvas.toDataURL('image/webp').indexOf('data:image/webp') === 0;
-  } catch (e) {
-    useWebP = false;
-  }
-
   function getFrameUrl(index) {
     const pad = String(index).padStart(4, '0');
-    if (useWebP) {
-      return `./Assets/Media/frames-webp/frame_${pad}.webp`;
-    }
-    return `./Assets/Media/frames/frame_${pad}.jpg`;
+    return `./Assets/Media/frames-webp/frame_${pad}.webp`;
   }
 
   function resizeCanvas() {
@@ -429,9 +419,8 @@ function initProfileScrollAnimation() {
 
     if (headshotCanvas) {
       const hsRect = headshotCanvas.getBoundingClientRect();
-      const hsDpr = Math.min(window.devicePixelRatio || 1, 2);
-      headshotCanvas.width = Math.max(hsRect.width * hsDpr, 192);
-      headshotCanvas.height = Math.max(hsRect.height * hsDpr, 264);
+      headshotCanvas.width = Math.max(hsRect.width * dpr, 192);
+      headshotCanvas.height = Math.max(hsRect.height * dpr, 264);
 
       if (headshotCtx) {
         headshotCtx.imageSmoothingEnabled = true;
@@ -441,10 +430,6 @@ function initProfileScrollAnimation() {
 
     if (lastDrawnFrameIndex >= 0) {
       drawFrame(lastDrawnFrameIndex);
-    }
-
-    if (typeof ScrollTrigger !== 'undefined') {
-      ScrollTrigger.refresh();
     }
   }
 
@@ -487,14 +472,15 @@ function initProfileScrollAnimation() {
   function drawFrame(index) {
     let imgToDraw = frameImages[index];
     if (!imgToDraw || !imgToDraw.complete || imgToDraw.naturalWidth === 0) {
-      for (let offset = 1; offset < totalFrames; offset++) {
+      const maxSearch = Math.min(25, totalFrames);
+      for (let offset = 1; offset < maxSearch; offset++) {
         const prev = index - offset;
         const next = index + offset;
-        if (prev >= 0 && frameImages[prev] && frameImages[prev].complete && frameImages[prev].naturalWidth !== 0) {
+        if (prev >= 0 && frameImages[prev]?.complete && frameImages[prev].naturalWidth !== 0) {
           imgToDraw = frameImages[prev];
           break;
         }
-        if (next < totalFrames && frameImages[next] && frameImages[next].complete && frameImages[next].naturalWidth !== 0) {
+        if (next < totalFrames && frameImages[next]?.complete && frameImages[next].naturalWidth !== 0) {
           imgToDraw = frameImages[next];
           break;
         }
@@ -525,6 +511,8 @@ function initProfileScrollAnimation() {
     const progress = Math.min(1, Math.max(0, currentScroll / scrollableHeight));
     targetFrameIndex = Math.min(totalFrames - 1, Math.max(0, Math.floor(progress * (totalFrames - 1))));
   }
+
+  let triggerQueueUpdate = null;
 
   if (typeof ScrollTrigger !== 'undefined' && !prefersReducedMotion) {
     ScrollTrigger.create({
@@ -588,6 +576,7 @@ function initProfileScrollAnimation() {
     }
   }
 
+  // Load initial frame immediately
   const frame0 = new Image();
   frame0.onload = () => {
     frameImages[0] = frame0;
@@ -597,7 +586,6 @@ function initProfileScrollAnimation() {
   frame0.src = getFrameUrl(0);
 
   const loadedSet = new Set();
-  let triggerQueueUpdate = null;
 
   function preloadAllFrames() {
     const keyframes = [];
@@ -630,8 +618,18 @@ function initProfileScrollAnimation() {
         if (keyframes.length > 0) {
           idx = keyframes.shift();
         } else if (remaining.length > 0) {
-          remaining.sort((a, b) => Math.abs(a - targetFrameIndex) - Math.abs(b - targetFrameIndex));
-          idx = remaining.shift();
+          // Efficient single-pass search for closest frame to scroll position
+          let closestIdx = 0;
+          let minDiff = Math.abs(remaining[0] - targetFrameIndex);
+          const rLen = remaining.length;
+          for (let i = 1; i < rLen; i++) {
+            const diff = Math.abs(remaining[i] - targetFrameIndex);
+            if (diff < minDiff) {
+              minDiff = diff;
+              closestIdx = i;
+            }
+          }
+          idx = remaining.splice(closestIdx, 1)[0];
         } else {
           break;
         }
@@ -664,17 +662,6 @@ function initProfileScrollAnimation() {
     setTimeout(loadNext, 40);
   }
 
-  window.addEventListener(
-    'scroll',
-    () => {
-      if (typeof ScrollTrigger === 'undefined') {
-        updateScrollProgress();
-      }
-      if (triggerQueueUpdate) triggerQueueUpdate();
-    },
-    { passive: true }
-  );
-
   preloadAllFrames();
   heroRafId = requestAnimationFrame(renderLoop);
 }
@@ -684,41 +671,28 @@ function initProfileScrollAnimation() {
    ========================================================================== */
 function initGSAPScrollAnimations() {
   if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
-
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (prefersReducedMotion) return;
 
-  // Cache DOM references used in scroll callbacks
   const topNav = document.querySelector('.top-nav');
   const allNavLinks = document.querySelectorAll('.nav-link');
 
   // --- 8A. Top Navigation Scroll State & Active Section Spy ---
-  ScrollTrigger.create({
-    start: 'top -40',
-    end: 999999,
-    onUpdate: (self) => {
-      if (topNav) {
-        if (self.scroll() > 50) {
-          topNav.classList.add('scrolled');
-        } else {
-          topNav.classList.remove('scrolled');
-        }
-      }
-    },
-  });
+  if (topNav) {
+    ScrollTrigger.create({
+      start: 'top -50',
+      end: 999999,
+      toggleClass: { targets: topNav, className: 'scrolled' },
+    });
+  }
 
   const navSections = [
-    { id: '#about', links: ['a[href="#about"]'] },
-    { id: '#focus', links: ['a[href="#focus"]'] },
-    { id: '#skills', links: ['a[href="#skills"]'] },
-    { id: '#work', links: ['a[href="#work"]'] },
-    { id: '#certifications', links: ['a[href="#certifications"]'] },
-  ];
+    { el: document.querySelector('#about'), link: document.querySelector('a[href="#about"]') },
+    { el: document.querySelector('#work'), link: document.querySelector('a[href="#work"]') },
+    { el: document.querySelector('#certifications'), link: document.querySelector('a[href="#certifications"]') },
+    { el: document.querySelector('#skills'), link: document.querySelector('a[href="#skills"]') },
+  ].filter(item => item.el && item.link);
 
-  navSections.forEach(({ id, links }) => {
-    const el = document.querySelector(id);
-    if (!el) return;
-
+  navSections.forEach(({ el, link }) => {
     ScrollTrigger.create({
       trigger: el,
       start: 'top 45%',
@@ -726,10 +700,7 @@ function initGSAPScrollAnimations() {
       onToggle: (self) => {
         if (self.isActive) {
           allNavLinks.forEach((lnk) => lnk.classList.remove('active'));
-          links.forEach((selector) => {
-            const target = document.querySelector(selector);
-            if (target) target.classList.add('active');
-          });
+          link.classList.add('active');
         }
       },
     });
@@ -946,7 +917,4 @@ function initGSAPScrollAnimations() {
       },
     });
   }
-
-  // Refresh ScrollTrigger calculations after initial setup
-  ScrollTrigger.refresh();
 }
