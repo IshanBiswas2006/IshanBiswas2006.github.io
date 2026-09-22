@@ -113,7 +113,7 @@
   tl.to(heroSection, {
     scale: 1,
     opacity: 1,
-    duration: 1.6,
+    duration: 1.35,
     ease: 'sine.out',
   });
 
@@ -122,18 +122,18 @@
     tl.to(heroCanvas, {
       filter: 'blur(0px)',
       opacity: 1,
-      duration: 1.4,
+      duration: 1.2,
       ease: 'sine.out',
-    }, '-=1.0');
+    }, '-=0.9');
   }
 
   // PHASE 2: Hero content gently floats up
   tl.to(heroContent, {
     opacity: 1,
     y: 0,
-    duration: 0.9,
+    duration: 0.75,
     ease: 'sine.out',
-  }, '-=0.4');
+  }, '-=0.35');
 
   // PHASE 3A: Headshot badge appears with subtle foreground zoom
   tl.to(headshot, {
@@ -141,39 +141,39 @@
     scale: 1.1,
     y: 0,
     zIndex: 10,
-    duration: 0.7,
+    duration: 0.6,
     ease: 'sine.out',
-  }, '-=0.55');
+  }, '-=0.5');
 
   // PHASE 3B: Side badges emerge smoothly from behind center
   tl.to(sideBadges, {
     opacity: 1,
     x: 0,
     scale: 1,
-    duration: 0.85,
+    duration: 0.7,
     ease: 'power1.out',
     stagger: {
-      each: 0.09,
+      each: 0.075,
       from: 'center',
     },
-  }, '-=0.35');
+  }, '-=0.3');
 
   // PHASE 3C: Headshot gently settles back to original scale
   tl.to(headshot, {
     scale: 1,
     zIndex: 'auto',
-    duration: 0.55,
+    duration: 0.48,
     ease: 'sine.inOut',
-  }, '-=0.25');
+  }, '-=0.22');
 
   // PHASE 4: Text elements reveal with soft stagger
   tl.to(textElements, {
     opacity: 1,
     y: 0,
-    duration: 0.7,
+    duration: 0.6,
     ease: 'sine.out',
-    stagger: 0.12,
-  }, '-=0.5');
+    stagger: 0.1,
+  }, '-=0.45');
 
   // ── Cleanup: Remove all inline styles so final state matches original ──
   function cleanupAfterAnimation() {
@@ -196,7 +196,7 @@
     // Small delay for visual breathing room after loader fades
     setTimeout(() => {
       tl.play();
-    }, 100);
+    }, 80);
   }
 
   if (loader) {
