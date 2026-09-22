@@ -17,7 +17,6 @@
 }
 
 html {
-  /* Default scroll behavior; overridden dynamically when Lenis is active */
   scroll-behavior: auto;
 }
 
@@ -50,7 +49,6 @@ body {
   cursor: default;
 }
 
-/* Custom Cursor Follower */
 .cursor-follower {
   position: fixed;
   top: 0;
@@ -75,9 +73,6 @@ body {
   opacity: 1;
 }
 
-/* ==========================================================================
-   PREMIUM MINIMALIST LOADING SCREEN
-   ========================================================================== */
 .page-loader {
   position: fixed;
   inset: 0;
@@ -188,7 +183,6 @@ body {
   }
 }
 
-/* Top Navigation Bar */
 .top-nav {
   position: fixed;
   top: 0;
@@ -295,7 +289,6 @@ body {
   opacity: 0.7;
 }
 
-/* Scroll Animation Integration for Profile Section */
 .hero-scroll-wrapper {
   position: relative;
   min-height: 220vh;
@@ -303,7 +296,6 @@ body {
   margin: 0 auto;
 }
 
-/* Hero Section */
 .hero-section {
   position: relative;
   min-height: 85vh;
@@ -326,7 +318,6 @@ body {
   z-index: 10;
 }
 
-/* Full Hero Area Canvas (Unobscured Face) */
 .hero-bg-canvas {
   position: absolute;
   top: 0;
@@ -351,7 +342,6 @@ body {
   padding: 30px 24px;
 }
 
-/* Avatar Orbit & Badges - Transparent Style */
 .avatar-orbit {
   display: flex;
   align-items: center;
@@ -447,7 +437,6 @@ body {
   text-shadow: 0 3px 16px rgba(0, 0, 0, 0.9), 0 1px 3px rgba(0, 0, 0, 0.95);
 }
 
-/* Slider Section */
 .slider-section {
   position: relative;
   padding: 40px 0 80px;
@@ -500,7 +489,6 @@ body {
   margin-bottom: 8px;
 }
 
-/* Tea / Services Section */
 .tea-section {
   max-width: 1200px;
   margin: 0 auto 120px;
@@ -605,7 +593,6 @@ body {
   object-fit: contain;
 }
 
-/* Case Studies / Projects */
 .case-studies-section {
   max-width: 1200px;
   margin: 0 auto 120px;
@@ -715,7 +702,6 @@ body {
   color: #fff;
 }
 
-/* Certifications & Experience */
 .built-section {
   max-width: 1200px;
   margin: 0 auto 140px;
@@ -804,7 +790,6 @@ body {
   border-radius: 12px;
 }
 
-/* Footer CTA */
 .footer-cta {
   background: #0f1015;
   color: #fff;
@@ -864,7 +849,6 @@ body {
   border-color: #fff;
 }
 
-/* Modal Overlay */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -1053,7 +1037,6 @@ body {
   margin-top: 10px;
 }
 
-/* Responsive Styles */
 @media (max-width: 900px) {
   .top-nav { padding: 12px 20px; }
   .nav-center { display: none; }

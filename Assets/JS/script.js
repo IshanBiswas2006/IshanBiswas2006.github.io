@@ -1,54 +1,28 @@
-/**
- * Ishan Biswas Portfolio — Core Interaction & Animation Engine
- * Optimized for maximum runtime efficiency, low CPU/memory footprint & silky 60fps execution.
- * 
- * Integrates:
- * - Lenis Inertia-based Smooth Scrolling
- * - GSAP ScrollTrigger Orchestration (Parallax & Staggered Entrances)
- * - Canvas Frame-by-Frame Scroll Scrubbing
- * - Infinite Smooth Marquee
- * - Custom Elastic Cursor Follower & Interactive Controls
- */
-
-// Shared constants & configuration
 const prefersReducedMotion = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const silkyEase = (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t));
 
-// Global reference to Lenis instance
 let lenis = null;
 
-// Initialize Page Loader immediately
 initPageLoader();
 
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. Initialize Lenis Smooth Scrolling & GSAP ScrollTrigger
   initLenisAndScrollTrigger();
 
-  // 2. Smooth Anchor Navigation via Lenis
   initSmoothAnchorLinks();
 
-  // 3. Custom Cursor Follower with Elastic Spring
   initCustomCursor();
 
-  // 4. Horizontal Scroll Marquee with Smooth GSAP Ticker
   initSliderTrack();
 
-  // 5. Interactive Urgency Slider & Contact Modal
   initUrgencyAndModal();
 
-  // 6. Live Time Display (IST)
   initLiveClock();
 
-  // 7. Profile Frame-by-Frame Scroll Animation Integration
   initProfileScrollAnimation();
 
-  // 8. GSAP ScrollTrigger Parallax & Entrance Animations
   initGSAPScrollAnimations();
 });
 
-/* ==========================================================================
-   0. PREMIUM MINIMALIST PAGE LOADER
-   ========================================================================== */
 function initPageLoader() {
   const loader = document.getElementById('page-loader');
   if (!loader) return;
@@ -76,7 +50,6 @@ function initPageLoader() {
     setTimeout(handleCleanup, 800);
   }
 
-  // Proper window.load & font loading lifecycle
   function onReady() {
     if (document.fonts && document.fonts.ready) {
       document.fonts.ready.then(dismissLoader).catch(dismissLoader);
@@ -92,9 +65,6 @@ function initPageLoader() {
   }
 }
 
-/* ==========================================================================
-   1. LENIS SMOOTH SCROLLING & GSAP INTEGRATION
-   ========================================================================== */
 function initLenisAndScrollTrigger() {
   if (prefersReducedMotion) return;
 
@@ -102,25 +72,21 @@ function initLenisAndScrollTrigger() {
     lenis = new Lenis({
       duration: 1.15,
       easing: silkyEase,
-      smoothTouch: false, // Maintain native touch momentum on phones
+      smoothTouch: false,
       touchMultiplier: 1.5,
       wheelMultiplier: 1.05,
       infinite: false,
     });
 
-    // Synchronize Lenis with GSAP ScrollTrigger
     if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
       gsap.registerPlugin(ScrollTrigger);
 
-      // Inform ScrollTrigger of Lenis scroll events
       lenis.on('scroll', ScrollTrigger.update);
 
-      // Run Lenis within GSAP's optimized ticker
       gsap.ticker.add((time) => {
         lenis.raf(time * 1000);
       });
 
-      // Maintain 1:1 sync with momentum without extra lag smoothing overhead
       gsap.ticker.lagSmoothing(0);
     } else {
       function raf(time) {
@@ -134,9 +100,6 @@ function initLenisAndScrollTrigger() {
   }
 }
 
-/* ==========================================================================
-   2. SMOOTH ANCHOR NAVIGATION (via lenis.scrollTo)
-   ========================================================================== */
 function initSmoothAnchorLinks() {
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener('click', (e) => {
@@ -161,9 +124,6 @@ function initSmoothAnchorLinks() {
   });
 }
 
-/* ==========================================================================
-   3. CUSTOM CURSOR FOLLOWER (Event-Delegated & rAF-Managed)
-   ========================================================================== */
 function initCustomCursor() {
   const follower = document.getElementById('cursor-follower');
   const followerText = follower ? follower.querySelector('.cursor-text') : null;
@@ -232,9 +192,6 @@ function initCustomCursor() {
   }
 }
 
-/* ==========================================================================
-   4. HORIZONTAL INFINITE MARQUEE (GSAP Ticker-Driven)
-   ========================================================================== */
 function initSliderTrack() {
   const track = document.getElementById('slider-track');
   const section = document.getElementById('focus');
@@ -245,7 +202,6 @@ function initSliderTrack() {
     return;
   }
 
-  // Duplicate cards once for seamless loop
   const originalCards = Array.from(track.children);
   const fragment = document.createDocumentFragment();
   originalCards.forEach((card) => {
@@ -271,9 +227,8 @@ function initSliderTrack() {
   let translateX = 0;
   let isPaused = false;
   let sectionVisible = false;
-  const speed = 0.7; // px per frame at 60fps
+  const speed = 0.7;
 
-  // IntersectionObserver manages ticker activation based on viewport visibility
   const observer = new IntersectionObserver(
     (entries) => {
       sectionVisible = entries[0].isIntersecting;
@@ -312,11 +267,9 @@ function initSliderTrack() {
     requestAnimationFrame(marqueeLoop);
   }
 
-  // Hover pause on track container
   track.addEventListener('mouseenter', () => { isPaused = true; }, { passive: true });
   track.addEventListener('mouseleave', () => { isPaused = false; }, { passive: true });
 
-  // Recalculate on window resize with debounce
   let resizeTimeout;
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimeout);
@@ -329,9 +282,6 @@ function initSliderTrack() {
   }, { passive: true });
 }
 
-/* ==========================================================================
-   5. INTERACTIVE URGENCY SLIDER & CONTACT MODAL
-   ========================================================================== */
 function initUrgencyAndModal() {
   const urgencySlider = document.getElementById('urgency-slider');
   const urgentText = document.getElementById('urgent-text');
@@ -401,9 +351,6 @@ function initUrgencyAndModal() {
   }
 }
 
-/* ==========================================================================
-   6. LIVE TIME (IST) DISPLAY (Cached Formatter)
-   ========================================================================== */
 function initLiveClock() {
   const timeEl = document.getElementById('live-time');
   if (!timeEl) return;
@@ -432,9 +379,6 @@ function initLiveClock() {
   setInterval(updateTime, 30000);
 }
 
-/* ==========================================================================
-   7. PROFILE SCROLL FRAME-BY-FRAME ANIMATION (ScrollTrigger Scrubbed)
-   ========================================================================== */
 function initProfileScrollAnimation() {
   const canvas = document.getElementById('profile-canvas');
   const headshotCanvas = document.getElementById('headshot-canvas');
@@ -625,7 +569,6 @@ function initProfileScrollAnimation() {
     }
   }
 
-  // Load initial frame immediately
   const frame0 = new Image();
   frame0.onload = () => {
     frameImages[0] = frame0;
@@ -667,7 +610,6 @@ function initProfileScrollAnimation() {
         if (keyframes.length > 0) {
           idx = keyframes.shift();
         } else if (remaining.length > 0) {
-          // Efficient single-pass search for closest frame to scroll position
           let closestIdx = 0;
           let minDiff = Math.abs(remaining[0] - targetFrameIndex);
           const rLen = remaining.length;
@@ -715,9 +657,6 @@ function initProfileScrollAnimation() {
   heroRafId = requestAnimationFrame(renderLoop);
 }
 
-/* ==========================================================================
-   8. GSAP SCROLLTRIGGER ORCHESTRATION (PARALLAX & ENTRANCES)
-   ========================================================================== */
 function initGSAPScrollAnimations() {
   if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
   if (prefersReducedMotion) return;
@@ -725,7 +664,6 @@ function initGSAPScrollAnimations() {
   const topNav = document.querySelector('.top-nav');
   const allNavLinks = document.querySelectorAll('.nav-link');
 
-  // --- 8A. Top Navigation Scroll State & Active Section Spy ---
   if (topNav) {
     ScrollTrigger.create({
       start: 'top -50',
@@ -755,7 +693,6 @@ function initGSAPScrollAnimations() {
     });
   });
 
-  // --- 8B. Hero Badges & Content Parallax Scrub ---
   const badges = document.querySelectorAll('.avatar-orbit .oval-badge');
   if (badges.length > 0) {
     badges.forEach((badge, idx) => {
@@ -775,7 +712,6 @@ function initGSAPScrollAnimations() {
     });
   }
 
-  // Hero Text Smooth Lift & Fade Parallax
   const heroTextElements = document.querySelectorAll('.hero-title, .subtitle, .about-description');
   if (heroTextElements.length > 0) {
     gsap.to(heroTextElements, {
@@ -792,7 +728,6 @@ function initGSAPScrollAnimations() {
     });
   }
 
-  // --- 8C. Horizontal Slider Track (#focus) Entrance ---
   const sliderTrack = document.getElementById('slider-track');
   if (sliderTrack) {
     gsap.from(sliderTrack, {
@@ -808,7 +743,6 @@ function initGSAPScrollAnimations() {
     });
   }
 
-  // --- 8D. Skills & Competencies (#skills) Staggered Entrances ---
   gsap.from('.tea-header h2, .tea-header p', {
     opacity: 0,
     y: 30,
@@ -858,7 +792,6 @@ function initGSAPScrollAnimations() {
     });
   }
 
-  // --- 8E. Featured Projects (#work) Entrance ---
   gsap.from('.case-studies-section .section-label', {
     opacity: 0,
     x: -20,
@@ -889,7 +822,6 @@ function initGSAPScrollAnimations() {
     });
   }
 
-  // --- 8F. Academic & Certifications (#certifications) Slide-in ---
   gsap.from('.built-section h2, .built-section .section-sub', {
     opacity: 0,
     y: 25,
@@ -921,7 +853,6 @@ function initGSAPScrollAnimations() {
     });
   }
 
-  // --- 8G. Footer CTA (#contact) Parallax & Social Links Pop-in ---
   const footerHeading = document.getElementById('footer-trigger-modal');
   if (footerHeading) {
     gsap.from(footerHeading, {
