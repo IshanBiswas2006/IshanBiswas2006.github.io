@@ -1,3 +1,10 @@
+if (typeof history !== 'undefined' && 'scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+if (typeof window !== 'undefined') {
+  window.scrollTo(0, 0);
+}
+
 const prefersReducedMotion = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const silkyEase = (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t));
 
@@ -25,13 +32,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function initPageLoader() {
   const loader = document.getElementById('page-loader');
-  if (!loader) return;
+  if (!loader) {
+    if (typeof window.__playHeroEntrance === 'function') {
+      window.__playHeroEntrance();
+    }
+    return;
+  }
 
   let isDismissed = false;
 
   function dismissLoader() {
     if (isDismissed) return;
     isDismissed = true;
+
+    if (lenis) {
+      lenis.start();
+    }
+
+    if (typeof window.__playHeroEntrance === 'function') {
+      window.__playHeroEntrance();
+    }
 
     loader.classList.add('is-hidden');
 
@@ -41,28 +61,43 @@ function initPageLoader() {
       if (loader.parentNode) {
         loader.remove();
       }
-      if (typeof ScrollTrigger !== 'undefined') {
-        ScrollTrigger.refresh();
-      }
     };
 
     loader.addEventListener('transitionend', handleCleanup);
     setTimeout(handleCleanup, 800);
   }
 
-  function onReady() {
-    if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(dismissLoader).catch(dismissLoader);
+  const domReadyPromise = new Promise((resolve) => {
+    if (document.readyState !== 'loading') {
+      resolve();
     } else {
-      dismissLoader();
+      document.addEventListener('DOMContentLoaded', resolve, { once: true });
     }
-  }
+  });
 
-  if (document.readyState === 'complete') {
-    onReady();
-  } else {
-    window.addEventListener('load', onReady, { once: true });
-  }
+  const fontsReadyPromise = new Promise((resolve) => {
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(resolve).catch(resolve);
+      setTimeout(resolve, 2000);
+    } else {
+      resolve();
+    }
+  });
+
+  const frame0ReadyPromise = new Promise((resolve) => {
+    if (window.__frame0Loaded) {
+      resolve();
+    } else {
+      window.addEventListener('heroFrame0Loaded', resolve, { once: true });
+      setTimeout(resolve, 2500);
+    }
+  });
+
+  const minTimePromise = new Promise((resolve) => setTimeout(resolve, 350));
+
+  Promise.all([domReadyPromise, fontsReadyPromise, frame0ReadyPromise, minTimePromise]).then(() => {
+    dismissLoader();
+  });
 }
 
 function initLenisAndScrollTrigger() {
@@ -78,6 +113,11 @@ function initLenisAndScrollTrigger() {
       infinite: false,
     });
 
+    const loader = document.getElementById('page-loader');
+    if (loader && !loader.classList.contains('is-hidden')) {
+      lenis.stop();
+    }
+
     if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
       gsap.registerPlugin(ScrollTrigger);
 
@@ -86,8 +126,6 @@ function initLenisAndScrollTrigger() {
       gsap.ticker.add((time) => {
         lenis.raf(time * 1000);
       });
-
-      gsap.ticker.lagSmoothing(0);
     } else {
       function raf(time) {
         lenis.raf(time);
@@ -402,18 +440,20 @@ function initProfileScrollAnimation() {
 
   function resizeCanvas() {
     const heroSection = document.getElementById('about');
-    const rect = heroSection ? heroSection.getBoundingClientRect() : canvas.getBoundingClientRect();
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    canvas.width = Math.max(rect.width * dpr, 600);
-    canvas.height = Math.max(rect.height * dpr, 400);
+    const rectW = heroSection ? heroSection.offsetWidth : (canvas.parentElement ? canvas.parentElement.offsetWidth : window.innerWidth);
+    const rectH = heroSection ? heroSection.offsetHeight : (canvas.parentElement ? canvas.parentElement.offsetHeight : window.innerHeight);
+    canvas.width = Math.max(rectW * dpr, 600);
+    canvas.height = Math.max(rectH * dpr, 400);
 
     ctx.imageSmoothingEnabled = true;
     ctx.imageSmoothingQuality = 'high';
 
     if (headshotCanvas) {
-      const hsRect = headshotCanvas.getBoundingClientRect();
-      headshotCanvas.width = Math.max(hsRect.width * dpr, 192);
-      headshotCanvas.height = Math.max(hsRect.height * dpr, 264);
+      const hsW = headshotCanvas.offsetWidth || 96;
+      const hsH = headshotCanvas.offsetHeight || 132;
+      headshotCanvas.width = Math.max(hsW * dpr, 192);
+      headshotCanvas.height = Math.max(hsH * dpr, 264);
 
       if (headshotCtx) {
         headshotCtx.imageSmoothingEnabled = true;
@@ -574,8 +614,21 @@ function initProfileScrollAnimation() {
     frameImages[0] = frame0;
     loadedCount++;
     drawFrame(0);
+    window.__frame0Loaded = true;
+    window.dispatchEvent(new CustomEvent('heroFrame0Loaded'));
+  };
+  frame0.onerror = () => {
+    window.__frame0Loaded = true;
+    window.dispatchEvent(new CustomEvent('heroFrame0Loaded'));
   };
   frame0.src = getFrameUrl(0);
+  if (frame0.complete && frame0.naturalWidth !== 0) {
+    frameImages[0] = frame0;
+    loadedCount++;
+    drawFrame(0);
+    window.__frame0Loaded = true;
+    window.dispatchEvent(new CustomEvent('heroFrame0Loaded'));
+  }
 
   const loadedSet = new Set();
 
@@ -693,39 +746,55 @@ function initGSAPScrollAnimations() {
     });
   });
 
-  const badges = document.querySelectorAll('.avatar-orbit .oval-badge');
-  if (badges.length > 0) {
-    badges.forEach((badge, idx) => {
-      const yOffset = idx % 2 === 0 ? -30 : -50;
-      const rotateOffset = (idx - 2) * 2;
-      gsap.to(badge, {
-        y: yOffset,
-        rotation: rotateOffset,
+  function initHeroScrollTriggers() {
+    const badges = document.querySelectorAll('.avatar-orbit .oval-badge');
+    if (badges.length > 0) {
+      badges.forEach((badge, idx) => {
+        const yOffset = idx % 2 === 0 ? -30 : -50;
+        const rotateOffset = (idx - 2) * 2;
+        gsap.to(badge, {
+          y: yOffset,
+          rotation: rotateOffset,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: '#hero-scroll-wrapper',
+            start: 'top top',
+            end: 'bottom top',
+            scrub: 1.2,
+          },
+        });
+      });
+    }
+
+    const heroTextElements = document.querySelectorAll('.hero-title, .subtitle, .about-description');
+    if (heroTextElements.length > 0) {
+      gsap.to(heroTextElements, {
+        y: -40,
+        opacity: 0.2,
         ease: 'none',
+        stagger: 0.04,
         scrollTrigger: {
           trigger: '#hero-scroll-wrapper',
-          start: 'top top',
+          start: 'center top',
           end: 'bottom top',
-          scrub: 1.2,
+          scrub: 1,
         },
       });
-    });
+    }
   }
 
-  const heroTextElements = document.querySelectorAll('.hero-title, .subtitle, .about-description');
-  if (heroTextElements.length > 0) {
-    gsap.to(heroTextElements, {
-      y: -40,
-      opacity: 0.2,
-      ease: 'none',
-      stagger: 0.04,
-      scrollTrigger: {
-        trigger: '#hero-scroll-wrapper',
-        start: 'center top',
-        end: 'bottom top',
-        scrub: 1,
-      },
-    });
+  let heroScrollTriggersInitialized = false;
+  const safeInitHeroScroll = () => {
+    if (heroScrollTriggersInitialized) return;
+    heroScrollTriggersInitialized = true;
+    initHeroScrollTriggers();
+  };
+
+  if (prefersReducedMotion) {
+    safeInitHeroScroll();
+  } else {
+    window.__onHeroEntranceComplete = safeInitHeroScroll;
+    setTimeout(safeInitHeroScroll, 4000);
   }
 
   const sliderTrack = document.getElementById('slider-track');

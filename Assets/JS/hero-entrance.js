@@ -23,6 +23,9 @@
   const sideBadges = badges.filter((_, i) => i !== centerIndex);
 
   if (reducedMotion) {
+    if (typeof window.__onHeroEntranceComplete === 'function') {
+      window.__onHeroEntranceComplete();
+    }
     return;
   }
 
@@ -143,16 +146,27 @@
       gsap.set(heroCanvas, { clearProps: 'all' });
     }
 
+    if (typeof window.__onHeroEntranceComplete === 'function') {
+      window.__onHeroEntranceComplete();
+    }
+
     if (typeof ScrollTrigger !== 'undefined') {
       ScrollTrigger.refresh();
     }
   }
 
+  let entranceStarted = false;
+
   function playEntrance() {
+    if (entranceStarted) return;
+    entranceStarted = true;
+
     setTimeout(() => {
       tl.play();
     }, 80);
   }
+
+  window.__playHeroEntrance = playEntrance;
 
   if (loader) {
     if (loader.classList.contains('is-hidden')) {
@@ -192,14 +206,6 @@
     if (loader.parentNode) {
       removalObserver.observe(loader.parentNode, { childList: true });
     }
-
-    setTimeout(() => {
-      loaderObserver.disconnect();
-      removalObserver.disconnect();
-      if (tl.progress() === 0) {
-        playEntrance();
-      }
-    }, 5000);
   } else {
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', playEntrance, { once: true });
