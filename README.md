@@ -1,141 +1,134 @@
+<div align="center">
+
 # Ishan Biswas — 3D Interactive Portfolio
 
-An interactive 3D portfolio website for **Ishan Biswas**, Aspiring Data Scientist. Visitors ride through a gamified 3D stadium track where a cyclist navigates through distinct checkpoints: **Work**, **Skills**, **Resume**, **About**, and **Contact**.
+**Ride a bicycle around a 3D stadium to explore my work, skills, resume, story and contact details.**
+
+[![Live Site](https://img.shields.io/badge/Live-ishanbiswas2006.github.io-blue?style=for-the-badge)](https://ishanbiswas2006.github.io/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
+
+![Three.js](https://img.shields.io/badge/Three.js-r128-black?logo=three.js)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?logo=javascript&logoColor=black)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)
+![WebGL](https://img.shields.io/badge/WebGL-990000?logo=webgl&logoColor=white)
+
+</div>
 
 ---
 
-## 🌟 Overview
+## About
 
-* **Developer:** Ishan Biswas
-* **Role:** Aspiring Data Scientist · BCA Student, MAKAUT University (2025–2029)
-* **Live Site:** [https://ishanbiswas2006.github.io/](https://ishanbiswas2006.github.io/)
-* **Technologies:** Pure HTML5, CSS3, JavaScript (ES6+), Three.js (r128), Web Audio API, WebGL.
-* **Architecture:** Modular static site with separated design token stylesheets, structured JavaScript modules, local 3D assets (`.glb`), interactive audio layers (`.mp3`), and local web fonts (`.woff2`).
+A gamified portfolio for **Ishan Biswas**, an aspiring Data Scientist and BCA student at MAKAUT University (2025–2029). Instead of scrolling a page, visitors pedal a cyclist along a 3D track. Each checkpoint on the track opens a section of the portfolio:
 
----
+| Checkpoint | What you get |
+|---|---|
+| **Work** | Project cards linking to individual case studies |
+| **Skills** | Languages, web tech, data science libraries, tools and cloud |
+| **Resume** | Education and experience summary |
+| **About** | A draggable polaroid photo stack |
+| **Contact** | Copy-to-clipboard email and phone, scan-to-call QR, GitHub and LinkedIn |
 
-## ✨ Main Features
+## Features
 
-* **Interactive 3D Stadium Track:** Custom WebGL canvas powered by Three.js (r128) featuring a cyclist with real-time pedal rigging, stadium floodlights, terrain meshes, and procedural tree planting.
-* **Checkpoint Navigation:** Ride forward/backward along the track using mouse wheel, keyboard (`W`/`↑` to ride, `Shift`+`W` to sprint, `S`/`↓` to reverse, `E` to ring bell), or jump directly using navigation pills.
-* **Interactive Skills Showcase:** Dedicated responsive Skills page detailing programming languages (C, C++, Java, Python), web technologies, Python data science libraries (NumPy, Pandas, Matplotlib, Seaborn), development tools (Git, GitHub, VS Code), and cloud platforms (AWS, Docker).
-* **Interactive Polaroid Photo Stack:** Realistic polaroid pile in the About section with tilt, depth ordering, and smooth swipe/drag interactions to cycle through personal photographs.
-* **Day / Night Lighting & Ambience:** Toggle between daytime illumination and night-time floodlights with accompanying ambient audio layers (birds, wind, wheel spin, bell Easter egg).
-* **Contact & Scan-to-Call QR Code:** Direct copy actions for email and phone, an interactive QR code popover on hover to scan and call directly, and social links to GitHub and LinkedIn.
-* **Fully Responsive:** Custom layout optimizations for desktop, tablet, and mobile with touch gestures and responsive camera adjustments.
+- **3D stadium track** built with Three.js, with a rigged cyclist (animated pedals), floodlights, terrain and procedurally placed trees.
+- **Multiple ways to move:** mouse wheel, keyboard, touch gestures, or jump straight to a section with the navigation pills.
+- **Day / night mode** with floodlights and layered ambient audio (birds, wind, wheel spin, bell).
+- **Polaroid photo stack** with tilt, depth ordering and swipe / drag to cycle photos.
+- **Scan-to-call QR** popover on hover in the Contact section.
+- **Responsive** layout and camera for desktop, tablet and mobile.
+- **Self-hosted fonts and assets** for fast, offline-friendly loading, with loader fallbacks for models and audio.
 
----
+## Controls
 
-## 📁 Project Folder Structure
+| Input | Action |
+|---|---|
+| `W` / `↑` | Ride forward |
+| `Shift` + `W` | Sprint |
+| `S` / `↓` | Ride backward |
+| `E` | Ring the bell |
+| Mouse wheel / touch drag | Ride along the track |
+| Navigation pills | Jump to a checkpoint |
 
-```text
-├── index.html                   # Main entry point and 3D canvas viewport
-├── package.json                 # Project metadata & start script
-├── LICENSE                      # MIT License
-├── README.md                    # Project documentation
-├── favicon.png                  # Root browser tab favicon
+## Project Structure
+
+```
+├── index.html                    # Entry point and 3D canvas viewport
+├── package.json                  # Metadata and start script
+├── LICENSE                       # MIT
+├── README.md
+├── favicon.png
 │
-├── assets/                      # Structured visual, audio, 3D, and font assets
-│   ├── audio/                   # Interactive audio layers & sound effects
-│   │   ├── birds.mp3
-│   │   ├── day.mp3
-│   │   ├── horn.mp3
-│   │   ├── night.mp3
-│   │   └── wheel.mp3
-│   ├── fonts/                   # Local typography (WOFF2) & font declarations
-│   │   ├── irish-grover.woff2
-│   │   ├── nunito-*.woff2
-│   │   └── fonts.css
-│   ├── icons/                   # Tool & platform icons (GitHub, LinkedIn, Figma, etc.)
-│   │   ├── github.png
-│   │   ├── linkedin.png
-│   │   └── ...
-│   ├── images/                  # Project graphics, cards, photos, and QR codes
-│   │   ├── apple-touch-icon.png
-│   │   ├── favicon.png
-│   │   ├── og-image.jpg
-│   │   ├── qr-call.png
-│   │   ├── logos/               # Project and company badges
-│   │   ├── photos/              # Personal photographs for About polaroid stack
-│   │   └── thumbnails/          # Project cover cards
-│   └── models/                  # 3D glTF/GLB models (cyclist, track, trees)
-│       ├── rider.glb
-│       ├── track.glb
-│       └── tree1.glb ... tree4.glb
+├── assets/
+│   ├── audio/                    # birds, day, night, horn, wheel (.mp3)
+│   ├── fonts/                    # Irish Grover, Nunito (.woff2) + fonts.css
+│   ├── icons/                    # Tool and platform icons
+│   ├── images/                   # og-image, QR code, logos, photos, thumbnails
+│   └── models/                   # rider.glb, track.glb, tree1–4.glb
 │
-├── src/                         # Application source code
+├── src/
 │   ├── scripts/
-│   │   ├── app.js               # Core engine, physics, 3D render loop, and UI controls
+│   │   ├── app.js                # Engine, render loop, controls, UI
 │   │   ├── data/
-│   │   │   └── portfolio-data.js# Content data (checkpoints, projects, bio, skills)
+│   │   │   └── portfolio-data.js # Checkpoints, projects, bio, skills
 │   │   ├── utils/
-│   │   │   └── asset-loader.js  # Binary model & audio loading utility with fallback
+│   │   │   └── asset-loader.js   # Model and audio loader with fallback
 │   │   └── vendor/
-│   │       ├── three.min.js     # Three.js (r128) library
-│   │       └── GLTFLoader.js    # Three.js GLTF model parser
+│   │       ├── three.min.js      # Three.js r128
+│   │       └── GLTFLoader.js
 │   └── styles/
-│       ├── main.css             # Unified master stylesheet
-│       ├── variables.css        # Design tokens, color palette, dimensions
-│       ├── global.css           # Base styles, canvas layout, resets
-│       ├── typography.css       # Heading styles and typography
-│       ├── components.css       # Navigation pills, cards, polaroid pile, popovers
-│       ├── animations.css       # Keyframe animations and transitions
-│       └── responsive.css       # Mobile & tablet media queries
+│       ├── main.css              # Master stylesheet
+│       ├── variables.css         # Design tokens
+│       ├── global.css            # Resets and canvas layout
+│       ├── typography.css
+│       ├── components.css        # Pills, cards, polaroids, popovers
+│       ├── animations.css
+│       └── responsive.css
 │
-├── work/                        # Standalone subpages & case studies
-│   ├── concepts.html            # Skills showcase page
-│   ├── backroom.html            # Case study subpage
-│   ├── bizassure.html           # Case study subpage
-│   ├── ledge.html               # Case study subpage
-│   └── maarpit.html             # Case study subpage
-│
-└── docs/                        # Project records and migration documentation
-    ├── Memory.md                # Project execution logs and history
-    ├── PRD.md                   # Product requirements documentation
-    └── Rule.md                  # Development rules and asset guidelines
+└── work/                         # Standalone subpages
+    ├── concepts.html             # Skills showcase
+    ├── backroom.html             # Case study
+    ├── bizassure.html            # Case study
+    ├── ledge.html                # Case study
+    └── maarpit.html              # Case study
 ```
 
----
+## Run Locally
 
-## 🚀 Running Locally
+A local HTTP server is required so the browser can load `.glb` models and `.mp3` audio without CORS issues.
 
-The site requires a local HTTP server to load WebGL models (`.glb`) and Web Audio buffers (`.mp3`) without browser CORS restrictions.
-
-### Option 1: Node.js (npx serve)
 ```bash
+# Node
 npx serve . -l 5501
-```
-Open `http://localhost:5501` in your browser.
 
-### Option 2: Python HTTP Server
-```bash
+# or Python
 python -m http.server 5501
 ```
-Open `http://localhost:5501` in your browser.
 
-### Option 3: VS Code Live Server
-1. Open the project folder in VS Code.
-2. Install the **Live Server** extension if not already installed.
-3. Click **Go Live** on the bottom status bar (opens port `5501`/`5502`).
+Then open <http://localhost:5501>.
 
----
+With VS Code, install **Live Server** and click **Go Live**.
 
-## 🛠️ Technologies Used
+## Customize
 
-* **Core:** HTML5, CSS3 (Custom Properties, Grid, Flexbox), Vanilla JavaScript (ES6+).
-* **3D Graphics:** [Three.js (r128)](https://threejs.org/) with `GLTFLoader`, ACESFilmic tone mapping, PCFSoftShadowMap shadows, custom camera easing.
-* **Audio:** Web Audio API with procedural gain nodes and multi-channel soundscape mixing.
-* **Fonts:** Irish Grover, Nunito (self-hosted WOFF2 for fast offline loading).
+- **Content:** edit `src/scripts/data/portfolio-data.js` (checkpoints, projects, bio, skills).
+- **Look and feel:** change tokens in `src/styles/variables.css`.
+- **New case study:** add an HTML page in `work/` and link it from the project data.
+- **3D assets:** replace files in `assets/models/` keeping the same file names.
 
----
+## Tech Stack
 
-## 📄 License
+- **Core:** HTML5, CSS3 (custom properties, Grid, Flexbox), vanilla JavaScript (ES6+)
+- **3D:** Three.js r128, GLTFLoader, ACES Filmic tone mapping, PCF soft shadows, eased camera
+- **Audio:** Web Audio API with gain-node mixing
+- **Fonts:** Irish Grover, Nunito (self-hosted WOFF2)
+- **Hosting:** GitHub Pages, mirrored on Vercel
 
-This project is open source and available under the [MIT License](LICENSE).
+## Contact
 
----
+- Website: <https://ishanbiswas2006.github.io/>
+- GitHub: [@IshanBiswas2006](https://github.com/IshanBiswas2006)
 
-## 🙏 Credits & Acknowledgments
+## License
 
-* Design inspiration and original 3D track concept by [Taye Bhaskar](https://taye.in/).
-* 3D rendering and mathematics powered by the open-source [Three.js](https://threejs.org/) community.
+Released under the [MIT License](LICENSE).
