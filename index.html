@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Ishan Biswas, aspiring data scientist. Ride the track to see work, skills, resume, about and contact.">
+  <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Ishan Biswas Portfolio">
+  <meta property="og:url" content="https://ishanbiswas2006.github.io/">
+  <meta property="og:title" content="Ishan Biswas · Aspiring Data Scientist">
+  <meta property="og:description" content="Ride the track to see my work, skills, resume and more.">
+  <meta property="og:image" content="assets/images/og-image.jpg">
+  <meta property="og:image:secure_url" content="assets/images/og-image.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Ishan Biswas, aspiring data scientist, cycling around a 3D stadium track">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Ishan Biswas · Aspiring Data Scientist">
+  <meta name="twitter:description" content="Ride the track to see my work, skills, resume and more.">
+  <meta name="twitter:image" content="assets/images/og-image.jpg">
+  <link rel="canonical" href="https://ishanbiswas2006.github.io/">
+  <title>Ishan Biswas</title>
+  <link rel="icon" type="image/png" href="assets/images/favicon.png">
+
+  <!-- Local Fonts -->
+  <link rel="stylesheet" href="assets/fonts/fonts.css">
+  
+  <!-- Modular Stylesheets -->
+  <link rel="stylesheet" href="src/styles/main.css">
+</head>
+<body>
+
+  <canvas id="c"></canvas>
+  <div id="load">
+    <div class="in">
+      <h1>Ishan Biswas</h1>
+      <div class="bar"><i id="lbar"></i></div>
+      <small id="ltxt">Pumping the tyres…</small>
+    </div>
+  </div>
+  <div id="shade"></div>
+  <section id="hero" aria-live="polite">
+    <h1>Ishan Biswas</h1>
+    <div id="lines"><div class="ln"></div></div>
+  </section>
+  <div id="keyhint" class="gone">
+    <div><kbd>W</kbd><b>/</b><kbd>↑</kbd><span>to ride</span></div>
+    <div><kbd class="wide">Shift</kbd><b>+</b><kbd>W</kbd><span>to ride faster</span></div>
+    <div><kbd>S</kbd><b>/</b><kbd>↓</kbd><span>to ride back</span></div>
+    <div><kbd>E</kbd><span>to ring the bell</span></div>
+  </div>
+  <div id="scrollhint"><span class="m"></span><span id="sh">Scroll to ride</span></div>
+  <nav id="nav" aria-label="Sections">
+    <div class="pills" id="pills"></div>
+    <div class="row">
+      <button class="round" id="btnCtl" aria-expanded="false" aria-label="Game controls">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <g transform="translate(0 -1)">
+            <path d="M7.5 7.5h9a4.5 4.5 0 0 1 4.4 3.6l.9 4.5a2.6 2.6 0 0 1-4.6 2.1L15.6 16H8.4l-1.6 1.7a2.6 2.6 0 0 1-4.6-2.1l.9-4.5a4.5 4.5 0 0 1 4.4-3.6z"/>
+            <path d="M8 10.5v3M6.5 12h3"/>
+            <circle cx="15.5" cy="11" r=".6" fill="currentColor"/>
+            <circle cx="17.5" cy="13" r=".6" fill="currentColor"/>
+          </g>
+        </svg>
+      </button>
+      <button class="round" id="btnSound" aria-pressed="false" aria-label="Sound on"></button>
+      <button class="round" id="btnNight" aria-pressed="false" aria-label="Night mode"></button>
+      <button class="round" id="menuBtn" aria-expanded="false" aria-label="Open menu"></button>
+    </div>
+  </nav>
+  <button id="enter" hidden>
+    <span id="eName">View Work</span>
+    <svg viewBox="0 0 38 36" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M35 3v20H4"/>
+      <path d="M13 13.5L3.5 23 13 32.5"/>
+    </svg>
+  </button>
+  <div id="toast" role="status"></div>
+  <aside id="card" aria-live="polite">
+    <header>
+      <h2><small id="cKick"></small><span id="cName"></span></h2>
+      <button class="x" id="cX" aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
+          <path d="M5 5l14 14M19 5L5 19"/>
+        </svg>
+      </button>
+    </header>
+    <div class="body" id="cBody"></div>
+    <footer>
+      <small id="cNext"></small>
+      <button class="gpill" id="cRide">Keep riding →</button>
+    </footer>
+  </aside>
+
+  <!-- Local Vendor Scripts -->
+  <script src="src/scripts/vendor/three.min.js"></script>
+  <script src="src/scripts/vendor/GLTFLoader.js"></script>
+
+  <!-- Application Modules -->
+  <script src="src/scripts/utils/asset-loader.js"></script>
+  <script src="src/scripts/data/portfolio-data.js"></script>
+  <script src="src/scripts/app.js"></script>
+
+</body>
+</html>
+

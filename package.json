@@ -1,0 +1,19 @@
+{
+  "name": "ishan-biswas-portfolio",
+  "version": "1.0.0",
+  "description": "Interactive 3D Portfolio of Ishan Biswas - Aspiring Data Scientist",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve ."
+  },
+  "keywords": [
+    "portfolio",
+    "threejs",
+    "3d",
+    "interactive",
+    "design"
+  ],
+  "author": "Ishan Biswas",
+  "license": "MIT"
+}
+
