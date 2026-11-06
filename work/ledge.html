@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ledge</title>
+<link rel="icon" type="image/png" href="../assets/images/favicon.png">
+<link rel="apple-touch-icon" href="../assets/images/apple-touch-icon.png">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Source+Sans+3:wght@400;600;700&family=IBM+Plex+Mono:wght@500;600&family=Irish+Grover&family=Nunito:wght@800&display=swap">
+<style>
+/* Layout: a calm reading column (68ch) with visuals that break wider; sticky section index on wide screens */
+:root{
+  --paper:#ffffff;      /* clean white page */
+  --surface:#f5f7f2;    /* faint green-grey for cards */
+  --ink:#1d2618;
+  --muted:#5f6c57;
+  --line:#e2e8d8;
+  --leaf:#4d7a2f;       /* taye.in green, text-safe */
+  --leaf-soft:#a8cc88;  /* taye.in button green */
+  --cobalt:#2f6bff;     /* Backroom's own blue, used for pins and numbers */
+  --cobalt-soft:#e8efff;
+  --display:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;
+  --body:"Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --read:68ch;
+  --wide:1180px;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.65;-webkit-font-smoothing:antialiased;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--cobalt);outline-offset:3px;border-radius:6px}
+img,video{max-width:100%;display:block}
+h1,h2{font-family:var(--display);font-weight:700;letter-spacing:-.025em;text-wrap:balance;margin:0;line-height:1.1}
+
+/* top bar */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:#fff;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line);margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)))}
+.top .in{max-width:calc(var(--wide) + 32px);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:12px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.brand{font-family:"Irish Grover","Trebuchet MS",cursive;font-weight:400;font-size:22px;text-decoration:none}
+.back{display:inline-flex;align-items:center;gap:8px;font-family:"Nunito",system-ui,sans-serif;font-weight:800;font-size:15px;text-decoration:none;padding:7px 16px;border-radius:999px;background:var(--leaf-soft);color:#fff;border:3px solid #fff;box-shadow:0 2px 0 rgba(0,0,0,.08)}
+.back svg{width:16px;height:16px}
+
+/* hero */
+.wrap{max-width:var(--wide);margin:0 auto}
+.hero{padding-block:56px 32px;display:grid;gap:28px}
+.hero .eyebrow{font-family:var(--mono);font-weight:600;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--leaf)}
+.hero h1.ttl{display:flex;align-items:center;gap:.28em}
+.appicon{width:.82em;height:.82em;border-radius:22%;box-shadow:0 8px 24px rgba(180,90,40,.25);flex:none}
+.hero h1{font-size:clamp(48px,8vw,96px)}
+.hero .tag-line{font-family:var(--display);letter-spacing:-.015em;font-size:clamp(22px,2.6vw,30px);font-weight:600;line-height:1.3;max-width:28ch;text-wrap:balance;margin:0}
+.hero .intro{max-width:var(--read);color:var(--muted);font-size:19px;margin:0}
+.meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:0}
+.meta div{padding:14px 16px 14px 0}
+.meta dt{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.meta dd{margin:2px 0 0;font-weight:700;font-size:15px;line-height:1.45}
+.cover{border-radius:28px;overflow:hidden;background:#cfe0f3;aspect-ratio:16/10;max-width:100%}
+.cover video{width:100%;height:100%;object-fit:cover}
+
+/* body grid with index */
+.body{padding-bottom:80px;display:grid;grid-template-columns:minmax(0,1fr)}
+.secs{min-width:0}
+/* contents: sticky strip under the navbar on phones, tablets and laptops; sidebar on wide desktops */
+.toc{position:sticky;top:calc(env(safe-area-inset-top,0px) + 63px);z-index:8;background:#fff;border-bottom:1px solid var(--line);margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)));padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.toc ol{list-style:none;margin:0;padding:10px 0;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+.toc ol::-webkit-scrollbar{display:none}
+.toc a{display:flex;align-items:center;gap:8px;white-space:nowrap;padding:6px 12px;border-radius:999px;text-decoration:none;font-size:14px;font-weight:600;color:var(--muted);border:1px solid var(--line);line-height:1.3}
+.toc a span{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.toc a:hover{color:var(--ink)}
+.toc a.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.toc a.on span{color:#9fb8ff}
+@media (min-width:1360px){
+ .wrap{max-width:1440px}
+ .top .in{max-width:1472px}
+ .body{grid-template-columns:210px minmax(0,1fr);gap:44px}
+ .toc{grid-column:1;grid-row:1}
+ .secs{grid-column:2;grid-row:1}
+ .toc{top:calc(env(safe-area-inset-top,0px) + 88px);align-self:start;margin:0;padding:0;border:0;max-height:calc(100vh - 110px);overflow:auto}
+ .toc .tl{display:block;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:0 10px 8px}
+ .toc ol{flex-direction:column;gap:2px;padding:0;overflow:visible}
+ .toc a{border:0;border-radius:10px;padding:7px 10px;white-space:normal;align-items:baseline}
+ .toc a.on{background:var(--surface);color:var(--ink)}
+ .toc a.on span{color:var(--cobalt)}
+}
+.toc .tl{display:none}
+.sec{scroll-margin-top:130px}
+
+/* sections */
+.sec{padding-block:56px 8px;border-top:1px solid var(--line);display:grid;gap:18px;min-width:0;scroll-margin-top:80px}
+.sec:first-child{border-top:0;padding-top:16px}
+.sh{display:flex;align-items:baseline;gap:12px}
+.num{font-family:var(--mono);font-weight:600;font-size:14px;color:var(--cobalt);font-variant-numeric:tabular-nums}
+.kick{font-family:var(--mono);font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.sec h2{font-size:clamp(28px,3.4vw,42px);max-width:22ch}
+.lede{max-width:var(--read)}
+.lede p{margin:0;font-size:19px;color:var(--muted)}
+.sec>*:last-child{margin-top:18px}
+.tag{font-family:var(--mono);display:inline-block;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.tag.good{color:var(--leaf)}
+
+/* 01 flow */
+.flow{display:grid;gap:12px;max-width:820px}
+.say{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:18px 20px}
+.say q{display:block;font-size:22px;font-weight:700;quotes:"“" "”";margin-top:4px}
+.arrow{width:2px;height:22px;background:var(--line);margin-left:34px;position:relative}
+.arrow::after{content:"";position:absolute;left:-5px;bottom:-2px;border:6px solid transparent;border-top-color:var(--line)}
+.chief{display:flex;gap:14px;align-items:center;background:var(--cobalt);color:#fff;border-radius:20px;padding:16px 20px}
+.chief b{display:block;font-size:18px}
+.chief span{opacity:.9;font-size:15px}
+.av{flex:none;width:44px;height:44px;border-radius:14px;display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:20px;background:#fff;color:var(--cobalt)}
+.av.sm{width:34px;height:34px;font-size:17px;border-radius:10px;background:var(--cobalt-soft);color:var(--cobalt)}
+.agents{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.ag{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px;display:grid;gap:6px;align-content:start}
+.ag b{font-size:16px}
+.ag span:last-child{font-size:14px;color:var(--muted);line-height:1.45}
+.ends{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.end{border:1px dashed var(--line);border-radius:16px;padding:12px 16px}
+.end.ok{border:2px solid var(--leaf-soft);background:color-mix(in srgb,var(--leaf-soft) 18%,transparent)}
+.end b{display:block}.end span{font-size:14px;color:var(--muted)}
+.chips{list-style:none;padding:0;margin:8px 0 0;display:flex;flex-wrap:wrap;gap:8px}
+.chips li{font-size:14px;font-weight:700;padding:6px 14px;border-radius:999px;background:var(--surface);border:1px solid var(--line)}
+@media (max-width:640px){.agents{grid-template-columns:1fr 1fr}}
+
+/* 02 jobs */
+.jobs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.job{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:6px}
+.job b{font-size:18px}
+.job p{margin:0;font-size:15px;color:var(--muted);line-height:1.5;flex:1}
+.jk{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.1em;color:var(--cobalt);text-transform:uppercase}
+.jf{font-size:13px;font-weight:700;color:var(--leaf);padding-top:8px;border-top:1px solid var(--line);margin-top:6px}
+.tension{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:4px}
+.tension>div{padding:20px 22px;border-radius:20px;background:var(--cobalt-soft)}
+.tension>div:last-child{background:color-mix(in srgb,var(--leaf-soft) 22%,var(--surface))}
+.tension p{margin:6px 0 0;font-size:18px;font-weight:700;line-height:1.45}
+@media (max-width:900px){.jobs{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.jobs,.tension{grid-template-columns:1fr}}
+
+/* 03 motion */
+.motion{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px 20px;align-items:end}
+.mv{margin:0;display:grid;gap:10px;justify-items:center}
+.mv video{width:100%;max-width:260px;aspect-ratio:644/1298;object-fit:contain;border-radius:28px;background:transparent}
+.mv.sq video{aspect-ratio:1;border-radius:28px;max-width:260px;object-fit:cover}
+.mv figcaption{font-weight:700;font-size:15px}
+@media (max-width:700px){.motion{grid-template-columns:1fr 1fr}}
+
+/* 04 rules */
+.rules{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.rule{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:14px 14px 20px;display:flex;flex-direction:column;gap:6px}
+.rimg{height:150px;border-radius:14px;background:var(--cobalt-soft);display:grid;place-items:center;padding:12px;margin-bottom:8px;overflow:hidden}
+.rimg img{max-height:100%;width:auto;object-fit:contain;border-radius:8px}
+.rule b{font-size:17px;line-height:1.3}
+.rule p{margin:0;font-size:15px;color:var(--muted);line-height:1.5}
+@media (max-width:900px){.rules{grid-template-columns:1fr 1fr}}
+@media (max-width:480px){.rules{grid-template-columns:1fr}}
+
+/* phone rows */
+.phones{display:grid;gap:32px 22px}
+.phones.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.phones.four{grid-template-columns:repeat(4,minmax(0,1fr))}
+.ph{margin:0;display:grid;gap:12px;align-content:start}
+.ph img{width:100%;max-width:280px;margin:0 auto;height:auto}
+.ph figcaption{font-size:15px;line-height:1.5;color:var(--muted);max-width:280px;margin:0 auto}
+.ph figcaption b{display:block;color:var(--ink);font-size:16px}
+@media (max-width:900px){.phones.four{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.phones.three{grid-template-columns:1fr 1fr}.phones.three .ph:last-child{grid-column:1/-1;max-width:50%;justify-self:center}}
+
+/* callouts: phones with numbered pins, notes underneath */
+.co-stage{position:relative;display:flex;align-items:flex-start;justify-content:center;gap:20px;width:100%}
+.co-col{flex:none;display:flex;flex-direction:column;align-items:center;gap:10px}
+.co-phone{width:220px}
+.co-phone img,.co-image img{width:100%;height:auto}
+.co-image{align-self:center}
+.co-image img{border-radius:18px;box-shadow:0 10px 30px rgba(30,50,90,.12)}
+.co-cap{font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.co-labels{position:relative;width:170px;align-self:stretch;display:block}
+.co-label{position:absolute;left:0;right:0;display:flex;gap:10px;align-items:flex-start}
+.co-labels.l .co-label{flex-direction:row-reverse;text-align:right}
+.co-label b{display:block;font-weight:600;font-size:15px;line-height:24px}
+.co-label p{margin:2px 0 0;color:var(--muted);font-size:14px;line-height:1.4}
+.ob-num{flex:none;width:24px;height:24px;border-radius:50%;background:var(--cobalt);color:#fff;display:grid;place-items:center;font:600 12px var(--mono)}
+.co-svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.co-svg path{fill:none;stroke:var(--cobalt);stroke-width:1.5;stroke-linejoin:round}
+.co-svg circle{fill:var(--cobalt);stroke:var(--paper);stroke-width:2}
+/* when the row does not fit: phones stack, labels become a list, lines hide */
+.co-stage.stack{flex-direction:column;align-items:center;gap:16px}
+.co-stage.stack .co-svg{display:none}
+.co-stage.stack .co-labels{width:100%;max-width:420px;display:flex;flex-direction:column;align-items:stretch;gap:14px}
+.co-stage.stack .co-label{position:static!important;flex-direction:row!important;text-align:left!important}
+.co-stage.stack .co-phone{width:min(240px,70vw)}
+
+/* 13 questions */
+.qs{list-style:none;padding:0;margin:0;display:grid;gap:12px;max-width:var(--read)}
+.qs li{display:grid;grid-template-columns:30px 1fr;gap:14px;align-items:start;font-size:20px;font-weight:700;line-height:1.4;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px 18px}
+.qs .pn{width:30px;height:30px;margin-top:1px}
+
+/* footer */
+.foot{border-top:1px solid var(--line);padding-block:40px 56px;display:flex;flex-wrap:wrap;gap:16px 32px;align-items:center;justify-content:space-between}
+.foot h2{font-size:32px}
+.foot p{margin:4px 0 0;color:var(--muted)}
+.foot .links{display:flex;flex-wrap:wrap;gap:10px}
+.foot code{font-family:var(--body);font-weight:700;padding:8px 14px;border-radius:999px;background:var(--surface);border:1px solid var(--line);user-select:all}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+.demo{display:grid;gap:14px;margin-top:8px}
+.dbar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between}
+.dbar p{margin:0;color:var(--muted);font-size:16px}
+.dbar .acts{display:flex;gap:10px;flex-wrap:wrap}
+.dbtn{font:inherit;font-weight:700;font-size:15px;padding:10px 18px;border-radius:12px;border:1.5px solid var(--line);background:#fff;color:var(--ink);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+.dbtn.pri{background:var(--ink);border-color:var(--ink);color:#fff}
+.dbtn svg{width:14px;height:14px}
+.dframe{border-radius:24px;border:1px solid var(--line);background:#fff;overflow:hidden}
+.dframe iframe{display:block;width:100%;height:760px;border:0}
+.feats{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.feat{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:20px;display:grid;gap:8px;align-content:start}
+.feat b{font-size:18px;line-height:1.3}
+.feat p{margin:0;color:var(--muted);font-size:16px;line-height:1.5}
+.gains{list-style:none;margin:0;padding:0;display:grid;gap:12px;max-width:var(--read)}
+.gains li{display:grid;gap:4px;padding:18px 20px;border-radius:18px;border:1px solid var(--line)}
+.gains b{font-size:18px}.gains span{color:var(--muted)}
+.mnote{display:none;padding:16px 18px;border-radius:16px;background:var(--cobalt-soft);font-weight:600}
+@media (max-width:1023px),(hover:none) and (pointer:coarse){.mnote{display:block}}
+</style>
+</head>
+<body>
+<div class="top"><div class="in"><a class="brand" href="../" data-home>Taye Bhaskar</a><a class="back" href="../" id="back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>Back to the ride</a><script>
+// "Taye Bhaskar" and "Back to the ride" return to the ride:
+// if the ride opened this tab, close it and focus the ride tab; otherwise go back to it, or load the home page
+document.querySelectorAll('.top [data-home],.top #back').forEach(a=>a.addEventListener('click',e=>{
+ e.preventDefault();const home=a.href;
+ let op=null;try{op=window.opener&&!window.opener.closed?window.opener:null;}catch(_){}
+ if(op){try{op.focus();}catch(_){}window.close();}
+ setTimeout(()=>{let ref='';try{ref=new URL(document.referrer);}catch(_){}
+  const fromRide=ref&&ref.origin===location.origin&&/^\/(index\.html)?$/.test(ref.pathname);
+  if(fromRide&&history.length>1)history.back();else location.href=home;},op?250:0);
+}));
+</script></div></div>
+<main class="wrap" id="top"><section class="hero">
+    <span class="eyebrow">Tool I built for myself · macOS · 2026</span>
+    <h1 class="ttl"><img class="appicon" src="data:image/png;base64,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" alt="Ledge app icon">Ledge</h1>
+    <p class="tag-line">Every capture, one drag away.</p>
+    <p class="intro">Ledge is a shelf in the Mac menu bar that catches every screenshot and copied image, so I can drag them straight into whatever I am working in.</p>
+    <dl class="meta"><div><dt>Type</dt><dd>Personal tool</dd></div><div><dt>Platform</dt><dd>macOS menu bar app</dd></div><div><dt>Built with</dt><dd>Figma, Claude, Xcode</dd></div><div><dt>Status</dt><dd>Coming to GitHub soon</dd></div></dl>
+    <div class="demo" id="demo">
+      <div class="dbar"><p>This is a working demo. Try it on the laptop below.</p><div class="acts"><button class="dbtn pri" id="tour" type="button">Start the guided tour</button></div></div>
+      <p class="mnote">The demo recreates a Mac app with drag and drop, so it works best on a laptop or desktop with a mouse or trackpad.</p>
+      <div class="dframe"><iframe id="dfr" src="ledge-demo.html" title="Ledge interactive demo" loading="eager" scrolling="no"></iframe></div>
+    </div>
+  </section><div class="body"><nav class="toc" aria-label="Contents"><span class="tl">Contents</span><ol><li><a href="#why" data-sec="why"><span>01</span>Why I built it</a></li><li><a href="#what" data-sec="what"><span>02</span>What it does</a></li><li><a href="#forme" data-sec="forme"><span>03</span>What it does for me</a></li><li><a href="#usage" data-sec="usage"><span>04</span>Who uses it</a></li><li><a href="#built" data-sec="built"><span>05</span>How I built it</a></li><li><a href="#next" data-sec="next"><span>06</span>What’s next</a></li></ol></nav><div class="secs"><section class="sec" id="why"><header class="sh"><span class="num">01</span><span class="kick">Why I built it</span></header><h2>Screenshots were piling up faster than I could use them.</h2><div class="lede"><p>Designing all day means capturing all day: a reference from a website, a bug in a build, a state I want to compare later. On a Mac each one lands on the Desktop with a timestamp for a name, and copied images vanish the moment I copy something else.</p><p>I kept stopping mid-flow to dig through the Desktop, rename files and clean up afterwards. I wanted every capture to wait in one place, one drag away from whatever I was working in. Nothing on the Mac did that the way I wanted, so I built it.</p></div></section><section class="sec" id="what"><header class="sh"><span class="num">02</span><span class="kick">What it does</span></header><h2>A shelf under the menu bar for every capture.</h2><div class="feats"><div class="feat"><span class="pn">1</span><b>Catches captures on its own</b><p>New screenshots and copied images land on the shelf as they happen, flying up into the menu bar icon.</p></div><div class="feat"><span class="pn">2</span><b>Opens from anywhere</b><p>Click the Ledge icon in the menu bar or press ⌥ Space. Escape or a click outside puts it away.</p></div><div class="feat"><span class="pn">3</span><b>Drags into any app</b><p>Pull a thumbnail into a design file, a document or a message. Select several to drag them in together.</p></div><div class="feat"><span class="pn">4</span><b>Previews and zooms</b><p>Double-click a thumbnail to preview it. Scroll to zoom, drag to look around, arrow keys to step through.</p></div><div class="feat"><span class="pn">5</span><b>Keeps what matters</b><p>Pin the keepers. Clear removes everything else, and can move the original screenshot files to the Trash.</p></div></div></section><section class="sec" id="forme"><header class="sh"><span class="num">03</span><span class="kick">What it does for me</span></header><h2>Fewer interruptions, one drag at a time.</h2><ul class="gains"><li><b>No more Desktop pile</b><span>Captures stop cluttering the Desktop. They wait on the shelf until I need them, and go when I clear them.</span></li><li><b>References stay in reach</b><span>While I design, the screens I am comparing sit one keystroke away instead of in a Finder window.</span></li><li><b>Faster write-ups and hand-offs</b><span>Dropping screens into docs, tickets and messages is one drag, several at a time.</span></li><li><b>Nothing to save first</b><span>Copied images are kept too, so a quick copy is never lost to the next one.</span></li></ul></section><section class="sec" id="usage"><header class="sh"><span class="num">04</span><span class="kick">Who uses it</span></header><h2>It started as mine. Now my colleagues use it too.</h2><div class="lede"><p>After I built Ledge, I showed it to a few colleagues. Some of them now use it every day, for office work like design reviews, bug reports and hand-offs, and for their own personal tasks as well.</p><p>Seeing it stick with people beyond me is what pushed me to tidy it up for a public release.</p></div></section><section class="sec" id="built"><header class="sh"><span class="num">05</span><span class="kick">How I built it</span></header><h2>Designed in Figma, built with Claude and Xcode.</h2><div class="lede"><p>I designed the shelf, the thumbnails and the preview in Figma first, then built the native macOS menu bar app in Xcode with Claude as my pair programmer. The demo above recreates the app in the browser so anyone can try it without installing anything.</p></div></section><section class="sec" id="next"><header class="sh"><span class="num">06</span><span class="kick">What’s next</span></header><h2>Coming to GitHub soon.</h2><ul class="gains"><li><b>Open source release</b><span>The app is being tidied up for a public release on GitHub.</span></li></ul></section></div></div><footer class="foot"><div><h2>Want to talk about it?</h2><p>I am open to product design roles and freelance projects.</p></div><div class="links"><code>skarxdesigns@gmail.com</code><a class="back" href="https://www.linkedin.com/in/bhaskar-taye-9328011b3/" target="_blank" rel="noopener">LinkedIn</a><a class="back" href="https://www.instagram.com/skarxdesigns/" target="_blank" rel="noopener">Instagram</a></div></footer></main>
+<script>
+// size the demo frame to its content, and let the tour button reach inside it
+const fr=document.getElementById('dfr');
+function fit(){try{const d=fr.contentDocument;if(!d)return;const w=d.querySelector('.wrap')||d.body;const h=Math.ceil(w.getBoundingClientRect().height+88);if(h>200)fr.style.height=h+'px';}catch(e){}}
+fr.addEventListener('load',()=>{fit();setTimeout(fit,600);setTimeout(fit,1500);try{new ResizeObserver(fit).observe(fr.contentDocument.body);}catch(e){}});
+addEventListener('resize',()=>setTimeout(fit,100));
+document.getElementById('tour').onclick=()=>{try{const d=fr.contentDocument;const b=d.getElementById('wc-start');if(b&&b.offsetParent)b.click();else d.getElementById('c-how').click();fr.scrollIntoView({behavior:'smooth',block:'center'});}catch(e){}};
+const links=[...document.querySelectorAll('.toc a')];const map=new Map(links.map(a=>[a.dataset.sec,a]));
+if('IntersectionObserver' in window){const so=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;links.forEach(a=>a.classList.remove('on'));const a=map.get(e.target.id);if(a){a.classList.add('on');const ol=a.closest('ol');if(ol.scrollWidth>ol.clientWidth)ol.scrollTo({left:a.offsetLeft-16,behavior:'smooth'});}}),{rootMargin:'-35% 0px -60% 0px'});document.querySelectorAll('.sec').forEach(s=>so.observe(s));}
+</script>
+</body>
+</html>
