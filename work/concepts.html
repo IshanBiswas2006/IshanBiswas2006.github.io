@@ -217,6 +217,10 @@ h1,h2{font-family:var(--display);font-weight:700;letter-spacing:-.025em;text-wra
 .info{display:grid;gap:8px;min-width:0}
 .info h3{margin:0;font-family:var(--display);font-weight:600;font-size:clamp(18px,1.6vw,22px);letter-spacing:-.015em;line-height:1.25}
 .info p{margin:0;font-size:16px;color:var(--muted);line-height:1.6}
+.skill-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.skill-chip{display:inline-flex;align-items:center;gap:8px;background:#ffffff;border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:14px;font-weight:600;color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.03);transition:transform .15s ease,border-color .15s ease}
+.skill-chip:hover{border-color:var(--leaf-soft);transform:translateY(-1px)}
+.sk-icon{width:18px;height:18px;object-fit:contain;flex:none}
 @media (max-width:1100px){.cgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:560px){.cgrid{grid-template-columns:1fr;row-gap:20px}.cc{padding:20px;border-radius:20px}}
 </style>
@@ -236,15 +240,56 @@ document.querySelectorAll('.top [data-home],.top #back').forEach(a=>a.addEventLi
 </script></div></div>
 <main class="wrap" id="top"><section class="chero"><span class="eyebrow">SKILLS · 2026</span><h1>Skills</h1><p>Technical skills, programming languages, libraries, and tools I work with.</p></section><section class="cgrid">
 <article class="cc" id="prog-lang">
-<div class="info"><div><h3>Programming Languages</h3></div><p>C · C++ · Python · Java</p></div></article>
+<div class="info"><div><h3>Programming Languages</h3></div>
+<div class="skill-chips">
+  <span class="skill-chip"><img src="../assets/icons/c.svg" alt="C" class="sk-icon"> C</span>
+  <span class="skill-chip"><img src="../assets/icons/cplusplus.svg" alt="C++" class="sk-icon"> C++</span>
+  <span class="skill-chip"><img src="../assets/icons/python.svg" alt="Python" class="sk-icon"> Python</span>
+  <span class="skill-chip"><img src="../assets/icons/java.svg" alt="Java" class="sk-icon"> Java</span>
+  <span class="skill-chip"><img src="../assets/icons/javascript.svg" alt="JavaScript" class="sk-icon"> JavaScript</span>
+</div>
+</div></article>
 <article class="cc" id="web-dev">
-<div class="info"><div><h3>Web Development</h3></div><p>HTML · CSS · JavaScript</p></div></article>
+<div class="info"><div><h3>Web Development</h3></div>
+<div class="skill-chips">
+  <span class="skill-chip"><img src="../assets/icons/html5.svg" alt="HTML5" class="sk-icon"> HTML5</span>
+  <span class="skill-chip"><img src="../assets/icons/css3.svg" alt="CSS3" class="sk-icon"> CSS3</span>
+  <span class="skill-chip"><img src="../assets/icons/javascript.svg" alt="JavaScript" class="sk-icon"> JavaScript</span>
+</div>
+</div></article>
 <article class="cc" id="py-libs">
-<div class="info"><div><h3>Python Libraries</h3></div><p>NumPy · Pandas · Matplotlib · Seaborn</p></div></article>
+<div class="info"><div><h3>Python Libraries</h3></div>
+<div class="skill-chips">
+  <span class="skill-chip"><img src="../assets/icons/numpy.svg" alt="NumPy" class="sk-icon"> NumPy</span>
+  <span class="skill-chip"><img src="../assets/icons/pandas.svg" alt="Pandas" class="sk-icon"> Pandas</span>
+  <span class="skill-chip"><img src="../assets/icons/matplotlib.svg" alt="Matplotlib" class="sk-icon"> Matplotlib</span>
+  <span class="skill-chip"><img src="../assets/icons/seaborn.svg" alt="Seaborn" class="sk-icon"> Seaborn</span>
+</div>
+</div></article>
 <article class="cc" id="dev-tools">
-<div class="info"><div><h3>Development Tools</h3></div><p>Git · GitHub · VS Code</p></div></article>
+<div class="info"><div><h3>Development Tools</h3></div>
+<div class="skill-chips">
+  <span class="skill-chip"><img src="../assets/icons/git.svg" alt="Git" class="sk-icon"> Git</span>
+  <span class="skill-chip"><img src="../assets/icons/github.svg" alt="GitHub" class="sk-icon"> GitHub</span>
+  <span class="skill-chip"><img src="../assets/icons/vscode.svg" alt="VS Code" class="sk-icon"> VS Code</span>
+  <span class="skill-chip"><img src="../assets/icons/jupyter.svg" alt="Jupyter Notebook" class="sk-icon"> Jupyter Notebook</span>
+</div>
+</div></article>
+<article class="cc" id="database-tech">
+<div class="info"><div><h3>Database Technologies</h3></div>
+<div class="skill-chips">
+  <span class="skill-chip"><img src="../assets/icons/sql.svg" alt="SQL" class="sk-icon"> SQL</span>
+  <span class="skill-chip"><img src="../assets/icons/mysql.svg" alt="MySQL" class="sk-icon"> MySQL</span>
+  <span class="skill-chip"><img src="../assets/icons/oracle.svg" alt="Oracle SQL" class="sk-icon"> Oracle SQL</span>
+</div>
+</div></article>
 <article class="cc" id="cloud-devops">
-<div class="info"><div><h3>Cloud &amp; DevOps</h3></div><p>Docker · AWS</p></div></article>
+<div class="info"><div><h3>Cloud &amp; DevOps</h3></div>
+<div class="skill-chips">
+  <span class="skill-chip"><img src="../assets/icons/docker.svg" alt="Docker" class="sk-icon"> Docker</span>
+  <span class="skill-chip"><img src="../assets/icons/aws.svg" alt="AWS" class="sk-icon"> AWS</span>
+</div>
+</div></article>
 </section></main>
 </body>
 </html>

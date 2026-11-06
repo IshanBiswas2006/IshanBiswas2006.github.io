@@ -713,9 +713,12 @@ color-scheme:light;
 .tlogo img {
    width: 100%;
    height: 100%;
-   object-fit: cover;
+   object-fit: contain;
+   padding: 5px;
+   box-sizing: border-box;
    background: #fff;
-   border-radius: 10px
+   border-radius: 10px;
+   border: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 .tlogo:has(img) {
@@ -1258,8 +1261,9 @@ color-scheme:light;
 
 .tl div {
    display: grid;
-   grid-template-columns: 72px 1fr;
-   gap: 10px;
+   grid-template-columns: max-content 1fr;
+   gap: 12px;
+   align-items: baseline;
    padding: 10px 12px;
    border-radius: 12px;
    background: #fff;
@@ -1272,7 +1276,12 @@ color-scheme:light;
    color: var(--green-deep);
    font-family: var(--display);
    font-weight: 400;
-   font-size: 15px
+   font-size: 15px;
+   white-space: nowrap;
+}
+
+.tl span {
+   min-width: 0;
 }
 
 .chips {
