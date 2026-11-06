@@ -51,14 +51,13 @@ An interactive 3D portfolio website for **Ishan Biswas**, Aspiring Data Scientis
 │   │   ├── linkedin.png
 │   │   └── ...
 │   ├── images/                  # Project graphics, cards, photos, and QR codes
-│   │   ├── apple-touch-icon.png
 │   │   ├── favicon.png
 │   │   ├── og-image.jpg
 │   │   ├── qr-call.png
-│   │   ├── logos/               # Project and company badges
-│   │   ├── photos/              # Personal photographs for About polaroid stack
-│   │   └── thumbnails/          # Project cover cards
-│   └── models/                  # 3D glTF/GLB models (cyclist, track, trees)
+│   │   ├── logos/             
+│   │   └── photos/              # Personal photographs for About polaroid stack
+│   │  
+│   └── models/                  
 │       ├── rider.glb
 │       ├── track.glb
 │       └── tree1.glb ... tree4.glb
@@ -82,17 +81,14 @@ An interactive 3D portfolio website for **Ishan Biswas**, Aspiring Data Scientis
 │       ├── animations.css       # Keyframe animations and transitions
 │       └── responsive.css       # Mobile & tablet media queries
 │
-├── work/                        # Standalone subpages & case studies
-│   ├── concepts.html            # Skills showcase page
-│   ├── backroom.html            # Case study subpage
-│   ├── bizassure.html           # Case study subpage
-│   ├── ledge.html               # Case study subpage
-│   └── maarpit.html             # Case study subpage
-│
-└── docs/                        # Project records and migration documentation
-    ├── Memory.md                # Project execution logs and history
-    ├── PRD.md                   # Product requirements documentation
-    └── Rule.md                  # Development rules and asset guidelines
+└── work/                        # Standalone subpages & case studies
+    ├── concepts.html            # Skills showcase page
+    ├── backroom.html            # Case study subpage
+    ├── bizassure.html           # Case study subpage
+    ├── ledge.html               # Case study subpage
+    └── maarpit.html             # Case study subpage
+
+
 ```
 
 ---
