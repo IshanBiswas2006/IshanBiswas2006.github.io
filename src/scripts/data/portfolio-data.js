@@ -87,7 +87,8 @@ const STACK = [ // [name, what for, logo]
 
 const EMAIL = 'biswas.ishan2006@gmail.com',
   PHONE = '+91 70030 90104',
-  TEL = '+917003090104';
+  TEL = '+917003090104',
+  RESUME_URL = 'assets/IshanBiswasResume.pdf';
 
 const QR_CALL = '<img src="assets/images/qr-call.png" alt="Scan to call">';
 
@@ -115,6 +116,7 @@ window.PortfolioData = {
   PHOTOS,
   STACK,
   EMAIL,
+  RESUME_URL,
   QR_CALL,
   SOCIALS
 };
